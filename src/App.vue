@@ -7,15 +7,28 @@ const ns = useNumberSystem();
 
 <template>
   <div class="wrapper">
-    <h1 class="text-3xl text-green-400">{{ generateCzechName(ns.base) }}</h1>
-    <h1 class="text-xl text-sky-500">{{ generateEnglishName(ns.base) }}</h1>
+    <h1 class="text-3xl green-grad">
+      {{ generateCzechName(10) }}
+    </h1>
+    <!-- Number -->
     <div
-      class="my-3 text-purple-300 text-shadow-lg text-5xl bg-gradient-to-r from-emerald-400 via-emerald-600 to-emerald-800 text-transparent bg-clip-text"
+      :title="`Číslo v ... ${generateCzechName(10)}`"
+      class="cursor-help my-3 text-5xl green-grad"
     >
       {{ ns.computedNumberDecimal }}
     </div>
+
+    <h1 class="text-3xl purple-grad">
+      {{ generateCzechName(ns.base) }}
+    </h1>
+    <span class="text-xs text-purple-400 opacity-70"
+      >( {{ generateEnglishName(ns.base) }} )</span
+    >
+
+    <!-- Number -->
     <div
-      class="my-3 animate-pulse text-purple-300 text-shadow-lg text-5xl bg-gradient-to-r from-purple-400 via-purple-600 to-purple-800 text-transparent bg-clip-text"
+      :title="`Číslo v ... ${generateCzechName(ns.base)}`"
+      class="cursor-help my-3 text-5xl animate-pulse purple-grad"
     >
       {{ ns.computedNumber }}
     </div>

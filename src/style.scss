@@ -55,4 +55,12 @@ select {
   .button {
     @apply trans rounded bg-purple-700 opacity-30 hover:opacity-80 text-white;
   }
+
+  .purple-grad {
+    @apply text-purple-300 bg-gradient-to-br from-purple-400 via-purple-600 to-purple-800 text-transparent bg-clip-text;
+  }
+
+  .green-grad {
+    @apply text-green-300 bg-gradient-to-b from-green-400 via-green-600 to-green-800 text-transparent bg-clip-text;
+  }
 }

@@ -10,8 +10,8 @@ const ns = useNumberSystem();
     <!-- Digits -->
     <div class="flex flex-row gap-2">
       <div class="center flex-col gap-1">
-        <button @click="ns.addDigit" class="w-8 h-8 text-2xl button">+</button>
-        <button @click="ns.removeDigit" class="w-8 h-8 text-2xl button">
+        <button title="přidat číslici" @click="ns.addDigit" class="w-8 h-8 text-2xl button">+</button>
+        <button title="odebrat číslici" @click="ns.removeDigit" class="w-8 h-8 text-2xl button">
           -
         </button>
       </div>
@@ -37,10 +37,10 @@ const ns = useNumberSystem();
 
     <!-- Controls -->
     <div class="center gap-1 mt-10">
-      <button @click="ns.setDigitsToZero" class="px-3 text-lg button">
+      <button title="nastaví všechny číslice na nulu" @click="ns.setDigitsToZero" class="px-3 text-lg button">
         Vynulovat čísla
       </button>
-      <button
+      <button title="přepíná mezi zobrazením indexů číslic a hodnotami řádů"
         @click="ns.showDigitValue = !ns.showDigitValue"
         class="px-3 text-lg button"
       >

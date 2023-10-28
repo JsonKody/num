@@ -7,8 +7,8 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const MAX_BASE = chars.length;
 
-  const base = ref<Base>(10);
-  const digits = ref<string[]>(["0", "0"]);
+  const base = ref<Base>(2);
+  const digits = ref<string[]>(["0", "0", "0", "0"]);
   const showDigitValue = ref(true);
 
   watch(
