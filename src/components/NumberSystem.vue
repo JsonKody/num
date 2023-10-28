@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import { useNumberSystem } from "../stores/numberSystem";
+import { Base } from "../types/typings";
 import Digit from "./Digit.vue";
 
 const ns = useNumberSystem();
+
+const setBase = (event: Event) => {
+  const value = parseInt((event.target as HTMLInputElement).value);
+  if (!value || value < 2 || value > ns.MAX_BASE) {
+    return;
+  }
+  ns.base = value as Base;
+};
 </script>
 
 <template>
@@ -45,7 +54,7 @@ const ns = useNumberSystem();
         type="number"
         name="base"
         id="base"
-        v-model="ns.base"
+        @change="setBase"
       />
     </div>
 
