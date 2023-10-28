@@ -1,33 +1,49 @@
 <script setup lang="ts">
 import { useNumberSystem } from "../stores/numberSystem";
-import { ref, watch, computed } from "vue";
+import { watch, computed } from "vue";
+
+const { index } = defineProps<{
+  index: number;
+}>();
 
 const ns = useNumberSystem();
-const digitIndex = ref(0); // Měl bys to nastavit podle pozice digitu
-const digitValue = ref(ns.digits[digitIndex.value] || "0");
+const selectedNumber = computed(() => ns.digits[index]);
+const availableChars = computed(() => ns.availableCharsForBase);
+const digitIndex = computed(() => ns.digits.length - index - 1);
+const digitValue = computed(() => Math.pow(ns.base, digitIndex.value));
 
 watch(
-  () => ns.digits[digitIndex.value],
-  (newVal) => {
-    digitValue.value = newVal || "0";
+  () => ns.base,
+  (_newVal) => {
+    // digitValue.value = newVal || "0";
   }
 );
 
-const availableChars = computed(() => ns.availableCharsForBase);
-
 const updateDigit = (event: Event) => {
   const value = (event.target as HTMLSelectElement).value;
-  ns.setDigit(digitIndex.value, value);
+  ns.setDigit(index, value);
 };
 </script>
 
 <template>
-  <div>
-    <span>{{ digitValue }}</span>
-    <select @change="updateDigit" :value="digitValue">
-      <option v-for="char in availableChars" :key="char" :value="char">
-        {{ char }}
-      </option>
-    </select>
+  <div class="relative">
+    <div class="cursor-pointer" @click="ns.showDigitValue = !ns.showDigitValue">
+      <div v-if="ns.showDigitValue" class="center text-xs text-purple-400">
+        {{ digitValue }}
+      </div>
+      <div v-else class="center text-xs text-purple-400">
+        {{ digitIndex }}
+      </div>
+    </div>
+    <div class="text-2xl center">
+      {{ selectedNumber }}
+    </div>
+    <div class="center text-xs">
+      <select @change="updateDigit" :value="selectedNumber">
+        <option v-for="char in availableChars" :key="char" :value="char">
+          {{ char }}
+        </option>
+      </select>
+    </div>
   </div>
 </template>

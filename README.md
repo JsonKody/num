@@ -1,6 +1,6 @@
 # Číselné poziční soustavy
 
-Toto je vizualizace číselných pozičních soustav, vytvořená pro YouTube tutorial na kanálu JsonKody.
+Toto je vizualizace číselných pozičních soustav, vytvořená pro YouTube tutoriál na kanálu JsonKody.
 
 ## Instrukce
 

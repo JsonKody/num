@@ -36,10 +36,4 @@ type Base =
   | 35
   | 36;
 
-interface NameConfig {
-  prefixes: string[];
-  suffix: string;
-  term: string;
-}
-
-export type { Base, NameConfig };
+export type { Base };

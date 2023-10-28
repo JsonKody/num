@@ -1,47 +1,55 @@
-import { NameConfig } from "./types/typings";
+// Pro češtinu
+export const generateCzechName = (() => {
+  const prefixes = [
+    "Jedničková",
+    "Dvojková",
+    "Trojková",
+    "Čtyřková",
+    "Pětková",
+    "Šestková",
+    "Sedmičková",
+    "Osmičková",
+    "Devítková",
+    "Desítková",
+    "Jedenáctková",
+    "Dvanáctková",
+    "Třináctková",
+    "Čtrnáctková",
+    "Patnáctková",
+    "Šestnáctková",
+  ];
+  return (base: number): string => {
+    if (base <= 16) {
+      return `${prefixes[base - 1]} soustava`;
+    }
+    return `${base}-ková soustava`;
+  };
+})();
 
-export const czech: NameConfig = {
-  prefixes: [
-    "Jednič",
-    "Dvoj",
-    "Troj",
-    "Čtyř",
-    "Pět",
-    "Šest",
-    "Sedm",
-    "Osm",
-    "Devět",
-    "Des",
-    "Jedenáct",
-    "Dvanáct",
-    "Třináct",
-    "Čtrnáct",
-    "Patnáct",
-    "Šestnáct",
-  ],
-  suffix: "ková",
-  term: "soustava",
-};
-
-export const latin: NameConfig = {
-  prefixes: [
-    "Uni",
-    "Bi",
-    "Tri",
-    "Quadri",
-    "Quinti",
-    "Hexi",
-    "Septi",
-    "Octo",
-    "Nona",
-    "Deci",
-    "Unde",
-    "Duo",
-    "Treo",
-    "Quattuor",
-    "Quin",
-    "Sex",
-  ],
-  suffix: "decimal",
-  term: "",
-};
+// Pro angličtinu
+export const generateEnglishName = (() => {
+  const names = [
+    "Unary",
+    "Binary",
+    "Ternary",
+    "Quaternary",
+    "Quinary",
+    "Senary",
+    "Septenary",
+    "Octal",
+    "Nonary",
+    "Decimal",
+    "Undecimal",
+    "Duodecimal",
+    "Tridecimal",
+    "Tetradecimal",
+    "Pentadecimal",
+    "Hexadecimal",
+  ];
+  return (base: number): string => {
+    if (base <= 16) {
+      return names[base - 1];
+    }
+    return `${base}-base`;
+  };
+})();

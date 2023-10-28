@@ -16,6 +16,18 @@ body {
   line-height: 1.5;
 }
 
+input,
+select {
+  color: black;
+  padding: 0 0.5rem;
+  border-radius: 0.3rem;
+  transition: all 0.2s ease-in-out;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(132, 0, 255, 0.932);
+  }
+}
+
 @layer components {
   .wrapper {
     padding: 4rem;
@@ -27,5 +39,13 @@ body {
     flex-direction: column;
     margin: auto;
     /* další vlastní styly */
+  }
+
+  .center {
+    @apply flex items-center justify-center;
+  }
+
+  .trans {
+    @apply transition duration-150;
   }
 }

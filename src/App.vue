@@ -1,38 +1,26 @@
 <script setup lang="ts">
-import { NameConfig } from "./types/typings";
-import Digit from "./components/Digit.vue";
+import NumberSystem from "./components/NumberSystem.vue";
 import { useNumberSystem } from "./stores/numberSystem";
-import { czech, latin } from "./prefixes";
+import { generateCzechName, generateEnglishName } from "./prefixes";
 const ns = useNumberSystem();
-
-// Funkce pro generování názvu
-const generujNazevSoustavy = (base: number, config: NameConfig) => {
-  if (base <= 16) {
-    return `${config.prefixes[base - 1]}${config.suffix} ${config.term}`;
-  } else {
-    return `${base}-${config.suffix} ${config.term}`;
-  }
-};
 </script>
 
 <template>
   <div class="wrapper">
-    <h1>{{ generujNazevSoustavy(ns.base, czech) }}</h1>
-    <h1>{{ generujNazevSoustavy(ns.base, latin) }}</h1>
-    <h1>base-{{ ns.base }}</h1>
-    <div>
-      <label for="base">Base</label>
-      <input
-        min="1"
-        :max="ns.MAX_BASE"
-        type="number"
-        name="base"
-        id="base"
-        v-model="ns.base"
-      />
+    <h1 class="text-3xl text-green-400">{{ generateCzechName(ns.base) }}</h1>
+    <h1 class="text-xl text-sky-500">{{ generateEnglishName(ns.base) }}</h1>
+    <div
+      class="my-3 text-purple-300 text-shadow-lg text-5xl bg-gradient-to-r from-emerald-400 via-emerald-600 to-emerald-800 text-transparent bg-clip-text"
+    >
+      {{ ns.computedNumberDecimal }}
     </div>
-    <div v-for="(_d, i) in ns.digits">
-      <Digit :digit="i" />
+    <div
+      class="my-3 animate-pulse text-purple-300 text-shadow-lg text-5xl bg-gradient-to-r from-purple-400 via-purple-600 to-purple-800 text-transparent bg-clip-text"
+    >
+      {{ ns.computedNumber }}
+    </div>
+    <div class="mt-5">
+      <NumberSystem />
     </div>
   </div>
 </template>
