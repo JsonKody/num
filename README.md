@@ -1,18 +1,20 @@
-# Ciselne pozicni soustavy
+# Číselné poziční soustavy
 
-Toto je vizualizace ciselnych pozicnich soustav, vytvorena pro Youtube tutorial na kanalu JsonKody.
+Toto je vizualizace číselných pozičních soustav, vytvořená pro YouTube tutorial na kanálu JsonKody.
 
-## Naklonujete pomoci
+## Instrukce
+
+### Naklonování repozitáře
 ```bash
 git clone git@github.com:JsonKody/ciselne_pozicni_soustavy.git
 ```
 
-## Nainstalovani zavislosti
+### Instalace závislostí
 ```bash
 npm i
 ```
 
-## Spusteni (po nainstalovani zavislosti)
+### Spuštění (po nainstalování závislostí)
 ```bash
 npm run dev
 ```
