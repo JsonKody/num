@@ -2,6 +2,8 @@
 
 Toto je vizualizace číselných pozičních soustav, vytvořená pro YouTube tutoriál na kanálu JsonKody.
 
+### [Online ukázka](http://jk_soustavy.surge.sh)
+
 ## Instrukce
 
 ### Naklonování repozitáře

@@ -10,16 +10,30 @@ const ns = useNumberSystem();
     <!-- Digits -->
     <div class="flex flex-row gap-2">
       <div class="center flex-col gap-1">
-        <button title="přidat číslici" @click="ns.addDigit" class="w-8 h-8 text-2xl button">+</button>
-        <button title="odebrat číslici" @click="ns.removeDigit" class="w-8 h-8 text-2xl button">
+        <button
+          title="přidat číslici"
+          @click="ns.addDigit"
+          class="w-8 h-8 text-2xl button"
+        >
+          +
+        </button>
+        <button
+          title="odebrat číslici"
+          @click="ns.removeDigit"
+          class="w-8 h-8 text-2xl button"
+        >
           -
         </button>
       </div>
-      <div class="grow center flex flex-row gap-1">
+      <TransitionGroup
+        tag="div"
+        class="relative grow center flex flex-row gap-1"
+        name="list"
+      >
         <div v-for="(_digit, i) in ns.digits" :key="i">
           <Digit :index="i" />
         </div>
-      </div>
+      </TransitionGroup>
     </div>
 
     <!-- Base -->
@@ -37,10 +51,15 @@ const ns = useNumberSystem();
 
     <!-- Controls -->
     <div class="center gap-1 mt-10">
-      <button title="nastaví všechny číslice na nulu" @click="ns.setDigitsToZero" class="px-3 text-lg button">
+      <button
+        title="nastaví všechny číslice na nulu"
+        @click="ns.setDigitsToZero"
+        class="px-3 text-lg button"
+      >
         Vynulovat čísla
       </button>
-      <button title="přepíná mezi zobrazením indexů číslic a hodnotami řádů"
+      <button
+        title="přepíná mezi zobrazením indexů číslic a hodnotami řádů"
         @click="ns.showDigitValue = !ns.showDigitValue"
         class="px-3 text-lg button"
       >
@@ -54,4 +73,23 @@ const ns = useNumberSystem();
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+  transform: translateX(80px);
+}
+</style>

@@ -35,11 +35,11 @@ const updateDigit = (event: Event) => {
         {{ digitIndex }}
       </div>
     </div>
-    <div class="text-2xl center">
+    <div class="text-2xl center" :class="{'opacity-50': selectedNumber == 0,'text-purple-300': selectedNumber != 0}">
       {{ selectedNumber }}
     </div>
     <div class="center text-xs">
-      <select @change="updateDigit" :value="selectedNumber">
+      <select class="trans opacity-10 hover:opacity-80 cursor-pointer" @change="updateDigit" :value="selectedNumber">
         <option v-for="char in availableChars" :key="char" :value="char">
           {{ char }}
         </option>
