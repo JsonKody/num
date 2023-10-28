@@ -35,7 +35,7 @@ const updateDigit = (event: Event) => {
         {{ digitIndex }}
       </div>
     </div>
-    <div class="text-2xl center" :class="{'opacity-50': selectedNumber == 0,'text-purple-300': selectedNumber != 0}">
+    <div class="text-2xl center" :class="{'opacity-50': selectedNumber == '0','text-purple-300': selectedNumber != '0'}">
       {{ selectedNumber }}
     </div>
     <div class="center text-xs">
