@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
 }
 
 body {
@@ -30,7 +31,7 @@ select {
 
 @layer components {
   .wrapper {
-    padding: 4rem;
+    padding: 1rem 1rem;
     border-radius: 2rem;
     border: 4px double rgba(168, 85, 247, 0.2);
     display: flex;
@@ -38,6 +39,8 @@ select {
     justify-content: center;
     flex-direction: column;
     margin: auto;
+    min-width: 50vh;
+    min-height: 50vh;
     /* další vlastní styly */
   }
 
@@ -47,5 +50,9 @@ select {
 
   .trans {
     @apply transition duration-150;
+  }
+
+  .button {
+    @apply trans rounded bg-purple-700 opacity-30 hover:opacity-80 text-white;
   }
 }

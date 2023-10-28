@@ -10,20 +10,12 @@ const ns = useNumberSystem();
     <!-- Digits -->
     <div class="flex flex-row gap-2">
       <div class="center flex-col gap-1">
-        <button
-          @click="ns.addDigit"
-          class="trans text-2xl w-8 h-8 rounded bg-purple-700 opacity-30 hover:opacity-80 text-white"
-        >
-          +
-        </button>
-        <button
-          @click="ns.removeDigit"
-          class="trans text-2xl w-8 h-8 rounded bg-purple-700 opacity-30 hover:opacity-80 text-white"
-        >
+        <button @click="ns.addDigit" class="w-8 h-8 text-2xl button">+</button>
+        <button @click="ns.removeDigit" class="w-8 h-8 text-2xl button">
           -
         </button>
       </div>
-      <div class="flex flex-row gap-1">
+      <div class="grow center flex flex-row gap-1">
         <div v-for="(_digit, i) in ns.digits" :key="i">
           <Digit :index="i" />
         </div>
@@ -43,10 +35,20 @@ const ns = useNumberSystem();
       />
     </div>
 
-    <!-- Delete -->
-    <div class="center mt-10">
-      <button @click="ns.setDigitsToZero" class="px-3 rounded bg-purple-700">
+    <!-- Controls -->
+    <div class="center gap-1 mt-10">
+      <button @click="ns.setDigitsToZero" class="px-3 text-lg button">
         Vynulovat čísla
+      </button>
+      <button
+        @click="ns.showDigitValue = !ns.showDigitValue"
+        class="px-3 text-lg button"
+      >
+        {{
+          ns.showDigitValue
+            ? "Zobrazit indexy číslic"
+            : "Zobrazit hodnoty číslic"
+        }}
       </button>
     </div>
   </div>
