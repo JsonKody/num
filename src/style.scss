@@ -3,12 +3,19 @@
 @tailwind utilities;
 
 :root {
+  font-size: 16px;
   background-color: #1e004b;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+}
+
+@media screen and (min-width: 1024px) {
+  :root {
+    font-size: 28px; /* Zvětšíme písmo pouze pro obrazovky větší nebo rovno 1024px */
+  }
 }
 
 body {
@@ -31,7 +38,7 @@ select {
 
 @layer components {
   .wrapper {
-    padding: 1rem 1rem;
+    padding: 1rem 2rem;
     border-radius: 2rem;
     border: 4px double rgba(168, 85, 247, 0.2);
     display: flex;
