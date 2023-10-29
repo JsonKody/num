@@ -18,7 +18,7 @@ const setBase = (event: Event) => {
   <div>
     <!-- Digits -->
     <div class="flex flex-row gap-2">
-      <div class="center flex-col gap-1">
+      <div class="flex-col gap-1 center">
         <button
           title="přidat číslici"
           @click="ns.addDigit"
@@ -36,7 +36,7 @@ const setBase = (event: Event) => {
       </div>
       <TransitionGroup
         tag="div"
-        class="relative grow center flex flex-row gap-1"
+        class="relative flex flex-row gap-1 grow center"
         name="list"
       >
         <div v-for="(_digit, i) in ns.digits" :key="i">
@@ -49,6 +49,7 @@ const setBase = (event: Event) => {
     <div class="m-8 center">
       <label for="base">Base</label>
       <input
+        :value="ns.base"
         min="2"
         :max="ns.MAX_BASE"
         type="number"
@@ -59,7 +60,7 @@ const setBase = (event: Event) => {
     </div>
 
     <!-- Controls -->
-    <div class="center gap-1 mt-10">
+    <div class="gap-1 mt-10 center">
       <button
         title="nastaví všechny číslice na nulu"
         @click="ns.setDigitsToZero"
