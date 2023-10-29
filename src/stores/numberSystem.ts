@@ -1,11 +1,12 @@
 // numberSystem.ts
 import type { Base } from "../types/typings";
 import { defineStore } from "pinia";
-import { ref, computed, watch } from "vue";
+import { ref, computed } from "vue";
 import { generateCzechName, generateEnglishName } from "../prefixes";
 
 export const useNumberSystem = defineStore("numberSystem", () => {
   const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const MIN_BASE = 2;
   const MAX_BASE = chars.length;
 
   const base = ref<Base>(2);
@@ -20,19 +21,19 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     return chars.substring(0, base.value);
   });
 
-  watch(
-    () => base.value,
-    () => {
-      digits.value = digits.value.map((d) =>
-        base.value > Number(d)
-          ? d
-          : availableCharsForBase.value[availableCharsForBase.value.length - 1]
-      );
-    }
-  );
+  const setBase = (val: Base) => {
+    digits.value = digits.value.map((d) => {
+      // console.log(val);
+      // console.log(chars[val - 1]);
+      return val > parseInt(d, base.value) ? d : chars[val - 1];
+    });
+
+    base.value = val;
+  };
 
   const setDigitsToZero = () => {
-    digits.value = digits.value.map(() => "0");
+    const zero = availableCharsForBase.value[0];
+    digits.value = digits.value.map(() => zero);
   };
 
   const setDigitsToMax = () => {
@@ -53,28 +54,48 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     digits.value.shift();
   };
 
-  const computedNumberDecimal = computed(() => {
-    const number = parseInt(digits.value.join(""), base.value);
-    return isNaN(number) ? 0 : number;
+  function stringToBigInt(str: string, base: Base): BigInt {
+    let result = BigInt(0);
+    const bigBase = BigInt(base);
+    let multiplier = BigInt(1);
+
+    for (let i = str.length - 1; i >= 0; i--) {
+      const digit = str[i];
+      const value = BigInt(parseInt(digit, base));
+      result += value * multiplier;
+      multiplier *= bigBase;
+    }
+
+    return result;
+  }
+
+  const numberToBaseDecimal = computed(() => {
+    const str_num = stringToBigInt(digits.value.join(""), base.value)
+      .toString(10)
+      .toUpperCase();
+    return str_num ? str_num : "0";
   });
 
-  const computedNumber = computed(() => {
-    return base.value > 1
-      ? computedNumberDecimal.value.toString(base.value).toUpperCase()
-      : "0";
+  const numberToBase = computed(() => {
+    const str_num = stringToBigInt(digits.value.join(""), base.value)
+      .toString(base.value)
+      .toUpperCase();
+    return str_num ? str_num : "0";
   });
 
   return {
     base,
+    setBase,
     chars,
+    MIN_BASE,
     MAX_BASE,
     digits,
     setDigit,
     addDigit,
     removeDigit,
     availableCharsForBase,
-    computedNumber,
-    computedNumberDecimal,
+    numberToBase,
+    numberToBaseDecimal,
     showDigitValue,
     setDigitsToZero,
     setDigitsToMax,

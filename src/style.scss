@@ -38,26 +38,20 @@ select {
     box-shadow: 0 0 0 2px rgba(132, 0, 255, 0.932);
   }
 
-  &[type=number] {
-    font-size: .8rem;
+  &[type="number"] {
+    font-size: 0.8rem;
   }
 }
 
 @layer components {
   .wrapper {
-    padding: 1rem 2rem;
-    border-radius: 1.5rem;
-    border: 1px solid #a96ee133;
-    background-color: #05061a70;
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    flex-direction: column;
-    margin: auto;
-    min-width: 50vh;
-    min-height: 50vh;
-    /* další vlastní styly */
+    @apply md:p-4 md:px-12 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
+    // border: 1px solid #a96ee133;
+    // background-color: #05061a70;
+  }
+
+  .app-border {
+    @apply border border-purple-500 border-opacity-10;
   }
 
   .center {
@@ -97,6 +91,10 @@ select {
   }
 
   .number-base {
-    @apply center my-3 text-4xl cursor-help;
+    @apply center text-4xl cursor-help;
+  }
+
+  .base-wrap {
+    @apply py-3 my-3 app-border rounded-lg bg-slate-950 bg-opacity-20 center flex flex-col;
   }
 }

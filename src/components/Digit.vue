@@ -46,6 +46,7 @@ const updateDigit = (event: Event) => {
     </div>
     <div class="center text-xs">
       <select
+        name="digit"
         class="trans opacity-10 hover:opacity-80 cursor-pointer"
         @change="updateDigit"
         :value="selectedNumber"

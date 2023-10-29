@@ -35,7 +35,7 @@ const ns = useNumberSystem();
       :title="`Číslo v ... ${ns.czech_10.toLocaleLowerCase()}`"
       class="number green-grad"
     >
-      {{ ns.computedNumberDecimal }}
+      {{ ns.numberToBaseDecimal }}
     </div>
 
     <Transition name="fade" mode="out-in">
@@ -54,7 +54,7 @@ const ns = useNumberSystem();
       :title="`Číslo v ... ${ns.czech.toLocaleLowerCase()}`"
       class="number animate-pulse purple-grad"
     >
-      {{ ns.computedNumber }}
+      {{ ns.numberToBase }}
     </div>
     <div class="mt-5">
       <NumberSystem />

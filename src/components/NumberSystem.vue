@@ -2,6 +2,7 @@
 import { useNumberSystem } from "../stores/numberSystem";
 import { Base } from "../types/typings";
 import Digit from "./Digit.vue";
+import { computed } from "vue";
 
 const ns = useNumberSystem();
 
@@ -10,53 +11,96 @@ const setBase = (event: Event) => {
   if (!value || value < 2 || value > ns.MAX_BASE) {
     return;
   }
-  ns.base = value as Base;
+  ns.setBase(value as Base);
 };
+
+const baseTitle = computed(
+  () =>
+    `Základ v této soustavy je:
+                            ${ns.base}
+Je to tedy ${ns.czech.toLowerCase()}.`
+);
 </script>
 
 <template>
   <div>
     <!-- Digits -->
-    <div class="flex flex-row gap-2">
-      <div class="flex-col gap-1 center">
-        <button
-          title="přidat číslici"
-          @click="ns.addDigit"
-          class="w-8 h-8 text-2xl button"
-        >
-          +
-        </button>
-        <button
-          title="odebrat číslici"
-          @click="ns.removeDigit"
-          class="w-8 h-8 text-2xl button"
-        >
-          -
-        </button>
-      </div>
+    <div class="flex flex-col gap-2">
       <TransitionGroup
         tag="div"
-        class="relative flex flex-row gap-1 grow center"
+        class="relative flex flex-row flex-wrap gap-1 grow center"
         name="list"
       >
         <div v-for="(_digit, i) in ns.digits" :key="i">
           <Digit :index="i" />
         </div>
       </TransitionGroup>
+      <div class="flex-row gap-1 center">
+        <button
+          title="odebrat číslici"
+          @click="ns.removeDigit"
+          class="center w-6 h-6 text-xl button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-circle-minus"
+            width="38"
+            height="38"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+            <path d="M9 12l6 0"></path>
+          </svg>
+        </button>
+        <button
+          title="přidat číslici"
+          @click="ns.addDigit"
+          class="center w-6 h-6 text-xl button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-circle-plus"
+            width="38"
+            height="38"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+            <path d="M9 12h6"></path>
+            <path d="M12 9v6"></path>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <!-- Base -->
-    <div class="center flex flex-col">
+    <div class="base-wrap">
       <div class="center">
         <Transition name="fade" mode="out-in">
-          <div :key="ns.base" class="number-base red-grad">{{ ns.base }}</div>
+          <div :title="baseTitle" :key="ns.base" class="number-base red-grad">
+            {{ ns.base }}
+          </div>
         </Transition>
       </div>
-      <label :title="`Základ (base) v této soustavě - ${ns.czech}`" for="base" class="text-base"><span class="text-xs opacity-0">(Base)</span> Základ <span class="text-xs opacity-50">(Base)</span></label>
+      <label :title="baseTitle" for="base" class="text-base cursor-help"
+        ><span class="text-xs opacity-0">(Base)</span> Základ
+        <span class="text-xs opacity-50">(Base)</span></label
+      >
       <input
         class="opacity-10 hover:opacity-80 focus:opacity-80"
         :value="ns.base"
-        min="2"
+        :min="ns.MIN_BASE"
         :max="ns.MAX_BASE"
         type="number"
         name="base"
@@ -66,7 +110,7 @@ const setBase = (event: Event) => {
     </div>
 
     <!-- Controls -->
-    <div class="gap-1 mt-10 center">
+    <div class="gap-1 center">
       <button
         title="nastaví všechny číslice na nulu"
         @click="ns.setDigitsToZero"
@@ -75,7 +119,7 @@ const setBase = (event: Event) => {
         Min
       </button>
       <button
-        title="přepíná mezi zobrazením indexů řádů a hodnotami řádů"
+        title="přepíná zobrazení -> indexy řádů / hodnoty řádů"
         @click="ns.showDigitValue = !ns.showDigitValue"
         class="px-3 text-lg button"
       >
@@ -97,7 +141,7 @@ const setBase = (event: Event) => {
             d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"
           ></path>
         </svg>
-        {{ ns.showDigitValue ? "indexy řádů" : "hodnoty řádů" }}
+        {{ ns.showDigitValue ? "hodnoty řádů" : "indexy řádů" }}
       </button>
       <button
         title="nastaví všechny číslice na maximum"
