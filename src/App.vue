@@ -2,6 +2,7 @@
 import NumberSystem from "./components/NumberSystem.vue";
 import { useNumberSystem } from "./stores/numberSystem";
 import { generateCzechName, generateEnglishName } from "./prefixes";
+
 const ns = useNumberSystem();
 </script>
 
@@ -13,7 +14,7 @@ const ns = useNumberSystem();
     <!-- Number -->
     <div
       :title="`Číslo v ... ${generateCzechName(10)}`"
-      class="cursor-help my-3 text-5xl green-grad"
+      class="my-3 text-5xl cursor-help green-grad"
     >
       {{ ns.computedNumberDecimal }}
     </div>
@@ -28,7 +29,7 @@ const ns = useNumberSystem();
     <!-- Number -->
     <div
       :title="`Číslo v ... ${generateCzechName(ns.base)}`"
-      class="cursor-help my-3 text-5xl animate-pulse purple-grad"
+      class="my-3 text-5xl cursor-help animate-pulse purple-grad"
     >
       {{ ns.computedNumber }}
     </div>
