@@ -1,9 +1,24 @@
+@font-face {
+  font-family: "Asap";
+  src: url("./assets/fonts/asap/asap.ttf") format("truetype");
+  font-weight: 100 900; // od 100 (nejtenčí) do 900 (nejtlustější)
+  font-style: oblique 0deg 10deg; // od 0 do 10 stupňů sklonu
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("./assets/fonts/roboto_mono/roboto_mono.ttf") format("truetype");
+  font-weight: 100 900; // od 100 (nejtenčí) do 900 (nejtlustější)
+  font-style: oblique 0deg 10deg; // od 0 do 10 stupňů sklonu
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   font-size: 16px;
+  line-height: 1.5;
   // background-color: #1e004b;
   color: white;
   min-height: 100vh;
@@ -13,7 +28,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  justify-content: start;
+  justify-content: flex-start;
   padding-top: 4rem;
   // padding-bottom: 1.5rem;
 }
@@ -48,12 +63,6 @@
   }
 }
 
-body {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
 input,
 select {
   color: black;
@@ -71,14 +80,10 @@ select {
 }
 
 @layer components {
-  .wrapper {
-    @apply m-1 px-2 pt-6 pb-3 md:px-12 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
-    // border: 1px solid #a96ee133;
-    // background-color: #05061a70;
-  }
+  /*** Utils ***/
 
-  .app-border {
-    @apply border border-purple-500 border-opacity-10;
+  .button {
+    @apply trans rounded-md bg-purple-700 opacity-30 hover:opacity-80 text-white;
   }
 
   .center {
@@ -89,17 +94,13 @@ select {
     @apply transition duration-150;
   }
 
-  .button {
-    @apply trans rounded-md bg-purple-700 opacity-30 hover:opacity-80 text-white;
-  }
-
   .control-button {
     @apply sm:h-9 px-3 text-lg button;
     min-height: 2.25rem;
   }
 
   .purple-grad {
-    @apply text-purple-300 bg-gradient-to-br from-purple-400 via-purple-600 to-purple-800 text-transparent bg-clip-text;
+    @apply text-purple-300 bg-gradient-to-br from-purple-100 via-purple-500 to-purple-700 text-transparent bg-clip-text;
   }
 
   .green-grad {
@@ -110,8 +111,26 @@ select {
     @apply text-pink-300 bg-gradient-to-b from-pink-400 via-pink-600 to-pink-800 text-transparent bg-clip-text;
   }
 
+  .asap {
+    font-family: "Asap", sans-serif;
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .mono {
+    font-family: "Roboto Mono", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+  }
+
   .rd {
     @apply border border-red-500;
+  }
+
+  /*** App ***/
+
+  .wrapper {
+    @apply asap m-1 px-2 pt-6 pb-3 md:px-12 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
   }
 
   .header {
@@ -120,13 +139,36 @@ select {
 
   .number {
     @apply center my-3 text-5xl cursor-help;
+    font-weight: 600;
   }
 
-  .number-base {
-    @apply center text-4xl cursor-help;
+  .app-border {
+    @apply border border-purple-500 border-opacity-10;
   }
+
+  /*** Digits ***/
+
+  .digit {
+    @apply mono text-xl center;
+  }
+
+  .digit-value {
+    @apply mono text-green-500  center;
+    font-size: 0.6rem;
+  }
+
+  .digit-index {
+    @apply text-pink-400 center;
+    font-size: 0.6rem;
+  }
+
+  /*** Base ***/
 
   .base-wrap {
     @apply py-3 my-3 app-border rounded-lg bg-slate-950 bg-opacity-20 center flex flex-col;
+  }
+
+  .number-base {
+    @apply mb-1 center text-4xl cursor-help;
   }
 }

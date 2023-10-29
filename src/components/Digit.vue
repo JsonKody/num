@@ -27,36 +27,41 @@ const updateDigit = (event: Event) => {
 
 <template>
   <div class="relative">
+    <!-- Digit value/index -->
     <div class="cursor-help" @click="ns.showDigitValue = !ns.showDigitValue">
       <div
         title="hodnota řádu | Kliknutím přepneš na index řádu"
         v-if="ns.showDigitValue"
-        class="center text-xs text-purple-400"
+        class="digit-value"
       >
         {{ digitValue }}
       </div>
       <div
         title="index řádu | Kliknutím přepneš na hodnotu řádu"
         v-else
-        class="center text-xs text-pink-400"
+        class="digit-index"
       >
         {{ digitIndex }}
       </div>
     </div>
+
+    <!-- Digit -->
     <div
-      class="text-2xl center"
+      class="digit"
       :class="{
         'opacity-50': selectedNumber == '0',
-        'text-purple-300': selectedNumber != '0',
+        'text-purple-400': selectedNumber != '0',
       }"
     >
       {{ selectedNumber }}
     </div>
-    <div class="center text-xs">
+
+    <!-- Digit selector -->
+    <div class="text-xs center">
       <select
         title="Vyber číslici"
         name="digit"
-        class="trans opacity-10 hover:opacity-80 cursor-pointer"
+        class="cursor-pointer mono trans opacity-10 hover:opacity-80"
         @change="updateDigit"
         :value="selectedNumber"
       >
