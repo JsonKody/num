@@ -46,9 +46,15 @@ const setBase = (event: Event) => {
     </div>
 
     <!-- Base -->
-    <div class="m-8 center">
-      <label for="base">Base</label>
+    <div class="center flex flex-col">
+      <div class="center">
+        <Transition name="fade" mode="out-in">
+          <div :key="ns.base" class="number-base red-grad">{{ ns.base }}</div>
+        </Transition>
+      </div>
+      <label for="base" class="text-base">Základ / Base</label>
       <input
+        class="opacity-10 hover:opacity-80 focus:opacity-80"
         :value="ns.base"
         min="2"
         :max="ns.MAX_BASE"
@@ -84,6 +90,26 @@ const setBase = (event: Event) => {
 </template>
 
 <style lang="scss" scoped>
+/**
+  *  Base number - Fade animation
+  */
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.15s ease;
+}
+
+.fade-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.fade-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/**
+  *  List animaniation
+  */
 .list-move, /* apply transition to moving elements */
 .list-enter-active,
 .list-leave-active {

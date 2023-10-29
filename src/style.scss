@@ -37,17 +37,21 @@ select {
     outline: none;
     box-shadow: 0 0 0 2px rgba(132, 0, 255, 0.932);
   }
+
+  &[type=number] {
+    font-size: .8rem;
+  }
 }
 
 @layer components {
   .wrapper {
     padding: 1rem 2rem;
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     border: 4px double rgba(168, 85, 247, 0.2);
     background-color: rgba(19, 6, 37, 0.315);
     backdrop-filter: blur(10px);
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     flex-direction: column;
     margin: auto;
@@ -65,7 +69,7 @@ select {
   }
 
   .button {
-    @apply trans rounded bg-purple-700 opacity-30 hover:opacity-80 text-white;
+    @apply trans rounded-md bg-purple-700 opacity-30 hover:opacity-80 text-white;
   }
 
   .purple-grad {
@@ -74,5 +78,25 @@ select {
 
   .green-grad {
     @apply text-green-300 bg-gradient-to-b from-green-400 via-green-600 to-green-800 text-transparent bg-clip-text;
+  }
+
+  .red-grad {
+    @apply text-pink-300 bg-gradient-to-b from-pink-400 via-pink-600 to-pink-800 text-transparent bg-clip-text;
+  }
+
+  .rd {
+    @apply border border-red-500;
+  }
+
+  .header {
+    @apply center text-3xl;
+  }
+
+  .number {
+    @apply center my-3 text-5xl cursor-help;
+  }
+
+  .number-base {
+    @apply center my-3 text-4xl cursor-help;
   }
 }

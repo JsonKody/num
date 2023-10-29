@@ -4,9 +4,9 @@
       <feGaussianBlur in="SourceGraphic" stdDeviation="20"/>
     </filter>
   </defs>
-  <!-- Temné pozadí -->
+ 
   <rect x="0" y="0" width="500" height="500" fill="#060023"/>
-  <!-- Barevné efekty -->
+  
   <circle cx="250" cy="250" r="50" fill="#800080" filter="url(#blur)"/>
   <circle cx="500" cy="50" r="90" fill="#4b0082" filter="url(#blur)"/>
   <circle cx="100" cy="100" r="50" fill="#4b0082" filter="url(#blur)"/>
