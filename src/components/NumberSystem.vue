@@ -114,14 +114,14 @@ Je to tedy ${ns.czech.toLowerCase()}.`
       <button
         title="nastaví všechny číslice na nulu"
         @click="ns.setDigitsToZero"
-        class="px-3 text-lg button"
+        class="h-9 px-3 text-lg button"
       >
         Min
       </button>
       <button
         title="přepíná zobrazení -> indexy řádů / hodnoty řádů"
         @click="ns.showDigitValue = !ns.showDigitValue"
-        class="px-3 text-lg button"
+        class="h-9 px-3 text-lg button"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +146,7 @@ Je to tedy ${ns.czech.toLowerCase()}.`
       <button
         title="nastaví všechny číslice na maximum"
         @click="ns.setDigitsToMax"
-        class="px-3 text-lg button"
+        class="h-9 px-3 text-lg button"
       >
         Max
       </button>

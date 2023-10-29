@@ -17,7 +17,17 @@
 
 @media screen and (min-width: 1024px) {
   :root {
-    font-size: 28px; /* Zvětšíme písmo pouze pro obrazovky větší nebo rovno 1024px */
+    font-size: 18px; /* Zvětšíme písmo pouze pro obrazovky větší nebo rovno 1024px */
+  }
+}
+@media screen and (min-width: 1280px) {
+  :root {
+    font-size: 22px; /* Zvětšíme písmo pouze pro obrazovky větší nebo rovno 1280px */
+  }
+}
+@media screen and (min-width: 1536px) {
+  :root {
+    font-size: 26px; /* Zvětšíme písmo pouze pro obrazovky větší nebo rovno 1536px */
   }
 }
 
@@ -45,7 +55,7 @@ select {
 
 @layer components {
   .wrapper {
-    @apply md:p-4 md:px-12 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
+    @apply pt-6 pb-3 md:px-12 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
     // border: 1px solid #a96ee133;
     // background-color: #05061a70;
   }
