@@ -52,7 +52,7 @@ const setBase = (event: Event) => {
           <div :key="ns.base" class="number-base red-grad">{{ ns.base }}</div>
         </Transition>
       </div>
-      <label for="base" class="text-base">Základ / Base</label>
+      <label :title="`Základ (base) v této soustavě - ${ns.czech}`" for="base" class="text-base"><span class="text-xs opacity-0">(Base)</span> Základ <span class="text-xs opacity-50">(Base)</span></label>
       <input
         class="opacity-10 hover:opacity-80 focus:opacity-80"
         :value="ns.base"
@@ -72,18 +72,39 @@ const setBase = (event: Event) => {
         @click="ns.setDigitsToZero"
         class="px-3 text-lg button"
       >
-        Vynulovat čísla
+        Min
       </button>
       <button
-        title="přepíná mezi zobrazením indexů číslic a hodnotami řádů"
+        title="přepíná mezi zobrazením indexů řádů a hodnotami řádů"
         @click="ns.showDigitValue = !ns.showDigitValue"
         class="px-3 text-lg button"
       >
-        {{
-          ns.showDigitValue
-            ? "Zobrazit indexy číslic"
-            : "Zobrazit hodnoty číslic"
-        }}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="inline-block mr-1"
+          width="38"
+          height="38"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+          <path
+            d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"
+          ></path>
+        </svg>
+        {{ ns.showDigitValue ? "indexy řádů" : "hodnoty řádů" }}
+      </button>
+      <button
+        title="nastaví všechny číslice na maximum"
+        @click="ns.setDigitsToMax"
+        class="px-3 text-lg button"
+      >
+        Max
       </button>
     </div>
   </div>

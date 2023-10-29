@@ -2,6 +2,7 @@
 import type { Base } from "../types/typings";
 import { defineStore } from "pinia";
 import { ref, computed, watch } from "vue";
+import { generateCzechName, generateEnglishName } from "../prefixes";
 
 export const useNumberSystem = defineStore("numberSystem", () => {
   const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -11,17 +12,33 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const digits = ref<string[]>(["0", "0", "0", "0"]);
   const showDigitValue = ref(true);
 
+  const czech = computed(() => generateCzechName(base.value));
+  const english = computed(() => generateEnglishName(base.value));
+  const czech_10 = computed(() => generateCzechName(10));
+
+  const availableCharsForBase = computed(() => {
+    return chars.substring(0, base.value);
+  });
+
   watch(
     () => base.value,
     () => {
       digits.value = digits.value.map((d) =>
-        base.value > Number(d) ? d : String(base.value - 1)
+        base.value > Number(d)
+          ? d
+          : availableCharsForBase.value[availableCharsForBase.value.length - 1]
       );
     }
   );
 
   const setDigitsToZero = () => {
     digits.value = digits.value.map(() => "0");
+  };
+
+  const setDigitsToMax = () => {
+    const max =
+      availableCharsForBase.value[availableCharsForBase.value.length - 1];
+    digits.value = digits.value.map(() => max);
   };
 
   const setDigit = (index: number, value: string) => {
@@ -47,10 +64,6 @@ export const useNumberSystem = defineStore("numberSystem", () => {
       : "0";
   });
 
-  const availableCharsForBase = computed(() => {
-    return chars.substring(0, base.value);
-  });
-
   return {
     base,
     chars,
@@ -64,5 +77,9 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     computedNumberDecimal,
     showDigitValue,
     setDigitsToZero,
+    setDigitsToMax,
+    czech,
+    english,
+    czech_10,
   };
 });

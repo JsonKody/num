@@ -1,27 +1,23 @@
 <script setup lang="ts">
 import NumberSystem from "./components/NumberSystem.vue";
 import { useNumberSystem } from "./stores/numberSystem";
-import { generateCzechName, generateEnglishName } from "./prefixes";
-import { computed } from "vue";
 
 const ns = useNumberSystem();
-
-const czech = computed(() => generateCzechName(ns.base));
-const english = computed(() => generateEnglishName(ns.base));
-const czech_10 = computed(() => generateCzechName(10));
 </script>
 
 <template>
   <a
     target="_blank"
+    title="Github"
     href="https://github.com/JsonKody/ciselne_pozicni_soustavy"
-    class="m-2 absolute top-0 right-0 trans opacity-40 hover:opacity-80"
+    class="m-2 opacity-40 hover:opacity-60 text-purple-400 hover:text-purple-300 absolute top-0 right-0 trans"
   >
     <svg
       height="38"
       width="38"
       aria-hidden="true"
       viewBox="0 0 16 16"
+      fill="currentColor"
       version="1.1"
       data-view-component="true"
     >
@@ -32,27 +28,30 @@ const czech_10 = computed(() => generateCzechName(10));
   </a>
   <div class="wrapper">
     <h1 class="header green-grad">
-      {{ czech_10 }}
+      {{ ns.czech_10 }}
     </h1>
     <!-- Number -->
-    <div :title="`Číslo v ... ${czech_10}`" class="number green-grad">
+    <div
+      :title="`Číslo v ... ${ns.czech_10.toLocaleLowerCase()}`"
+      class="number green-grad"
+    >
       {{ ns.computedNumberDecimal }}
     </div>
 
     <Transition name="fade" mode="out-in">
-      <div :key="czech" class="grow w-full">
+      <div :key="ns.czech" class="grow w-full">
         <h1 class="header relative purple-grad">
-          {{ czech }}
+          {{ ns.czech }}
         </h1>
         <div class="text-xs center text-purple-400 opacity-70">
-          ( {{ english }} )
+          ( {{ ns.english }} )
         </div>
       </div>
     </Transition>
 
     <!-- Number -->
     <div
-      :title="`Číslo v ... ${czech}`"
+      :title="`Číslo v ... ${ns.czech.toLocaleLowerCase()}`"
       class="number animate-pulse purple-grad"
     >
       {{ ns.computedNumber }}
