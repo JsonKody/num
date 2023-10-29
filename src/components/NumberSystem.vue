@@ -98,6 +98,7 @@ Je to tedy ${ns.czech.toLowerCase()}.`
         <span class="text-xs opacity-50">(Base)</span></label
       >
       <input
+        :title="`Zde můžete změnit základ soustavy.\nmin:   2\nmax:   36`"
         class="opacity-10 hover:opacity-80 focus:opacity-80"
         :value="ns.base"
         :min="ns.MIN_BASE"
