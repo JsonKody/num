@@ -43,7 +43,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
 
   const computedNumber = computed(() => {
     return base.value > 1
-      ? computedNumberDecimal.value.toString(base.value)
+      ? computedNumberDecimal.value.toString(base.value).toUpperCase()
       : "0";
   });
 
