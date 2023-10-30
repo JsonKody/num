@@ -169,7 +169,7 @@
   }
 
   .digit-button {
-    @apply p-1 rounded-md trans center text-purple-400 opacity-40 hover:opacity-100;
+    @apply p-1 rounded-md trans center  opacity-30 hover:opacity-100 text-purple-400;
   }
   
   /*** Base ***/
@@ -183,11 +183,11 @@
   }
   
   .base-button {
-    @apply p-1 rounded-md trans center text-pink-400 disabled:text-slate-600 opacity-40 hover:opacity-100;
+    @apply p-1 rounded-md trans center opacity-30 hover:opacity-100 text-pink-400 disabled:text-slate-600;
   }
 
   .base-buttons {
-    @apply h-full absolute right-0 top-0 flex-col items-center gap-1 center;
+    @apply h-full absolute center right-0 top-0 flex-col justify-center gap-1 items-center ;
   }
 
   /*** Footer ***/
