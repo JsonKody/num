@@ -8,8 +8,8 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "psh": "git add -A && git commit -m \"saved & pushed by npm\" && git push",
-    "all": "npm run build && npm run psh && surge ./dist jk_soustavy.surge.sh",
-    "deploy": "npm run build && surge ./dist jk_soustavy.surge.sh"
+    "deploy": "npm run build && surge ./dist jk_soustavy.surge.sh",
+    "all": "npm run build && npm run psh && npm run deploy"
   },
   "dependencies": {
     "pinia": "^2.1.7",
