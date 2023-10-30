@@ -167,6 +167,10 @@
     @apply text-xs center;
   }
 
+  .digit-button {
+    @apply rounded-md trans center text-purple-400 opacity-40 hover:opacity-100;
+  }
+
   /*** Base ***/
 
   .base-wrap {
