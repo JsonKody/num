@@ -171,15 +171,23 @@
   .digit-button {
     @apply p-1 rounded-md trans center text-purple-400 opacity-40 hover:opacity-100;
   }
-
+  
   /*** Base ***/
-
+  
   .base-wrap {
-    @apply py-3 my-3 app-border rounded-lg bg-slate-950 bg-opacity-20 center flex flex-col;
+    @apply relative py-3 my-3 app-border rounded-lg bg-slate-950 bg-opacity-20 center flex flex-col;
   }
-
+  
   .number-base {
     @apply mb-1 center text-4xl cursor-help;
+  }
+  
+  .base-button {
+    @apply p-1 rounded-md trans center text-pink-400 disabled:text-slate-600 opacity-40 hover:opacity-100;
+  }
+
+  .base-buttons {
+    @apply h-full absolute right-0 top-0 flex-col items-center gap-1 center;
   }
 
   /*** Footer ***/

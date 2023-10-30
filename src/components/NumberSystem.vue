@@ -18,10 +18,21 @@ const setBase = (event: Event) => {
 
 const baseTitle = computed(
   () =>
-    `Základ v této soustavy je:
-                            ${ns.base}
+    `[ ${ns.base} ]  je základ v této soustavy.
 Je to tedy ${ns.czech.toLowerCase()}.`
 );
+
+const increaseBase = () => {
+  if (ns.base < ns.MAX_BASE) {
+    ns.setBase((ns.base + 1) as Base);
+  }
+};
+
+const decreaseBase = () => {
+  if (ns.base > ns.MIN_BASE) {
+    ns.setBase((ns.base - 1) as Base);
+  }
+};
 </script>
 
 <template>
@@ -79,6 +90,15 @@ Je to tedy ${ns.czech.toLowerCase()}.`
         id="base"
         @change="setBase"
       />
+
+      <div class="base-buttons">
+        <button title="Základ + 1" :disabled="ns.base >= ns.MAX_BASE" @click="increaseBase" class="base-button">
+          <Plus />
+        </button>
+        <button title="Základ - 1" :disabled="ns.base <= ns.MIN_BASE" @click="decreaseBase" class="base-button">
+          <Minus />
+        </button>
+      </div>
     </div>
 
     <!-- Controls -->
