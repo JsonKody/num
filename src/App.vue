@@ -10,7 +10,7 @@ const ns = useNumberSystem();
     target="_blank"
     title="Github"
     href="https://github.com/JsonKody/ciselne_pozicni_soustavy"
-    class="m-2 opacity-40 hover:opacity-60 text-purple-400 hover:text-purple-300 absolute top-0 right-0 trans"
+    class="github-icon"
   >
     <svg
       height="38"
