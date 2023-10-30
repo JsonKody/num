@@ -4,8 +4,8 @@
   <svg
     xmlns="http://www.w3.org/2000/svg"
     class="icon icon-tabler icon-tabler-hexagon-minus"
-    width="38"
-    height="38"
+    width="42"
+    height="42"
     viewBox="0 0 24 24"
     stroke-width="2"
     stroke="currentColor"
