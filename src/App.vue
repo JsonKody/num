@@ -60,7 +60,7 @@ const ns = useNumberSystem();
       <NumberSystem />
     </div>
 
-    <div class="my-1 select-none text-xs center opacity-10">
+    <div class="footer-link">
       <a
         target="_blank"
         href="https://www.youtube.com/jsonkody"

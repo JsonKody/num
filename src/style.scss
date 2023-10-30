@@ -70,6 +70,12 @@
     @apply trans rounded-md bg-purple-700 opacity-30 hover:opacity-80 text-white;
   }
 
+  .control-button {
+    @apply sm:h-8 px-3 button;
+    // font-size: 0.8rem;
+    // min-height: 2.4rem;
+  }
+  
   .center {
     @apply flex items-center justify-center;
   }
@@ -95,10 +101,6 @@
     }
   }
 
-  .control-button {
-    @apply sm:h-9 px-3 text-lg button;
-    min-height: 2.25rem;
-  }
 
   .purple-grad {
     @apply text-purple-300 bg-gradient-to-br from-purple-100 via-purple-500 to-purple-700 text-transparent bg-clip-text;
@@ -179,5 +181,11 @@
 
   .number-base {
     @apply mb-1 center text-4xl cursor-help;
+  }
+
+  /*** Footer ***/
+
+  .footer-link {
+    @apply my-1.5 select-none text-xs center opacity-10;
   }
 }
