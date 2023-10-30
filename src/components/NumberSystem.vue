@@ -41,14 +41,14 @@ Je to tedy ${ns.czech.toLowerCase()}.`
         <button
           title="odebrat číslici"
           @click="ns.removeDigit"
-          class="w-6 h-6 text-xl center button"
+          class="trans center text-purple-400 opacity-40 hover:opacity-100"
         >
           <Minus />
         </button>
         <button
           title="přidat číslici"
           @click="ns.addDigit"
-          class="w-6 h-6 text-xl center button"
+          class="trans center text-purple-400 opacity-40 hover:opacity-100"
         >
           <Plus />
         </button>

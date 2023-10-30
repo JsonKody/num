@@ -47,6 +47,7 @@ const updateDigit = (event: Event) => {
 
     <!-- Digit -->
     <label
+      :title="`${parseInt(selectedNumber, ns.base) * digitValue}`"
       :for="digitIndex + '-digit'"
       class="digit"
       :class="{
@@ -58,7 +59,7 @@ const updateDigit = (event: Event) => {
     </label>
 
     <!-- Digit selector -->
-    <div class="text-xs center">
+    <div class="digit-select">
       <select
         title="Vyber číslici"
         :id="digitIndex + '-digit'"

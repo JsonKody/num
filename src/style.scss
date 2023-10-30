@@ -63,22 +63,6 @@
   }
 }
 
-input,
-select {
-  color: black;
-  padding: 0 0.5rem;
-  border-radius: 0.3rem;
-  transition: all 0.2s ease-in-out;
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(132, 0, 255, 0.932);
-  }
-
-  &[type="number"] {
-    font-size: 0.8rem;
-  }
-}
-
 @layer components {
   /*** Utils ***/
 
@@ -91,7 +75,24 @@ select {
   }
 
   .trans {
-    @apply transition duration-150;
+    @apply transition duration-200 ease-in-out;
+  }
+
+  input,
+  select {
+    @apply trans;
+    color: black;
+    padding: 0 0.5rem;
+    border-radius: 0.3rem;
+    transition: all 0.2s ease-in-out;
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(132, 0, 255, 0.932);
+    }
+
+    &[type="number"] {
+      font-size: 0.8rem;
+    }
   }
 
   .control-button {
@@ -148,18 +149,22 @@ select {
 
   /*** Digits ***/
 
-  .digit {
-    @apply mono text-xl center;
+  .digit-index {
+    @apply select-none text-pink-400 center;
+    font-size: 0.6rem;
   }
 
   .digit-value {
-    @apply mono text-emerald-400  center;
+    @apply mono select-none text-green-500 center;
     font-size: 0.6rem;
   }
 
-  .digit-index {
-    @apply text-pink-400 center;
-    font-size: 0.6rem;
+  .digit {
+    @apply mono select-none text-xl center;
+  }
+
+  .digit-select {
+    @apply text-xs center;
   }
 
   /*** Base ***/
