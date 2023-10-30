@@ -92,10 +92,20 @@ const decreaseBase = () => {
       />
 
       <div class="base-buttons">
-        <button title="Základ + 1" :disabled="ns.base >= ns.MAX_BASE" @click="increaseBase" class="base-button">
+        <button
+          title="Základ + 1"
+          :disabled="ns.base >= ns.MAX_BASE"
+          @click="increaseBase"
+          class="base-button"
+        >
           <Plus />
         </button>
-        <button title="Základ - 1" :disabled="ns.base <= ns.MIN_BASE" @click="decreaseBase" class="base-button">
+        <button
+          title="Základ - 1"
+          :disabled="ns.base <= ns.MIN_BASE"
+          @click="decreaseBase"
+          class="base-button"
+        >
           <Minus />
         </button>
       </div>
@@ -106,14 +116,14 @@ const decreaseBase = () => {
       <button
         title="nastaví všechny číslice na nulu"
         @click="ns.setDigitsToZero"
-        class="button control-button"
+        class="control-button"
       >
         Min
       </button>
       <button
         title="přepíná zobrazení -> indexy řádů / hodnoty řádů"
         @click="ns.showDigitValue = !ns.showDigitValue"
-        class="center button control-button"
+        class="control-button"
       >
         <Eye />
         {{ ns.showDigitValue ? "hodnoty řádů" : "indexy řádů" }}
@@ -121,7 +131,7 @@ const decreaseBase = () => {
       <button
         title="nastaví všechny číslice na maximum"
         @click="ns.setDigitsToMax"
-        class="button control-button"
+        class="control-button"
       >
         Max
       </button>

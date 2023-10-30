@@ -66,16 +66,6 @@
 @layer components {
   /*** Utils ***/
 
-  .button {
-    @apply trans rounded-md bg-purple-700 opacity-30 hover:opacity-80 text-white;
-  }
-
-  .control-button {
-    @apply sm:h-8 px-3 button;
-    // font-size: 0.8rem;
-    // min-height: 2.4rem;
-  }
-
   .center {
     @apply flex items-center justify-center;
   }
@@ -130,7 +120,7 @@
   }
 
   /*** App ***/
-
+  
   .wrapper {
     @apply asap m-1 px-2 pt-4 md:px-12 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
   }
@@ -144,9 +134,6 @@
     font-weight: 600;
   }
 
-  .app-border {
-    @apply border border-purple-500 border-opacity-10;
-  }
 
   /*** Digits ***/
 
@@ -171,23 +158,27 @@
   .digit-button {
     @apply p-1 rounded-md trans center  opacity-30 hover:opacity-100 text-purple-400;
   }
-  
-  /*** Base ***/
-  
-  .base-wrap {
-    @apply relative py-3 my-3 app-border rounded-lg bg-slate-950 bg-opacity-20 center flex flex-col;
+
+  .control-button {
+    @apply sm:h-8 px-3 trans rounded-md  border border-purple-500 border-opacity-50 bg-slate-950 opacity-50 hover:opacity-90 text-slate-300 center bg-opacity-50;
   }
-  
+
+  /*** Base ***/
+
+  .base-wrap {
+    @apply relative py-3 my-3  border border-purple-500 border-opacity-10 rounded-lg bg-slate-950 bg-opacity-20 center flex flex-col;
+  }
+
   .number-base {
     @apply mb-1 center text-4xl cursor-help;
   }
-  
+
   .base-button {
     @apply p-1 rounded-md trans center opacity-30 hover:opacity-100 text-pink-400 disabled:text-slate-600;
   }
 
   .base-buttons {
-    @apply h-full absolute center right-0 top-0 flex-col justify-center gap-1 items-center ;
+    @apply h-full absolute center right-0 top-0 flex-col justify-center gap-1 items-center;
   }
 
   /*** Footer ***/
