@@ -46,7 +46,8 @@ const updateDigit = (event: Event) => {
     </div>
 
     <!-- Digit -->
-    <div
+    <label
+      :for="digitIndex + '-digit'"
       class="digit"
       :class="{
         'opacity-50': selectedNumber == '0',
@@ -54,13 +55,13 @@ const updateDigit = (event: Event) => {
       }"
     >
       {{ selectedNumber }}
-    </div>
+    </label>
 
     <!-- Digit selector -->
     <div class="text-xs center">
       <select
         title="Vyber číslici"
-        name="digit"
+        :id="digitIndex + '-digit'"
         class="cursor-pointer mono trans opacity-10 hover:opacity-80"
         @change="updateDigit"
         :value="selectedNumber"

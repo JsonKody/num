@@ -6,6 +6,10 @@ const ns = useNumberSystem();
 </script>
 
 <template>
+  <div class="rd absolute mt-2 select-none text-xs center opacity-10">
+    Danielovo učitko číselných soustav ( ͡° ͜ʖ ͡°)
+  </div>
+
   <a
     target="_blank"
     title="Github"
@@ -59,6 +63,8 @@ const ns = useNumberSystem();
     <div class="mt-5">
       <NumberSystem />
     </div>
+
+    <div class="my-1 select-none text-xs center opacity-10">JsonKody</div>
   </div>
 </template>
 
