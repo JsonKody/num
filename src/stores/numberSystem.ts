@@ -12,8 +12,8 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const base_green = ref<Base>(10);
   const is_setting_base_green = ref(false);
 
-  const base_purple = ref<Base>(2);
-  const digits = ref<string[]>(["0", "0", "0", "0"]);
+  const base_purple = ref<Base>(16);
+  const digits = ref<string[]>(["0", "0", "F", "F"]);
   const showDigitValue = ref(true);
 
   const change_green_title = computed(
@@ -86,19 +86,40 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     return result;
   }
 
-  const numberToTopBase = computed(() => {
-    const str_num = stringToBigInt(digits.value.join(""), base_purple.value)
-      .toString(base_green.value)
+  function str_number_converter(
+    str_num: string,
+    base_from: Base,
+    base_to: Base
+  ) {
+    str_num = stringToBigInt(str_num, base_from)
+      .toString(base_to)
       .toUpperCase();
     return str_num ? str_num : "0";
-  });
+  }
 
-  const numberToBase = computed(() => {
-    const str_num = stringToBigInt(digits.value.join(""), base_purple.value)
-      .toString(base_purple.value)
-      .toUpperCase();
-    return str_num ? str_num : "0";
-  });
+  const digitsToGreenStrNumber = computed(() =>
+    str_number_converter(
+      digits.value.join(""),
+      base_purple.value,
+      base_green.value
+    )
+  );
+  const digitsToPurpleStrNumber = computed(() =>
+    str_number_converter(
+      digits.value.join(""),
+      base_purple.value,
+      base_purple.value
+    )
+  );
+
+  const switchGreenPurple = () => {
+    const new_digits_array = digitsToGreenStrNumber.value.split("");
+    digits.value = [];
+    const temp = base_green.value;
+    base_green.value = base_purple.value;
+    base_purple.value = temp;
+    digits.value = new_digits_array;
+  };
 
   return {
     base_green,
@@ -115,13 +136,14 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     addDigit,
     removeDigit,
     availableCharsForBase,
-    numberToBase,
-    numberToTopBase,
+    digitsToPurpleStrNumber,
+    digitsToGreenStrNumber,
     showDigitValue,
     setDigitsToZero,
     setDigitsToMax,
     cs_name_green,
     cs_name_purple,
     en_name,
+    switchGreenPurple,
   };
 });
