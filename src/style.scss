@@ -2,7 +2,7 @@
   font-family: "Asap";
   src: url("./assets/fonts/asap/asap.ttf") format("truetype");
   font-weight: 100 900; // od 100 (nejtenčí) do 900 (nejtlustější)
-  font-style: oblique 0deg 10deg; // od 0 do 10 stupňů sklonu
+  font-style: italic oblique 0deg 10deg; // od 0 do 10 stupňů sklonu
 }
 
 @font-face {
@@ -116,7 +116,6 @@
   }
   .asap {
     font-family: "Asap", sans-serif;
-    font-style: italic;
     font-weight: 600;
   }
 
@@ -133,7 +132,11 @@
   /*** App ***/
 
   .wrapper {
-    @apply asap m-1 px-2 pt-4 md:px-12 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
+    @apply asap m-1 px-2 pt-2 md:px-12 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
+  }
+
+  .header-block {
+    @apply m-1 p-2 trans cursor-pointer rounded-xl border border-purple-500 border-opacity-0 hover:border-opacity-40;
   }
 
   .header {
@@ -141,7 +144,7 @@
   }
 
   .number {
-    @apply center my-3 text-5xl cursor-help;
+    @apply center mt-2 text-5xl;
     font-weight: 600;
   }
 

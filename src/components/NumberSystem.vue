@@ -97,11 +97,12 @@ const basePlusDisabled = computed(() => base.value >= ns.MAX_BASE);
         ></div>
       </div>
       <div class="center">
-        <Transition name="fade" mode="out-in">
+        <!-- Base number -->
+        <Transition name="next" mode="out-in">
           <div
             :title="baseTitle"
-            :key="base"
-            class="number-base"
+            :key="`${base}_${ns.is_setting_base_green}`"
+            class="trans number-base"
             :class="ns.is_setting_base_green ? 'green-grad' : 'pink-grad'"
           >
             {{ base }}
@@ -184,16 +185,16 @@ const basePlusDisabled = computed(() => base.value >= ns.MAX_BASE);
 /**
   *  Base number - Fade animation
   */
-.fade-enter-active,
-.fade-leave-active {
+.next-enter-active,
+.next-leave-active {
   transition: all 0.15s ease;
 }
 
-.fade-enter-from {
+.next-enter-from {
   opacity: 0;
   transform: translateX(-30px);
 }
-.fade-leave-to {
+.next-leave-to {
   opacity: 0;
   transform: translateX(30px);
 }

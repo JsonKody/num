@@ -27,51 +27,57 @@ const ns = useNumberSystem();
     </svg>
   </a>
   <div class="wrapper">
-    <!-- Green title/number -->
-    <Transition name="fade" mode="out-in">
-      <div
-        @click="ns.is_setting_base_green = true"
-        class="cursor-help"
-        :title="ns.change_green_title"
-        :key="ns.cs_name_green"
-      >
-        <h1 class="header emerald-grad">
-          {{ ns.cs_name_green }}
-        </h1>
-      </div>
-    </Transition>
-    <!-- Number -->
+    <!-- Green BLOCK -->
     <div
-      :title="`Číslo v ... ${ns.cs_name_green.toLocaleLowerCase()}`"
-      class="number emerald-grad"
+      class="header-block"
+      @click="ns.is_setting_base_green = true"
+      :title="ns.change_green_title"
     >
-      {{ ns.numberToTopBase }}
-    </div>
-
-    <!-- Purple title/number -->
-    <Transition name="fade" mode="out-in">
-      <div
-        @click="ns.is_setting_base_green = false"
-        :title="ns.change_purple_title"
-        :key="ns.cs_name_purple"
-        class="cursor-help"
-      >
-        <h1 class="header relative purple-grad">
-          {{ ns.cs_name_purple }}
-        </h1>
-        <div class="text-xs center text-purple-400 opacity-70">
-          ( {{ ns.en_name }} )
+      <!-- title -->
+      <Transition name="fade" mode="out-in">
+        <div :key="ns.cs_name_green">
+          <h1 class="header emerald-grad">
+            {{ ns.cs_name_green }}
+          </h1>
         </div>
+      </Transition>
+      <!-- number -->
+      <div class="number emerald-grad">
+        <span
+          class="cursor-help"
+          :title="`Číslo v ... ${ns.cs_name_green.toLocaleLowerCase()}`"
+          >{{ ns.numberToTopBase }}</span
+        >
       </div>
-    </Transition>
-
-    <!-- Number -->
-    <div
-      :title="`Číslo v ... ${ns.cs_name_purple.toLocaleLowerCase()}`"
-      class="number animate-pulse purple-grad"
-    >
-      {{ ns.numberToBase }}
     </div>
+
+    <!-- Purple BLOCK -->
+    <div
+      class="header-block"
+      @click="ns.is_setting_base_green = false"
+      :title="ns.change_purple_title"
+    >
+      <!-- title -->
+      <Transition name="fade" mode="out-in">
+        <div :key="ns.cs_name_purple">
+          <h1 class="header relative purple-grad">
+            {{ ns.cs_name_purple }}
+          </h1>
+          <div class="text-xs center text-purple-400 opacity-70">
+            ( {{ ns.en_name }} )
+          </div>
+        </div>
+      </Transition>
+      <!-- number -->
+      <div class="number animate-pulse purple-grad">
+        <span
+          class="cursor-help"
+          :title="`Číslo v ... ${ns.cs_name_purple.toLocaleLowerCase()}`"
+          >{{ ns.numberToBase }}</span
+        >
+      </div>
+    </div>
+
     <div class="mt-5">
       <NumberSystem />
     </div>
