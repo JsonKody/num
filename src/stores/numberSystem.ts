@@ -10,20 +10,10 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const MAX_BASE = chars.length;
 
   const base_green = ref<Base>(10);
-  const is_setting_base_green = ref(false);
 
   const base_purple = ref<Base>(16);
   const digits = ref<string[]>(["0", "0", "F", "F"]);
   const showDigitValue = ref(true);
-
-  const change_green_title = computed(
-    () =>
-      `Kliknutím přepneš ovládání základu  [${base_green.value}]  pro zelené číslo.`
-  );
-  const change_purple_title = computed(
-    () =>
-      `Kliknutím přepneš ovládání základu  [${base_purple.value}]  pro fialové číslo.`
-  );
 
   const cs_name_green = computed(() => generateCzechName(base_green.value));
   const cs_name_purple = computed(() => generateCzechName(base_purple.value));
@@ -125,9 +115,6 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     base_green,
     base_purple,
     setBase,
-    is_setting_base_green,
-    change_green_title,
-    change_purple_title,
     chars,
     MIN_BASE,
     MAX_BASE,

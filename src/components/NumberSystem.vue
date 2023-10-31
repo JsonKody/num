@@ -8,9 +8,6 @@ import Eye from "./icons/Eye.vue";
 import { computed } from "vue";
 const ns = useNumberSystem();
 
-const base = computed(() =>
-  ns.is_setting_base_green ? ns.base_green : ns.base_purple
-);
 const setBase = (event: Event) => {
   const value = parseInt((event.target as HTMLInputElement).value);
   if (!value || value < 2 || value > ns.MAX_BASE) {
@@ -21,25 +18,25 @@ const setBase = (event: Event) => {
 
 const baseTitle = computed(
   () =>
-    `[ ${base} ]  je základ v této soustavy.
+    `[ ${ns.base_purple} ]  je základ v této soustavy.
 Je to tedy ${ns.cs_name_purple.toLowerCase()}.`
 );
 
 const increaseBase = () => {
-  if (base.value < ns.MAX_BASE) {
-    ns.setBase((base.value + 1) as Base);
+  if (ns.base_purple < ns.MAX_BASE) {
+    ns.setBase((ns.base_purple + 1) as Base);
   }
 };
 
 const decreaseBase = () => {
-  if (base.value > ns.MIN_BASE) {
-    ns.setBase((base.value - 1) as Base);
+  if (ns.base_purple > ns.MIN_BASE) {
+    ns.setBase((ns.base_purple - 1) as Base);
   }
 };
 
 const digitMinusDisabled = computed(() => ns.digits.length < 2);
-const baseMinusDisabled = computed(() => base.value <= ns.MIN_BASE);
-const basePlusDisabled = computed(() => base.value >= ns.MAX_BASE);
+const baseMinusDisabled = computed(() => ns.base_purple <= ns.MIN_BASE);
+const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
 </script>
 
 <template>
@@ -80,32 +77,15 @@ const basePlusDisabled = computed(() => base.value >= ns.MAX_BASE);
 
     <!-- Base -->
     <div class="base-wrap">
-      <div class="absolute top-0 left-0 m-2 flex flex-col gap-1">
-        <!-- change to green -->
-        <div
-          @click="ns.is_setting_base_green = true"
-          :title="ns.change_green_title"
-          class="trans cursor-pointer w-2 h-2 rounded-full emerald-grad-bg"
-          :class="{ 'opacity-20': !ns.is_setting_base_green }"
-        ></div>
-        <!-- change to purple -->
-        <div
-          @click="ns.is_setting_base_green = false"
-          :title="ns.change_purple_title"
-          class="trans cursor-pointer w-2 h-2 rounded-full purple-grad-bg"
-          :class="{ 'opacity-20': ns.is_setting_base_green }"
-        ></div>
-      </div>
       <div class="center">
         <!-- Base number -->
         <Transition name="next" mode="out-in">
           <div
             :title="baseTitle"
-            :key="`${base}_${ns.is_setting_base_green}`"
-            class="trans number-base"
-            :class="ns.is_setting_base_green ? 'green-grad' : 'pink-grad'"
+            :key="ns.base_purple"
+            class="trans number-base pink-grad"
           >
-            {{ base }}
+            {{ ns.base_purple }}
           </div>
         </Transition>
       </div>
@@ -116,7 +96,7 @@ const basePlusDisabled = computed(() => base.value >= ns.MAX_BASE);
       <input
         :title="`Zde můžete změnit základ soustavy.\nmin:   2\nmax:   36`"
         class="opacity-10 hover:opacity-80 focus:opacity-80"
-        :value="base"
+        :value="ns.base_purple"
         :min="ns.MIN_BASE"
         :max="ns.MAX_BASE"
         type="number"
@@ -132,7 +112,7 @@ const basePlusDisabled = computed(() => base.value >= ns.MAX_BASE);
               ? `[ ${ns.MAX_BASE} ]  je nejvyšší povolený základ`
               : 'Základ + 1'
           "
-          :disabled="base >= ns.MAX_BASE"
+          :disabled="ns.base_purple >= ns.MAX_BASE"
           @click="increaseBase"
           class="base-button"
         >

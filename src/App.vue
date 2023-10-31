@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import NumberSystem from "./components/NumberSystem.vue";
-import Switch from "./components/icons/Switch.vue";
 import { useNumberSystem } from "./stores/numberSystem";
 
 const ns = useNumberSystem();
@@ -28,16 +27,10 @@ const ns = useNumberSystem();
     </svg>
   </a>
   <div class="wrapper">
-    <Switch
-      @click="ns.switchGreenPurple"
-      class="m-2 text-purple-500 opacity-10 absolute right-0 top-0"
-    />
-
-    <!-- Green BLOCK -->
     <div
+      @click="ns.switchGreenPurple"
       class="header-block"
-      @click="ns.is_setting_base_green = true"
-      :title="ns.change_green_title"
+      title="Kliknutim prohodíš hodnoty"
     >
       <!-- title -->
       <Transition name="fade" mode="out-in">
@@ -55,14 +48,7 @@ const ns = useNumberSystem();
           >{{ ns.digitsToGreenStrNumber }}</span
         >
       </div>
-    </div>
 
-    <!-- Purple BLOCK -->
-    <div
-      class="header-block"
-      @click="ns.is_setting_base_green = false"
-      :title="ns.change_purple_title"
-    >
       <!-- title -->
       <Transition name="fade" mode="out-in">
         <div :key="ns.cs_name_purple">
