@@ -33,18 +33,21 @@
   // padding-bottom: 1.5rem;
 }
 
-@media screen and (min-width: 640px) {
+// @media screen and (min-width: 640px) {
+//   :root {
+//     padding-top: 0;
+//     // padding-bottom: 2rem;
+//     align-items: center;
+//     justify-content: center;
+//   }
+// }
+
+@media screen and (min-width: 768px) {
   :root {
     padding-top: 0;
     // padding-bottom: 2rem;
     align-items: center;
     justify-content: center;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  :root {
-    font-size: 20px; /* Zvětšíme písmo pouze pro obrazovky větší nebo rovno 768px */
   }
 }
 @media screen and (min-width: 1024px) {
@@ -121,7 +124,6 @@
 
   .mono {
     font-family: "Roboto Mono", sans-serif;
-    font-style: normal;
     font-weight: 400;
   }
 
@@ -132,11 +134,12 @@
   /*** App ***/
 
   .wrapper {
-    @apply asap m-1 px-2 pt-2 md:px-12 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
+    @apply asap m-1 px-2 pt-2 md:px-10 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
+    min-width: 42vw;
   }
 
   .header-block {
-    @apply m-1 p-2 trans cursor-pointer rounded-xl border border-purple-500 border-opacity-0 hover:border-opacity-40;
+    @apply m-1 p-1 trans cursor-pointer rounded-xl border border-purple-500 border-opacity-0 hover:border-opacity-40;
   }
 
   .header {
@@ -144,7 +147,7 @@
   }
 
   .number {
-    @apply center mt-2 text-5xl;
+    @apply center text-5xl;
     font-weight: 600;
   }
 
@@ -179,7 +182,7 @@
   /*** Base ***/
 
   .base-wrap {
-    @apply relative py-3 my-3 border border-purple-500 border-opacity-10 rounded-lg bg-slate-950 bg-opacity-20 center flex flex-col;
+    @apply relative py-2 my-2 border border-purple-500 border-opacity-10 rounded-lg bg-slate-950 bg-opacity-20 center flex flex-col;
   }
 
   .number-base {
