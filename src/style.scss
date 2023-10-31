@@ -95,14 +95,25 @@
     @apply text-purple-300 bg-gradient-to-br from-purple-100 via-purple-500 to-purple-700 text-transparent bg-clip-text;
   }
 
-  .green-grad {
+  .emerald-grad {
     @apply text-emerald-300 bg-gradient-to-br from-emerald-200 via-emerald-500 to-emerald-800 text-transparent bg-clip-text;
   }
 
-  .red-grad {
+  .purple-grad-bg {
+    @apply bg-gradient-to-br from-purple-100 via-purple-500 to-purple-700;
+  }
+
+  .emerald-grad-bg {
+    @apply bg-gradient-to-br from-emerald-200 via-emerald-500 to-emerald-800;
+  }
+
+  .pink-grad {
     @apply text-pink-300 bg-gradient-to-b from-pink-400 via-pink-600 to-pink-800 text-transparent bg-clip-text;
   }
 
+  .green-grad {
+    @apply text-green-300 bg-gradient-to-br from-green-200 via-green-500 to-green-800 text-transparent bg-clip-text;
+  }
   .asap {
     font-family: "Asap", sans-serif;
     font-style: italic;
@@ -120,7 +131,7 @@
   }
 
   /*** App ***/
-  
+
   .wrapper {
     @apply asap m-1 px-2 pt-4 md:px-12 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
   }
@@ -133,7 +144,6 @@
     @apply center my-3 text-5xl cursor-help;
     font-weight: 600;
   }
-
 
   /*** Digits ***/
 
@@ -166,7 +176,7 @@
   /*** Base ***/
 
   .base-wrap {
-    @apply relative py-3 my-3  border border-purple-500 border-opacity-10 rounded-lg bg-slate-950 bg-opacity-20 center flex flex-col;
+    @apply relative py-3 my-3 border border-purple-500 border-opacity-10 rounded-lg bg-slate-950 bg-opacity-20 center flex flex-col;
   }
 
   .number-base {

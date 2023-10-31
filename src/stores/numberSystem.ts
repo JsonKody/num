@@ -9,26 +9,43 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const MIN_BASE = 2;
   const MAX_BASE = chars.length;
 
-  const base = ref<Base>(2);
+  const base_green = ref<Base>(10);
+  const is_setting_base_green = ref(false);
+
+  const base_purple = ref<Base>(2);
   const digits = ref<string[]>(["0", "0", "0", "0"]);
   const showDigitValue = ref(true);
 
-  const czech = computed(() => generateCzechName(base.value));
-  const english = computed(() => generateEnglishName(base.value));
-  const czech_10 = computed(() => generateCzechName(10));
+  const change_green_title = computed(
+    () =>
+      `Kliknutím přepneš ovládání základu  [${base_green.value}]  pro zelené číslo.`
+  );
+  const change_purple_title = computed(
+    () =>
+      `Kliknutím přepneš ovládání základu  [${base_purple.value}]  pro fialové číslo.`
+  );
+
+  const cs_name_green = computed(() => generateCzechName(base_green.value));
+  const cs_name_purple = computed(() => generateCzechName(base_purple.value));
+  const en_name = computed(() => generateEnglishName(base_purple.value));
 
   const availableCharsForBase = computed(() => {
-    return chars.substring(0, base.value);
+    return chars.substring(0, base_purple.value);
   });
 
   const setBase = (val: Base) => {
     digits.value = digits.value.map((d) => {
       // console.log(val);
       // console.log(chars[val - 1]);
-      return val > parseInt(d, base.value) ? d : chars[val - 1];
+      return val > parseInt(d, base_purple.value) ? d : chars[val - 1];
     });
 
-    base.value = val;
+    if (is_setting_base_green.value) {
+      base_green.value = val;
+      return;
+    }
+
+    base_purple.value = val;
   };
 
   const setDigitsToZero = () => {
@@ -69,23 +86,27 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     return result;
   }
 
-  const numberToBaseDecimal = computed(() => {
-    const str_num = stringToBigInt(digits.value.join(""), base.value)
-      .toString(10)
+  const numberToTopBase = computed(() => {
+    const str_num = stringToBigInt(digits.value.join(""), base_purple.value)
+      .toString(base_green.value)
       .toUpperCase();
     return str_num ? str_num : "0";
   });
 
   const numberToBase = computed(() => {
-    const str_num = stringToBigInt(digits.value.join(""), base.value)
-      .toString(base.value)
+    const str_num = stringToBigInt(digits.value.join(""), base_purple.value)
+      .toString(base_purple.value)
       .toUpperCase();
     return str_num ? str_num : "0";
   });
 
   return {
-    base,
+    base_green,
+    base_purple,
     setBase,
+    is_setting_base_green,
+    change_green_title,
+    change_purple_title,
     chars,
     MIN_BASE,
     MAX_BASE,
@@ -95,12 +116,12 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     removeDigit,
     availableCharsForBase,
     numberToBase,
-    numberToBaseDecimal,
+    numberToTopBase,
     showDigitValue,
     setDigitsToZero,
     setDigitsToMax,
-    czech,
-    english,
-    czech_10,
+    cs_name_green,
+    cs_name_purple,
+    en_name,
   };
 });
