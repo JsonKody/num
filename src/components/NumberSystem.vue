@@ -33,6 +33,10 @@ const decreaseBase = () => {
     ns.setBase((ns.base - 1) as Base);
   }
 };
+
+const digitMinusDisabled = computed(() => ns.digits.length < 2);
+const baseMinusDisabled = computed(() => ns.base <= ns.MIN_BASE);
+const basePlusDisabled = computed(() => ns.base >= ns.MAX_BASE);
 </script>
 
 <template>
@@ -50,16 +54,17 @@ const decreaseBase = () => {
       </TransitionGroup>
       <div class="flex-row gap-1 center">
         <button
-          title="odebrat číslici"
-          @click="ns.removeDigit"
           class="digit-button"
+          :title="digitMinusDisabled ? 'Ale, no tak .. nechte si tu alespoň jednu číslici ._.' : 'odebrat číslici'"
+          @click="ns.removeDigit"
+          :disabled="digitMinusDisabled"
         >
           <Minus />
         </button>
         <button
           title="přidat číslici"
-          @click="ns.addDigit"
           class="digit-button"
+          @click="ns.addDigit"
         >
           <Plus />
         </button>
@@ -93,7 +98,11 @@ const decreaseBase = () => {
 
       <div class="base-buttons">
         <button
-          title="Základ + 1"
+          :title="
+            basePlusDisabled
+              ? `[ ${ns.MAX_BASE} ]  je nejvyšší povolený základ`
+              : 'Základ + 1'
+          "
           :disabled="ns.base >= ns.MAX_BASE"
           @click="increaseBase"
           class="base-button"
@@ -101,8 +110,12 @@ const decreaseBase = () => {
           <Plus />
         </button>
         <button
-          title="Základ - 1"
-          :disabled="ns.base <= ns.MIN_BASE"
+          :title="
+            baseMinusDisabled
+              ? `[ ${ns.MIN_BASE} ]  je nejmenší povolený základ`
+              : 'Základ - 1'
+          "
+          :disabled="baseMinusDisabled"
           @click="decreaseBase"
           class="base-button"
         >
