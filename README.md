@@ -1,4 +1,4 @@
-# Číselné poziční soustavy 🧐🤌
+# Poziční číselné soustavy 🤌🧐🍷
 
 Toto je vizualizace číselných pozičních soustav, vytvořená pro YouTube tutoriál na kanálu JsonKody.
 
