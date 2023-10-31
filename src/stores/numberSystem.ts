@@ -34,16 +34,16 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   });
 
   const setBase = (val: Base) => {
+    if (is_setting_base_green.value) {
+      base_green.value = val;
+      return;
+    }
+
     digits.value = digits.value.map((d) => {
       // console.log(val);
       // console.log(chars[val - 1]);
       return val > parseInt(d, base_purple.value) ? d : chars[val - 1];
     });
-
-    if (is_setting_base_green.value) {
-      base_green.value = val;
-      return;
-    }
 
     base_purple.value = val;
   };
