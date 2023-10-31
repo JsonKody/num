@@ -78,7 +78,7 @@ const ns = useNumberSystem();
       <a
         target="_blank"
         href="https://www.youtube.com/jsonkody"
-        title="Můj YouTube kanál - JsonKody 🧐🤌"
+        title="Můj YouTube kanál - JsonKody 🤌🧐🍷"
       >
         JsonKody
       </a>

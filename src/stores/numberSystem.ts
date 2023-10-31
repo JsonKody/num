@@ -10,9 +10,9 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const MAX_BASE = chars.length;
 
   const base_green = ref<Base>(10);
+  const base_purple = ref<Base>(2);
 
-  const base_purple = ref<Base>(16);
-  const digits = ref<string[]>(["0", "0", "F", "F"]);
+  const digits = ref<string[]>(["0", "0", "0", "0"]);
   const showDigitValue = ref(true);
 
   const cs_name_green = computed(() => generateCzechName(base_green.value));
