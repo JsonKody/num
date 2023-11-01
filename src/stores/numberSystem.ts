@@ -10,7 +10,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const MAX_BASE = chars.length;
 
   const base_green = ref<Base>(10);
-  const base_purple = ref<Base>(2);
+  const base_purple = ref<Base>(16);
 
   const digits = ref<string[]>(["0", "0", "0", "0"]);
   const showDigitValue = ref(true);
@@ -24,11 +24,14 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   });
 
   const setBase = (val: Base) => {
-    digits.value = digits.value.map((d) => {
-      return val > parseInt(d, base_purple.value) ? d : chars[val - 1];
-    });
-
+    const new_digits_array = digits_converter(
+      digits.value,
+      base_purple.value,
+      val
+    );
+    digits.value = [];
     base_purple.value = val;
+    digits.value = new_digits_array;
   };
 
   const setDigitsToZero = () => {
@@ -67,6 +70,11 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     }
 
     return result;
+  }
+
+  function digits_converter(current: string[], base_from: Base, base_to: Base) {
+    const str_num = current.join("");
+    return str_number_converter(str_num, base_from, base_to).split("");
   }
 
   function str_number_converter(
