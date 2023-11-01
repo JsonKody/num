@@ -17,6 +17,7 @@
 @tailwind utilities;
 
 :root {
+  @apply cursor-default;
   font-size: 16px;
   line-height: 1.5;
   // background-color: #1e004b;
@@ -68,7 +69,6 @@
 
 @layer components {
   /*** Utils ***/
-
   .center {
     @apply flex items-center justify-center;
   }
@@ -92,6 +92,20 @@
     &[type="number"] {
       font-size: 0.8rem;
     }
+  }
+
+  label, option {
+    @apply cursor-default;
+  }
+
+  a,
+  button,
+  select {
+    @apply cursor-pointer;
+  }
+
+  input[type="number"] {
+    @apply cursor-text;
   }
 
   .purple-grad {
@@ -133,13 +147,17 @@
 
   /*** App ***/
 
+  .icon {
+    @apply cursor-pointer;
+  }
+
   .wrapper {
     @apply asap m-1 px-2 pt-2 md:px-10 bg-slate-950 bg-opacity-40  backdrop-blur-md rounded-xl border border-purple-700 border-opacity-50 flex flex-col items-stretch justify-center;
     min-width: 42vw;
   }
 
   .header-block {
-    @apply m-1 p-1 trans cursor-pointer rounded-xl border border-purple-500 border-opacity-0 hover:border-opacity-40;
+    @apply m-1 p-1 cursor-switch trans rounded-xl border border-purple-500 border-opacity-0 hover:border-opacity-40;
   }
 
   .header {
@@ -172,7 +190,7 @@
   }
 
   .digit-button {
-    @apply p-1 rounded-md trans center  opacity-30 hover:opacity-100 text-purple-400 disabled:text-slate-600;
+    @apply p-1 rounded-md trans center opacity-30 hover:opacity-100 text-purple-400 disabled:text-slate-600;
   }
 
   .control-button {

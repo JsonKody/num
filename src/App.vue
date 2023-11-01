@@ -27,6 +27,7 @@ const ns = useNumberSystem();
     </svg>
   </a>
   <div class="wrapper">
+    <!-- Display block / Switch -->
     <div
       @click="ns.switchGreenPurple"
       class="header-block"
@@ -74,7 +75,7 @@ const ns = useNumberSystem();
       <NumberSystem />
     </div>
 
-    <div class="footer-link">
+    <div class="footer-link cursor-pointer">
       <a
         target="_blank"
         href="https://www.youtube.com/jsonkody"

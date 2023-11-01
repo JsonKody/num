@@ -12,7 +12,6 @@ const availableChars = computed(() => ns.availableCharsForBase);
 const digitIndex = computed(() => ns.digits.length - index - 1);
 const digitValue = computed(() => Math.pow(ns.base_purple, digitIndex.value));
 
-
 const updateDigit = (event: Event) => {
   const value = (event.target as HTMLSelectElement).value;
   ns.setDigit(index, value);
@@ -20,7 +19,7 @@ const updateDigit = (event: Event) => {
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative def-mouse">
     <!-- Digit value/index -->
     <div class="cursor-help" @click="ns.showDigitValue = !ns.showDigitValue">
       <div
@@ -57,7 +56,7 @@ const updateDigit = (event: Event) => {
       <select
         title="Vyber číslici"
         :id="digitIndex + '-digit'"
-        class="cursor-pointer mono trans opacity-10 hover:opacity-80"
+        class="mono trans opacity-10 hover:opacity-80"
         @change="updateDigit"
         :value="selectedNumber"
       >
