@@ -158,7 +158,7 @@
   }
 
   .header-block {
-    @apply m-1 p-1 cursor-switch trans rounded-xl border border-purple-500 border-opacity-0 hover:border-opacity-40;
+    @apply pt-2 m-1 mb-3 p-1 cursor-switch trans rounded-xl border border-purple-500 border-opacity-0 hover:border-opacity-40;
   }
 
   .header {
@@ -166,7 +166,7 @@
   }
 
   .number {
-    @apply center text-5xl;
+    @apply my-2 center text-5xl;
     font-weight: 600;
   }
 

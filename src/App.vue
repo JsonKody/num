@@ -75,9 +75,7 @@ const ns = useNumberSystem();
       </Transition>
     </div>
 
-    <div class="mt-5">
-      <NumberSystem />
-    </div>
+    <NumberSystem />
 
     <div class="footer-link cursor-pointer">
       <a
