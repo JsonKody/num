@@ -94,7 +94,8 @@
     }
   }
 
-  label, option {
+  label,
+  option {
     @apply cursor-default;
   }
 
@@ -136,7 +137,7 @@
     font-weight: 600;
   }
 
-  .mono {
+  .mono-r {
     font-family: "Roboto Mono", sans-serif;
     font-weight: 400;
   }
@@ -177,16 +178,16 @@
   }
 
   .digit-value {
-    @apply mono select-none text-green-500 center;
+    @apply mono-r select-none text-green-500 center;
     font-size: 0.6rem;
   }
 
   .digit {
-    @apply mono select-none text-xl center;
+    @apply mono-r select-none text-xl center;
   }
 
   .digit-select {
-    @apply text-xs center;
+    @apply mono-r trans opacity-10 hover:opacity-80 text-xs center;
   }
 
   .digit-button {

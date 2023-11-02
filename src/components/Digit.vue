@@ -56,7 +56,6 @@ const updateDigit = (event: Event) => {
       <select
         title="Vyber číslici"
         :id="digitIndex + '-digit'"
-        class="mono trans opacity-10 hover:opacity-80"
         @change="updateDigit"
         :value="selectedNumber"
       >

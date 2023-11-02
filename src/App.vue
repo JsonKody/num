@@ -34,7 +34,7 @@ const ns = useNumberSystem();
       title="Kliknutim prohodíš hodnoty"
     >
       <!-- title -->
-      <Transition name="fade" mode="out-in">
+      <Transition name="switch-v" mode="out-in">
         <div :key="ns.cs_name_green">
           <h1 class="header emerald-grad">
             {{ ns.cs_name_green }}
@@ -42,16 +42,18 @@ const ns = useNumberSystem();
         </div>
       </Transition>
       <!-- number -->
-      <div class="number emerald-grad">
-        <span
-          class="cursor-help"
-          :title="`Číslo v ... ${ns.cs_name_green.toLocaleLowerCase()}`"
-          >{{ ns.digitsToGreenStrNumber }}</span
-        >
-      </div>
+      <Transition name="push" mode="out-in">
+        <div :key="ns.digitsToGreenStrNumber" class="number emerald-grad">
+          <span
+            class="cursor-help"
+            :title="`Číslo v ... ${ns.cs_name_green.toLocaleLowerCase()}`"
+            >{{ ns.digitsToGreenStrNumber }}</span
+          >
+        </div>
+      </Transition>
 
       <!-- title -->
-      <Transition name="fade" mode="out-in">
+      <Transition name="switch-v" mode="out-in">
         <div :key="ns.cs_name_purple">
           <h1 class="header relative purple-grad">
             {{ ns.cs_name_purple }}
@@ -62,13 +64,15 @@ const ns = useNumberSystem();
         </div>
       </Transition>
       <!-- number -->
-      <div class="number animate-pulse purple-grad">
-        <span
-          class="cursor-help"
-          :title="`Číslo v ... ${ns.cs_name_purple.toLocaleLowerCase()}`"
-          >{{ ns.digitsToPurpleStrNumber }}</span
-        >
-      </div>
+      <Transition name="push" mode="out-in">
+        <div :key="ns.digitsToPurpleStrNumber" class="number purple-grad">
+          <span
+            class="cursor-help"
+            :title="`Číslo v ... ${ns.cs_name_purple.toLocaleLowerCase()}`"
+            >{{ ns.digitsToPurpleStrNumber }}</span
+          >
+        </div>
+      </Transition>
     </div>
 
     <div class="mt-5">
@@ -87,18 +91,90 @@ const ns = useNumberSystem();
   </div>
 </template>
 
-<style lang="scss" scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.15s ease;
+<style lang="scss">
+/**
+  *  Switch vertical animation
+  */
+.switch-v-enter-active,
+.switch-v-leave-active {
+  transition: all 0.12s ease-in-out;
 }
 
-.fade-enter-from {
+.switch-v-enter-from {
   opacity: 0;
   transform: translateY(-20px);
 }
-.fade-leave-to {
+.switch-v-leave-to {
   opacity: 0;
   transform: translateY(20px);
+}
+
+/**
+  *  Switch horizontal animation
+  */
+.switch-h-enter-active,
+.switch-h-leave-active {
+  transition: all 0.12s ease-in-out;
+}
+
+.switch-h-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.switch-h-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/**
+  *  "Push" switching animation
+  */
+.push-enter-active,
+.push-leave-active {
+  transition: all 0.12s ease-in-out;
+}
+
+.push-enter-from {
+  transform: scale(0.96);
+}
+.push-leave-to {
+  transform: scale(0.96);
+}
+
+/**
+  *  "Pop" switching animation
+  */
+// .pop-enter-active,
+// .pop-leave-active {
+//   transition: all 0.12s ease-in-out;
+// }
+
+// .pop-enter-from {
+//   transform: scale(1.03);
+// }
+// .pop-leave-to {
+//   transform: scale(1.03);
+// }
+
+/**
+  *  List animation
+  */
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.24s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+  transform: translateX(80px);
 }
 </style>

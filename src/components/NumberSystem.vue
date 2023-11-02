@@ -79,7 +79,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
     <div class="base-wrap">
       <div class="center">
         <!-- Base number -->
-        <Transition name="next" mode="out-in">
+        <Transition name="switch-h" mode="out-in">
           <div
             :title="baseTitle"
             :key="ns.base_purple"
@@ -161,43 +161,4 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
   </div>
 </template>
 
-<style lang="scss" scoped>
-/**
-  *  Base number - Fade animation
-  */
-.next-enter-active,
-.next-leave-active {
-  transition: all 0.15s ease;
-}
-
-.next-enter-from {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-.next-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-/**
-  *  List animaniation
-  */
-.list-move, /* apply transition to moving elements */
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.3s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-/* ensure leaving items are taken out of layout flow so that moving
-   animations can be calculated correctly. */
-.list-leave-active {
-  position: absolute;
-  transform: translateX(80px);
-}
-</style>
+<style lang="scss" scoped></style>
