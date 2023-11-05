@@ -36,4 +36,11 @@ type Base =
   | 35
   | 36;
 
-export type { Base };
+type Lang = "cs" | "en";
+
+interface Name {
+  cs: string;
+  en: string;
+}
+
+export type { Base, Lang, Name };

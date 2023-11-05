@@ -19,7 +19,7 @@ const setBase = (event: Event) => {
 const baseTitle = computed(
   () =>
     `[ ${ns.base_purple} ]  je základ v této soustavy.
-Je to tedy ${ns.cs_name_purple.toLowerCase()}.`
+Je to tedy ${ns.name_purple.toLowerCase()}.`
 );
 
 const increaseBase = () => {

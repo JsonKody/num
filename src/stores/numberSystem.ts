@@ -1,5 +1,5 @@
 // numberSystem.ts
-import type { Base } from "../types/typings";
+import type { Base, Lang, Name } from "../types/typings";
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { generateCzechName, generateEnglishName } from "../prefixes";
@@ -9,14 +9,16 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const MIN_BASE = 2;
   const MAX_BASE = chars.length;
 
+  const lang = ref<Lang>("cs");
+
   const base_green = ref<Base>(10);
   const base_purple = ref<Base>(16);
 
   const digits = ref<string[]>(["0", "0", "0", "0"]);
   const showDigitValue = ref(true);
 
-  const cs_name_green = computed(() => generateCzechName(base_green.value));
-  const cs_name_purple = computed(() => generateCzechName(base_purple.value));
+  const name_green = computed(() => lang.value === 'cs' ? generateCzechName(base_green.value) : generateEnglishName(base_green.value));
+  const name_purple = computed(() => lang.value === 'cs' ? generateCzechName(base_purple.value) : generateEnglishName(base_purple.value));
   const en_name = computed(() => generateEnglishName(base_purple.value));
 
   const availableCharsForBase = computed(() => {
@@ -112,7 +114,17 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     digits.value = new_digits_array;
   };
 
+  const t = (cs: string, en: string) => (lang.value === "cs" ? cs : en);
+  const to = (lang_obj: Name) => lang_obj[lang.value];
+  const toggleLang = () => {
+    lang.value = lang.value === "cs" ? "en" : "cs";
+  }
+
   return {
+    t,
+    to,
+    lang,
+    toggleLang,
     base_green,
     base_purple,
     setBase,
@@ -129,8 +141,8 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     showDigitValue,
     setDigitsToZero,
     setDigitsToMax,
-    cs_name_green,
-    cs_name_purple,
+    name_green,
+    name_purple,
     en_name,
     switchGreenPurple,
   };

@@ -7,9 +7,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "psh": "git add -A && git commit -m \"saved & pushed by npm\" && git push",
-    "deploy": "npm run build && surge ./dist jk_soustavy.surge.sh",
-    "all": "npm run psh && npm run deploy"
+    "psh": "git add -A && git commit -m \"saved & pushed by pnpm\" && git push"
   },
   "dependencies": {
     "pinia": "^2.1.7",

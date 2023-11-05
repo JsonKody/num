@@ -6,6 +6,7 @@ const ns = useNumberSystem();
 </script>
 
 <template>
+  <button @click="ns.toggleLang">change lang {{ ns.lang }}</button>
   <a
     target="_blank"
     title="Github"
@@ -35,9 +36,9 @@ const ns = useNumberSystem();
     >
       <!-- title -->
       <Transition name="switch-v" mode="out-in">
-        <div :key="ns.cs_name_green">
+        <div :key="ns.name_green">
           <h1 class="header emerald-grad">
-            {{ ns.cs_name_green }}
+            {{ ns.name_green }}
           </h1>
         </div>
       </Transition>
@@ -46,7 +47,7 @@ const ns = useNumberSystem();
         <div :key="ns.digitsToGreenStrNumber" class="number emerald-grad">
           <span
             class="cursor-help"
-            :title="`Číslo v ... ${ns.cs_name_green.toLocaleLowerCase()}`"
+            :title="`Číslo v ... ${ns.name_green.toLocaleLowerCase()}`"
             >{{ ns.digitsToGreenStrNumber }}</span
           >
         </div>
@@ -54,11 +55,14 @@ const ns = useNumberSystem();
 
       <!-- title -->
       <Transition name="switch-v" mode="out-in">
-        <div :key="ns.cs_name_purple">
+        <div :key="ns.name_purple">
           <h1 class="header relative purple-grad">
-            {{ ns.cs_name_purple }}
+            {{ ns.name_purple }}
           </h1>
-          <div class="text-xs center text-purple-400 opacity-70">
+          <div
+            v-if="ns.lang === 'cs'"
+            class="text-xs center text-purple-400 opacity-70"
+          >
             ( {{ ns.en_name }} )
           </div>
         </div>
@@ -68,7 +72,7 @@ const ns = useNumberSystem();
         <div :key="ns.digitsToPurpleStrNumber" class="number purple-grad">
           <span
             class="cursor-help"
-            :title="`Číslo v ... ${ns.cs_name_purple.toLocaleLowerCase()}`"
+            :title="`Číslo v ... ${ns.name_purple.toLocaleLowerCase()}`"
             >{{ ns.digitsToPurpleStrNumber }}</span
           >
         </div>

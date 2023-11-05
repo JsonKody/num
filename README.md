@@ -11,14 +11,19 @@ Toto je vizualizace číselných pozičních soustav, vytvořená pro YouTube tu
 git clone git@github.com:JsonKody/numeral_playground.git
 ```
 
+### Musite mit nainstalovan node.js - pokud nemate `pnpm` nainstalujete ho pomoci
+```bash
+npm i -g pnpm
+```
+
 ### Instalace závislostí
 ```bash
-npm i
+pnpm i
 ```
 
 ### Spuštění (po nainstalování závislostí)
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Po uspesnem lokalnim spusteni se na bezici projekt muzete podivat na adrese *[localhost:4040](http://localhost:4040)*
