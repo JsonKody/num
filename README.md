@@ -2,7 +2,7 @@
 
 Toto je vizualizace číselných pozičních soustav, vytvořená pro YouTube tutoriál na kanálu JsonKody.
 
-### [Online ukázka - numeral_playground.jsonkody.cz](http://numeral_playground.jsonkody.cz)
+### [Online ukázka - numeral-playground.jsonkody.cz](http://numeral-playground.jsonkody.cz)
 
 ## Instrukce
 
