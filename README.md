@@ -2,13 +2,13 @@
 
 Toto je vizualizace číselných pozičních soustav, vytvořená pro YouTube tutoriál na kanálu JsonKody.
 
-### [Online ukázka](http://jk_soustavy.surge.sh)
+### [Online ukázka - numeral_playground.jsonkody.cz](http://numeral_playground.jsonkody.cz)
 
 ## Instrukce
 
 ### Naklonování repozitáře
 ```bash
-git clone git@github.com:JsonKody/ciselne_pozicni_soustavy.git
+git clone git@github.com:JsonKody/numeral_playground.git
 ```
 
 ### Instalace závislostí
