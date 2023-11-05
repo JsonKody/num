@@ -227,7 +227,7 @@
   }
 
   .flag-button {
-    @apply cursor-pointer w-7 h-7 lg:w-4 lg:h-4 inline-block rounded-full bg-cover bg-no-repeat my-5 mx-1.5 sm:my-3 trans;
+    @apply cursor-pointer w-7 h-7 lg:w-4 lg:h-4 trans inline-block rounded-full bg-cover bg-no-repeat;
   }
 
   .flag-button:hover {
