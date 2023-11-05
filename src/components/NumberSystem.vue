@@ -16,10 +16,13 @@ const setBase = (event: Event) => {
   ns.setBase(value as Base);
 };
 
-const baseTitle = computed(
-  () =>
+const baseTitle = computed(() =>
+  ns.t(
     `[ ${ns.base_purple} ]  je základ v této soustavy.
-Je to tedy ${ns.name_purple.toLowerCase()}.`
+Je to tedy ${ns.name_purple.toLowerCase()}.`,
+    `[ ${ns.base_purple} ]  is the base in this number system.
+So it's called ${ns.name_purple.toLowerCase()}.`
+  )
 );
 
 const increaseBase = () => {
@@ -57,8 +60,11 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           class="digit-button"
           :title="
             digitMinusDisabled
-              ? 'Ale, no tak .. nechte si tu alespoň jednu číslici ._.'
-              : 'odebrat číslici'
+              ? ns.t(
+                  'Ale, no tak, nech si tu alespoň jednu číslici 😉',
+                  'Oh, come on, keep at least one digit here 😉'
+                )
+              : ns.t('odebrat číslici', 'remove digit')
           "
           @click="ns.removeDigit"
           :disabled="digitMinusDisabled"
@@ -66,7 +72,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           <Minus />
         </button>
         <button
-          title="přidat číslici"
+          :title="ns.t('přidat číslici', 'add digit')"
           class="digit-button"
           @click="ns.addDigit"
         >
@@ -89,12 +95,11 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           </div>
         </Transition>
       </div>
-      <label :title="baseTitle" for="base" class="text-base cursor-help"
-        ><span class="text-xs opacity-0">(Base)</span> Základ
-        <span class="text-xs opacity-50">(Base)</span></label
-      >
+      <label :title="baseTitle" for="base" class="text-base cursor-help">{{
+        ns.t("Základ", "Base")
+      }}</label>
       <input
-        :title="`Zde můžete změnit základ soustavy.\nmin:   2\nmax:   36`"
+        :title="ns.t(`Zde můžete změnit základ soustavy.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}}`, `Here you can change the base of the number system.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`)"
         class="opacity-10 hover:opacity-80 focus:opacity-80"
         :value="ns.base_purple"
         :min="ns.MIN_BASE"
@@ -109,8 +114,11 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         <button
           :title="
             basePlusDisabled
-              ? `[ ${ns.MAX_BASE} ]  je nejvyšší povolený základ`
-              : 'Základ + 1'
+              ? ns.t(
+                  `[ ${ns.MAX_BASE} ]  je nejvyšší povolený základ`,
+                  `[ ${ns.MAX_BASE} ]  is the highest allowed base`
+                )
+              : ns.t('Základ + 1', 'Base + 1')
           "
           :disabled="ns.base_purple >= ns.MAX_BASE"
           @click="increaseBase"
@@ -121,8 +129,11 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         <button
           :title="
             baseMinusDisabled
-              ? `[ ${ns.MIN_BASE} ]  je nejmenší povolený základ`
-              : 'Základ - 1'
+              ? ns.t(
+                  `[ ${ns.MIN_BASE} ]  je nejmenší povolený základ`,
+                  `[ ${ns.MIN_BASE} ]  is the lowest allowed base`
+                )
+              : ns.t('Základ - 1', 'Base - 1')
           "
           :disabled="baseMinusDisabled"
           @click="decreaseBase"
@@ -136,22 +147,38 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
     <!-- Controls -->
     <div class="gap-1 center">
       <button
-        title="nastaví všechny číslice na nulu"
+        :title="
+          ns.t('Nastaví všechny číslice na nulu.', 'Set all digits to zero.')
+        "
         @click="ns.setDigitsToZero"
         class="control-button"
       >
         Min
       </button>
       <button
-        title="přepíná zobrazení -> indexy řádů / hodnoty řádů"
+        :title="
+          ns.t(
+            'Přepíná mezi zobrazením hodnot řádů a indexů řádů.',
+            'Toggle between displaying positional values and place indices.'
+          )
+        "
         @click="ns.showDigitValue = !ns.showDigitValue"
         class="control-button"
       >
         <Eye />
-        {{ ns.showDigitValue ? "hodnoty řádů" : "indexy řádů" }}
+        {{
+          ns.showDigitValue
+            ? ns.t("Hodnoty řádů", "Positional values")
+            : ns.t("Indexy řádů", "Place indices")
+        }}
       </button>
       <button
-        title="nastaví všechny číslice na maximum"
+        :title="
+          ns.t(
+            'Nastaví všechny číslice na maximální hodnotu.',
+            'Set all digits to their maximum value.'
+          )
+        "
         @click="ns.setDigitsToMax"
         class="control-button"
       >

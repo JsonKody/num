@@ -23,14 +23,24 @@ const updateDigit = (event: Event) => {
     <!-- Digit value/index -->
     <div class="cursor-help" @click="ns.showDigitValue = !ns.showDigitValue">
       <div
-        title="hodnota řádu | Kliknutím přepneš na index řádu"
+        :title="
+          ns.t(
+            'Hodnota řádu. Kliknutím přepnete na index řádu.',
+            'Digit value. Click to switch to the place index.'
+          )
+        "
         v-if="ns.showDigitValue"
         class="digit-value"
       >
         {{ digitValue }}
       </div>
       <div
-        title="index řádu | Kliknutím přepneš na hodnotu řádu"
+        :title="
+          ns.t(
+            'Index řádu. Kliknutím přepnete na hodnotu řádu.',
+            'Place index. Click to switch to the digit value.'
+          )
+        "
         v-else
         class="digit-index"
       >
@@ -54,7 +64,11 @@ const updateDigit = (event: Event) => {
     <!-- Digit selector -->
     <div class="digit-select">
       <select
-        title="Vyber číslici"
+        :title="
+          ns.t('Vyber číslici na pozici', 'Select digit on position') +
+          ' - ' +
+          digitIndex
+        "
         :id="digitIndex + '-digit'"
         @change="updateDigit"
         :value="selectedNumber"

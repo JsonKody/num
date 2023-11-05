@@ -225,4 +225,34 @@
   .github-icon {
     @apply m-3.5 sm:m-2 absolute top-0 right-0 trans opacity-40 hover:opacity-60 text-purple-400 hover:text-purple-300;
   }
+
+  .flag-button {
+    @apply cursor-pointer w-7 h-7 lg:w-4 lg:h-4 inline-block rounded-full bg-cover bg-no-repeat my-5 mx-1.5 sm:my-3 trans;
+  }
+
+  .flag-button:hover {
+    transform: scale(1.12);
+  }
+
+  .fb-active {
+    @apply opacity-75;
+    transform: scale(1.12);
+  }
+
+  .fb-off {
+    @apply opacity-30;
+  }
+
+  .fb-off:hover {
+    @apply opacity-40;
+  }
+
+  .en {
+    background-image: url("./components/icons/en.svg");
+    background-position: center;
+  }
+  .cs {
+    background-image: url("./components/icons/cs.svg");
+    background-position: left;
+  }
 }
