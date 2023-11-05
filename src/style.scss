@@ -235,16 +235,16 @@
   }
 
   .fb-active {
-    @apply opacity-60 sm:opacity-100;
+    @apply opacity-40 sm:opacity-100;
     transform: scale(1.12);
   }
 
   .fb-off {
-    @apply opacity-10 sm:opacity-50;
+    @apply opacity-20 sm:opacity-50;
   }
 
   .fb-off:hover {
-    @apply opacity-10 sm:opacity-70;
+    @apply opacity-20 sm:opacity-70;
   }
 
   .en {
