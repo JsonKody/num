@@ -6,7 +6,9 @@ const ns = useNumberSystem();
 </script>
 
 <template>
-  <div class="ml-2 absolute top-0 left-0">
+  <div
+    class="trans ml-2 absolute top-0 left-0 sm:opacity-50 sm:hover:opacity-100"
+  >
     <div
       @click="ns.toggleLang"
       class="flag-button cs"
