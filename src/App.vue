@@ -6,28 +6,6 @@ const ns = useNumberSystem();
 </script>
 
 <template>
-  <div
-    class="trans ml-2 absolute top-0 left-0 sm:opacity-50 sm:hover:opacity-100"
-  >
-    <div
-      @click="ns.toggleLang"
-      class="flag-button cs"
-      title="Čeština"
-      :class="{
-        'fb-active': ns.lang === 'cs',
-        'fb-off': ns.lang === 'en',
-      }"
-    ></div>
-    <div
-      @click="ns.toggleLang"
-      class="flag-button en"
-      title="English"
-      :class="{
-        'fb-active': ns.lang === 'en',
-        'fb-off': ns.lang === 'cs',
-      }"
-    ></div>
-  </div>
   <a
     target="_blank"
     title="Github"
@@ -116,6 +94,30 @@ const ns = useNumberSystem();
       >
         JsonKody
       </a>
+    </div>
+
+    <div
+      class="trans ml-2 absolute top-0 left-0 sm:opacity-30 sm:hover:opacity-70"
+    >
+      <!-- sm:opacity-50 sm:hover:opacity-100 -->
+      <div
+        @click="ns.toggleLang"
+        class="flag-button cs"
+        title="Čeština"
+        :class="{
+          'fb-active': ns.lang === 'cs',
+          'fb-off': ns.lang === 'en',
+        }"
+      ></div>
+      <div
+        @click="ns.toggleLang"
+        class="flag-button en"
+        title="English"
+        :class="{
+          'fb-active': ns.lang === 'en',
+          'fb-off': ns.lang === 'cs',
+        }"
+      ></div>
     </div>
   </div>
 </template>
