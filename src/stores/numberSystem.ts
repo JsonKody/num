@@ -3,7 +3,7 @@ import type { Base, Lang, Name } from "../types/typings";
 import { defineStore } from "pinia";
 import { ref, computed, watch } from "vue";
 import { generateCzechName, generateEnglishName } from "../prefixes";
-import { debounce } from 'lodash-es'
+import { debounce } from "lodash-es";
 
 const delimiter = ",";
 
@@ -54,7 +54,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   );
   const showDigitValue = ref(true);
   // zamkne pocet ciselnych mist - mohou rust dle potreby ale nebudou se samy snizovat
-  const lock_digits = ref(ls_get("lock_digits", "boolean") || false);
+  const lock_digits = ref(ls_get("lock_digits", "boolean") || true);
 
   const name_green = computed(() =>
     lang.value === "cs"
