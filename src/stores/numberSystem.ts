@@ -7,26 +7,12 @@ import { debounce } from "lodash-es";
 
 const delimiter = ",";
 
-const ls_get = (
-  key: string,
-  type: "boolean" | "number" | "string" | "digits" = "string"
-) => {
-  if (type === "string") {
-    return localStorage.getItem(key);
-  }
-
-  if (type === "boolean") {
-    return localStorage.getItem(key) === "true";
-  }
-
-  if (type === "number") {
-    return Number(localStorage.getItem(key));
-  }
-
-  if (type === "digits") {
-    const digits = localStorage.getItem(key);
-    return digits ? digits.split(delimiter) : ["0"];
-  }
+const ls_get_bool = (key: string) => localStorage.getItem(key) === "true";
+const ls_get_str = (key: string) => localStorage.getItem(key);
+const ls_get_num = (key: string) => Number(localStorage.getItem(key));
+const ls_get_dig = (key: string) => {
+  const digits = localStorage.getItem(key);
+  return digits ? digits.split(delimiter) : ["0"];
 };
 
 const ls_queue: Record<string, string> = {};
@@ -53,23 +39,16 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const MIN_BASE = 2;
   const MAX_BASE = chars.length;
 
-  const lang = ref<Lang>((ls_get("lang", "string") as Lang) || "cs");
+  const lang = ref<Lang>((ls_get_str("lang") as Lang) || "cs");
 
-  const base_green = ref<Base>((ls_get("base_green", "number") as Base) || 10);
-  const base_purple = ref<Base>(
-    (ls_get("base_purple", "number") as Base) || 16
-  );
+  const base_green = ref<Base>((ls_get_num("base_green") as Base) || 10);
+  const base_purple = ref<Base>((ls_get_num("base_purple") as Base) || 16);
 
-  const digits = ref<string[]>(
-    (ls_get("digits", "digits") as string[]) || [zero]
-  );
-  const show_digits_value = ref<boolean>(
-    (ls_get("show_digits_value", "boolean") as boolean) || true
-  );
+  const digits = ref<string[]>((ls_get_dig("digits") as string[]) || [zero]);
+
+  const show_digits_val = ref<boolean>(ls_get_bool("show_digits_val"));
   // zamkne pocet ciselnych mist - mohou rust dle potreby ale nebudou se samy snizovat
-  const lock_digits = ref<boolean>(
-    (ls_get("lock_digits", "boolean") as boolean) || true
-  );
+  const lock_digits = ref<boolean>(ls_get_bool("lock_digits"));
 
   const name_green = computed(() =>
     lang.value === "cs"
@@ -207,9 +186,8 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     }
   );
   watch(
-    () => show_digits_value.value,
-    () =>
-      enqueue_ls_set("show_digits_value", show_digits_value.value.toString())
+    () => show_digits_val.value,
+    () => enqueue_ls_set("show_digits_val", show_digits_val.value.toString())
   );
   watch(
     () => lock_digits.value,
@@ -244,7 +222,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     availableCharsForBase,
     digitsToPurpleStrNumber,
     digitsToGreenStrNumber,
-    show_digits_value,
+    show_digits_val,
     setDigitsToZero,
     mas_available_str_digit,
     setDigitsToMax,

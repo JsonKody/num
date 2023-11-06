@@ -29,30 +29,27 @@ const toggleMinMax = () => {
 <template>
   <div class="relative def-mouse">
     <!-- Digit value/index -->
-    <div
-      class="cursor-help"
-      @click="ns.show_digits_value = !ns.show_digits_value"
-    >
+    <div class="cursor-help" @click="ns.show_digits_val = !ns.show_digits_val">
       <div
+        v-if="ns.show_digits_val"
         :title="
           ns.t(
             'Hodnota řádu. Kliknutím přepnete na index řádu.',
             'Digit value. Click to switch to the place index.'
           )
         "
-        v-if="ns.show_digits_value"
         class="digit-value"
       >
         {{ digitValue }}
       </div>
       <div
+        v-else
         :title="
           ns.t(
             'Index řádu. Kliknutím přepnete na hodnotu řádu.',
             'Place index. Click to switch to the digit value.'
           )
         "
-        v-else
         class="digit-index"
       >
         {{ digitIndex }}
