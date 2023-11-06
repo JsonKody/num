@@ -1,6 +1,6 @@
 # Poziční číselné soustavy 🤌🧐🍷
 
-#real Cool Heading
+#real-cool-heading
 
 Toto je vizualizace číselných pozičních soustav, vytvořená pro YouTube tutoriál na kanálu JsonKody.
 
