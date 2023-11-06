@@ -1,6 +1,6 @@
 # Poziční číselné soustavy 🤌🧐🍷
 
-#real-cool-heading
+[Markdown - Link](#Link)
 
 Toto je vizualizace číselných pozičních soustav, vytvořená pro YouTube tutoriál na kanálu JsonKody.
 
@@ -72,7 +72,7 @@ Tento malý projekt měl původně sloužit jen jako "pomocný nástroj" pro moj
 
 Aktualizace: preklad je hotov, aplikace je 100%
 
-#Real Cool Heading
+#Link
 
 English desc.:
 
