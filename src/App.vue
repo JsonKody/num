@@ -89,8 +89,8 @@ const ns = useNumberSystem();
     <div class="footer-link cursor-pointer">
       <a
         target="_blank"
-        href="https://www.youtube.com/jsonkody"
-        title="Můj YouTube kanál - JsonKody 🤌🧐🍷"
+        href="https://jsonkody.cz"
+        title="JsonKody 🤌🧐🍷"
       >
         JsonKody
       </a>
