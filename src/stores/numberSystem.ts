@@ -3,7 +3,7 @@ import type { Base, Lang, Name } from "../types/typings";
 import { defineStore } from "pinia";
 import { ref, computed, watch } from "vue";
 import { generateCzechName, generateEnglishName } from "../prefixes";
-import { debounce } from "lodash-es";
+import { debounce } from 'lodash-es'
 
 const delimiter = ",";
 
