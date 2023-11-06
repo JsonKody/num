@@ -50,7 +50,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   );
   const showDigitValue = ref(true);
   // zamkne pocet ciselnych mist - mohou rust dle potreby ale nebudou se samy snizovat
-  const lock_digits = ref(false);
+  const lock_digits = ref(ls_get("lock_digits", "boolean") || false);
 
   const name_green = computed(() =>
     lang.value === "cs"
@@ -189,7 +189,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   );
   watch(
     () => lock_digits.value,
-    () => ls_set("locked", lock_digits.value.toString())
+    () => ls_set("lock_digits", lock_digits.value.toString())
   );
   watch(
     () => base_green.value,
