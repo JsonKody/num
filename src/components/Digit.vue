@@ -16,6 +16,14 @@ const updateDigit = (event: Event) => {
   const value = (event.target as HTMLSelectElement).value;
   ns.setDigit(index, value);
 };
+
+const toggleMinMax = () => {
+  if (selectedNumber.value === ns.zero) {
+    ns.setDigit(index, ns.mas_available_str_digit);
+  } else {
+    ns.setDigit(index, ns.zero);
+  }
+};
 </script>
 
 <template>
@@ -52,10 +60,13 @@ const updateDigit = (event: Event) => {
     <label
       :title="`( ${
         parseInt(selectedNumber, ns.base_purple) * digitValue
-      } )  ${ns.t('Kliknutím vynuluj číslici', 'Click to reset digit')}`"
+      } )  ${ns.t(
+        'Kliknutím přepínej Min - Max',
+        'Click to toggle Min - Max'
+      )}`"
       :for="digitIndex + '-digit'"
       class="digit"
-      @click="ns.setDigit(index, '0')"
+      @click="toggleMinMax"
       :class="{
         'opacity-50': selectedNumber == '0',
         'text-purple-400': selectedNumber != '0',

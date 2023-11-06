@@ -6,6 +6,7 @@ import { generateCzechName, generateEnglishName } from "../prefixes";
 
 export const useNumberSystem = defineStore("numberSystem", () => {
   const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const zero = chars[0];
   const MIN_BASE = 2;
   const MAX_BASE = chars.length;
 
@@ -14,11 +15,19 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const base_green = ref<Base>(10);
   const base_purple = ref<Base>(16);
 
-  const digits = ref<string[]>(["0", "0", "0", "0"]);
+  const digits = ref<string[]>([zero, zero, zero, zero]);
   const showDigitValue = ref(true);
 
-  const name_green = computed(() => lang.value === 'cs' ? generateCzechName(base_green.value) : generateEnglishName(base_green.value));
-  const name_purple = computed(() => lang.value === 'cs' ? generateCzechName(base_purple.value) : generateEnglishName(base_purple.value));
+  const name_green = computed(() =>
+    lang.value === "cs"
+      ? generateCzechName(base_green.value)
+      : generateEnglishName(base_green.value)
+  );
+  const name_purple = computed(() =>
+    lang.value === "cs"
+      ? generateCzechName(base_purple.value)
+      : generateEnglishName(base_purple.value)
+  );
   const en_name = computed(() => generateEnglishName(base_purple.value));
 
   const availableCharsForBase = computed(() => {
@@ -41,9 +50,12 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     digits.value = digits.value.map(() => zero);
   };
 
+  const mas_available_str_digit = computed(() => {
+    return availableCharsForBase.value[availableCharsForBase.value.length - 1];
+  });
+
   const setDigitsToMax = () => {
-    const max =
-      availableCharsForBase.value[availableCharsForBase.value.length - 1];
+    const max = mas_available_str_digit.value;
     digits.value = digits.value.map(() => max);
   };
 
@@ -87,7 +99,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     str_num = stringToBigInt(str_num, base_from)
       .toString(base_to)
       .toUpperCase();
-    return str_num ? str_num : "0";
+    return str_num ? str_num : zero;
   }
 
   const digitsToGreenStrNumber = computed(() =>
@@ -118,7 +130,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const to = (lang_obj: Name) => lang_obj[lang.value];
   const toggleLang = () => {
     lang.value = lang.value === "cs" ? "en" : "cs";
-  }
+  };
 
   return {
     t,
@@ -129,6 +141,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     base_purple,
     setBase,
     chars,
+    zero,
     MIN_BASE,
     MAX_BASE,
     digits,
@@ -140,6 +153,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     digitsToGreenStrNumber,
     showDigitValue,
     setDigitsToZero,
+    mas_available_str_digit,
     setDigitsToMax,
     name_green,
     name_purple,
