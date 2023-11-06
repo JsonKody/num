@@ -3,13 +3,14 @@ import type { Base, Lang, Name } from "../types/typings";
 import { defineStore } from "pinia";
 import { ref, computed, watch } from "vue";
 import { generateCzechName, generateEnglishName } from "../prefixes";
+import { debounce } from "lodash-es";
 
 const delimiter = ",";
 
-function ls_get(
+const ls_get = (
   key: string,
   type: "boolean" | "number" | "string" | "digits" = "string"
-) {
+) => {
   if (type === "string") {
     return localStorage.getItem(key);
   }
@@ -26,11 +27,14 @@ function ls_get(
     const digits = localStorage.getItem(key);
     return digits ? digits.split(delimiter) : ["0"];
   }
-}
+};
 
-function ls_set(key: string, val: string) {
+const saved = ref(false);
+const ls_set = debounce((key: string, val: string) => {
   localStorage.setItem(key, val);
-}
+  saved.value = true;
+  setTimeout(() => (saved.value = false), 200);
+}, 1000);
 
 export const useNumberSystem = defineStore("numberSystem", () => {
   const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -200,6 +204,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     () => ls_set("base_purple", base_purple.value.toString())
   );
   return {
+    saved,
     t,
     to,
     lang,

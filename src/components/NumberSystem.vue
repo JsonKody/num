@@ -116,6 +116,13 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
 
     <!-- Base -->
     <div class="base-wrap">
+      <div
+        class="m-2 trans absolute top-0 left-0 w-1.5 h-1.5 rounded-full"
+        :class="{
+          'bg-purple-500 opacity-50': ns.saved,
+          'bg-purple-800 opacity-10': !ns.saved,
+        }"
+      ></div>
       <div class="center">
         <!-- Base number -->
         <Transition name="switch-h" mode="out-in">
