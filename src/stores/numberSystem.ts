@@ -33,7 +33,7 @@ const saved = ref(false);
 const ls_set = debounce((key: string, val: string) => {
   localStorage.setItem(key, val);
   saved.value = true;
-  setTimeout(() => (saved.value = false), 200);
+  setTimeout(() => (saved.value = false), 180);
 }, 1000);
 
 export const useNumberSystem = defineStore("numberSystem", () => {
