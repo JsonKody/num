@@ -7,30 +7,27 @@ import { debounce } from "lodash-es";
 
 const delimiter = ",";
 
-function ls_get<T extends "boolean" | "number" | "string" | "digits">(
+const ls_get = (
   key: string,
-  type: T
-): T extends "boolean"
-  ? boolean
-  : T extends "number"
-  ? number
-  : T extends "string"
-  ? string
-  : T extends "digits"
-  ? string[]
-  : never {
-  const item = localStorage.getItem(key);
+  type: "boolean" | "number" | "string" | "digits" = "string"
+) => {
   if (type === "string") {
-    return item as any;
-  } else if (type === "boolean") {
-    return (item === "true") as any;
-  } else if (type === "number") {
-    return (item ? Number(item) : 0) as any;
-  } else if (type === "digits") {
-    return (item ? item.split(delimiter) : []) as any;
+    return localStorage.getItem(key);
   }
-  throw new Error(`Unsupported type: ${type}`);
-}
+
+  if (type === "boolean") {
+    return localStorage.getItem(key) === "true";
+  }
+
+  if (type === "number") {
+    return Number(localStorage.getItem(key));
+  }
+
+  if (type === "digits") {
+    const digits = localStorage.getItem(key);
+    return digits ? digits.split(delimiter) : ["0"];
+  }
+};
 
 const ls_queue: Record<string, string> = {};
 
@@ -38,6 +35,7 @@ const saved = ref(false);
 const ls_set_batch = debounce(() => {
   for (const key in ls_queue) {
     localStorage.setItem(key, ls_queue[key]);
+    console.log(`Saved -> ${key}: ${ls_queue[key]}`);
     delete ls_queue[key]; // Odstraní hodnotu z fronty
   }
   saved.value = true;
