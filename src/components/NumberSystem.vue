@@ -116,8 +116,10 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
 
     <!-- Base -->
     <div class="base-wrap">
+
+      <!-- Save diod -->
       <div
-        class="m-2 trans absolute top-0 left-0 w-1.5 h-1.5 rounded-full"
+        class="m-2 trans absolute top-0 left-0 w-2 h-2 rounded-full"
         :class="{
           'bg-purple-800 opacity-40': ns.saved,
           'bg-purple-800 opacity-20': !ns.saved,
