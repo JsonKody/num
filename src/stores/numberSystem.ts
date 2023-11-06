@@ -35,6 +35,17 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   });
 
   const setBase = (val: Base) => {
+    /**
+     * If the base is 0, we set the base to 0 and return.
+     */
+    if (digitsToPurpleStrNumber.value === "0") {
+      base_purple.value = val;
+      return;
+    }
+
+    /**
+     * .. else we convert the digits to the new base.
+     */
     const new_digits_array = digits_converter(
       digits.value,
       base_purple.value,

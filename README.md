@@ -82,4 +82,4 @@ Máte-li nějaké nápady na vylepšení nebo chcete opravit bug, neváhejte vyt
 
 ## Licence
 
-Numeral Playground je poskytován pod MIT licencí, která je dostupná v souboru [LICENSE](LICENSE).
+Tento software `Numeral_playground` je poskytován pod MIT licencí, která je dostupná v souboru [LICENSE](LICENSE).
