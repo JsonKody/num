@@ -1,8 +1,36 @@
 // numberSystem.ts
 import type { Base, Lang, Name } from "../types/typings";
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { generateCzechName, generateEnglishName } from "../prefixes";
+
+const delimiter = ",";
+
+function ls_get(
+  key: string,
+  type: "boolean" | "number" | "string" | "digits" = "string"
+) {
+  if (type === "string") {
+    return localStorage.getItem(key);
+  }
+
+  if (type === "boolean") {
+    return localStorage.getItem(key) === "true";
+  }
+
+  if (type === "number") {
+    return Number(localStorage.getItem(key));
+  }
+
+  if (type === "digits") {
+    const digits = localStorage.getItem(key);
+    return digits ? digits.split(delimiter) : ["0"];
+  }
+}
+
+function ls_set(key: string, val: string) {
+  localStorage.setItem(key, val);
+}
 
 export const useNumberSystem = defineStore("numberSystem", () => {
   const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -10,13 +38,19 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const MIN_BASE = 2;
   const MAX_BASE = chars.length;
 
-  const lang = ref<Lang>("cs");
+  const lang = ref<Lang>((ls_get("lang") as Lang) || "cs");
 
-  const base_green = ref<Base>(10);
-  const base_purple = ref<Base>(16);
+  const base_green = ref<Base>((ls_get("base_green", "number") as Base) || 10);
+  const base_purple = ref<Base>(
+    (ls_get("base_purple", "number") as Base) || 16
+  );
 
-  const digits = ref<string[]>([zero, zero, zero, zero]);
+  const digits = ref<string[]>(
+    (ls_get("digits", "digits") as string[]) || [zero]
+  );
   const showDigitValue = ref(true);
+  // zamkne pocet ciselnych mist - mohou rust dle potreby ale nebudou se samy snizovat
+  const lock_digits = ref(false);
 
   const name_green = computed(() =>
     lang.value === "cs"
@@ -35,17 +69,8 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   });
 
   const setBase = (val: Base) => {
-    /**
-     * If the base is 0, we set the base to 0 and return.
-     */
-    if (digitsToPurpleStrNumber.value === "0") {
-      base_purple.value = val;
-      return;
-    }
+    const digits_length = digits.value.length;
 
-    /**
-     * .. else we convert the digits to the new base.
-     */
     const new_digits_array = digits_converter(
       digits.value,
       base_purple.value,
@@ -54,6 +79,11 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     digits.value = [];
     base_purple.value = val;
     digits.value = new_digits_array;
+
+    if (lock_digits.value && digits.value.length < digits_length) {
+      const zeros = new Array(digits_length - digits.value.length).fill(zero);
+      digits.value = [...zeros, ...digits.value];
+    }
   };
 
   const setDigitsToZero = () => {
@@ -72,6 +102,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
 
   const setDigit = (index: number, value: string) => {
     digits.value[index] = value;
+    ls_set("digits", digits.value.join(delimiter));
   };
 
   const addDigit = () => {
@@ -141,8 +172,33 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const to = (lang_obj: Name) => lang_obj[lang.value];
   const toggleLang = () => {
     lang.value = lang.value === "cs" ? "en" : "cs";
+    ls_set("lang", lang.value);
   };
 
+  watch(
+    () => digits.value,
+    () => {
+      ls_set("digits", digits.value.join(delimiter));
+    }
+  );
+  watch(
+    () => digits.value.length,
+    () => {
+      ls_set("digits", digits.value.join(delimiter));
+    }
+  );
+  watch(
+    () => lock_digits.value,
+    () => ls_set("locked", lock_digits.value.toString())
+  );
+  watch(
+    () => base_green.value,
+    () => ls_set("base_green", base_green.value.toString())
+  );
+  watch(
+    () => base_purple.value,
+    () => ls_set("base_purple", base_purple.value.toString())
+  );
   return {
     t,
     to,
@@ -156,6 +212,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     MIN_BASE,
     MAX_BASE,
     digits,
+    lock_digits,
     setDigit,
     addDigit,
     removeDigit,

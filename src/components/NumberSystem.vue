@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useNumberSystem } from "../stores/numberSystem";
 import { Base } from "../types/typings";
+import Lock from "./icons/Lock.vue";
+import LockOpen from "./icons/LockOpen.vue";
 import Digit from "./Digit.vue";
 import Plus from "./icons/Plus.vue";
 import Minus from "./icons/Minus.vue";
@@ -55,29 +57,60 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           <Digit :index="i" />
         </div>
       </TransitionGroup>
-      <div class="flex-row gap-1 center">
-        <button
-          class="digit-button"
-          :title="
-            digitMinusDisabled
-              ? ns.t(
-                  'Ale, no tak, nech si tu alespoň jednu číslici 😉',
-                  'Oh, come on, keep at least one digit here 😉'
-                )
-              : ns.t('odebrat číslici', 'remove digit')
-          "
-          @click="ns.removeDigit"
-          :disabled="digitMinusDisabled"
-        >
-          <Minus />
-        </button>
-        <button
-          :title="ns.t('přidat číslici', 'add digit')"
-          class="digit-button"
-          @click="ns.addDigit"
-        >
-          <Plus />
-        </button>
+      <div class="flex justify-between">
+        <div class="center" @click="ns.lock_digits = !ns.lock_digits">
+          <button
+            :title="
+              ns.t(
+                'Zamknuto - počet číslic se nebude automaticky snižovat',
+                'Locked - number of digits won\'t automatically decrease'
+              )
+            "
+            class="digit-lock"
+            v-if="ns.lock_digits"
+          >
+            <Lock />
+          </button>
+          <button
+            :title="
+              ns.t(
+                'Odemknuto - počet číslic bude vždy minimum nutné k vyjádření čísla',
+                'Unlocked - number of digits will always be the minimum necessary to represent the number'
+              )
+            "
+            class="digit-lock"
+            v-else
+          >
+            <LockOpen />
+          </button>
+        </div>
+        <div class="flex gap-1">
+          <button
+            class="digit-button"
+            :title="
+              digitMinusDisabled
+                ? ns.t(
+                    'Ale, no tak, nech si tu alespoň jednu číslici 😉',
+                    'Oh, come on, keep at least one digit here 😉'
+                  )
+                : ns.t('odebrat číslici', 'remove digit')
+            "
+            @click="ns.removeDigit"
+            :disabled="digitMinusDisabled"
+          >
+            <Minus />
+          </button>
+          <button
+            :title="ns.t('přidat číslici', 'add digit')"
+            class="digit-button"
+            @click="ns.addDigit"
+          >
+            <Plus />
+          </button>
+        </div>
+        <div>
+          <Lock class="digit-button invisible" />
+        </div>
       </div>
     </div>
 
@@ -99,7 +132,12 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         ns.t("Základ", "Base")
       }}</label>
       <input
-        :title="ns.t(`Zde můžete změnit základ soustavy.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`, `Here you can change the base of the number system.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`)"
+        :title="
+          ns.t(
+            `Zde můžete změnit základ soustavy.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`,
+            `Here you can change the base of the number system.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`
+          )
+        "
         class="opacity-10 hover:opacity-80 focus:opacity-80"
         :value="ns.base_purple"
         :min="ns.MIN_BASE"
