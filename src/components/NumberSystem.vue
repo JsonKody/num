@@ -99,7 +99,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         ns.t("Základ", "Base")
       }}</label>
       <input
-        :title="ns.t(`Zde můžete změnit základ soustavy.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}}`, `Here you can change the base of the number system.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`)"
+        :title="ns.t(`Zde můžete změnit základ soustavy.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`, `Here you can change the base of the number system.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`)"
         class="opacity-10 hover:opacity-80 focus:opacity-80"
         :value="ns.base_purple"
         :min="ns.MIN_BASE"

@@ -50,9 +50,12 @@ const updateDigit = (event: Event) => {
 
     <!-- Digit -->
     <label
-      :title="`${parseInt(selectedNumber, ns.base_purple) * digitValue}`"
+      :title="`( ${
+        parseInt(selectedNumber, ns.base_purple) * digitValue
+      } )  ${ns.t('Kliknutím vynuluj číslici', 'Click to reset digit')}`"
       :for="digitIndex + '-digit'"
       class="digit"
+      @click="ns.setDigit(index, '0')"
       :class="{
         'opacity-50': selectedNumber == '0',
         'text-purple-400': selectedNumber != '0',
