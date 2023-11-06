@@ -44,7 +44,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const base_green = ref<Base>((ls_get_num("base_green") as Base) || 10);
   const base_purple = ref<Base>((ls_get_num("base_purple") as Base) || 16);
 
-  const digits = ref<string[]>((ls_get_dig("digits") as string[]) || [zero]);
+  const digits = ref<string[]>(ls_get_dig("digits") as string[]);
 
   const show_digits_val = ref<boolean>(ls_get_bool("show_digits_val"));
   // zamkne pocet ciselnych mist - mohou rust dle potreby ale nebudou se samy snizovat
@@ -158,12 +158,19 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   );
 
   const switchGreenPurple = () => {
+    const digits_length = digits.value.length;
+
     const new_digits_array = digitsToGreenStrNumber.value.split("");
     digits.value = [];
     const temp = base_green.value;
     base_green.value = base_purple.value;
     base_purple.value = temp;
     digits.value = new_digits_array;
+
+    if (lock_digits.value && digits.value.length < digits_length) {
+      const zeros = new Array(digits_length - digits.value.length).fill(zero);
+      digits.value = [...zeros, ...digits.value];
+    }
   };
 
   const t = (cs: string, en: string) => (lang.value === "cs" ? cs : en);
