@@ -32,12 +32,22 @@ function ls_get<T extends "boolean" | "number" | "string" | "digits">(
   throw new Error(`Unsupported type: ${type}`);
 }
 
+const ls_queue: Record<string, string> = {};
+
 const saved = ref(false);
-const ls_set = debounce((key: string, val: string) => {
-  localStorage.setItem(key, val);
+const ls_set_batch = debounce(() => {
+  for (const key in ls_queue) {
+    localStorage.setItem(key, ls_queue[key]);
+    delete ls_queue[key]; // Odstraní hodnotu z fronty
+  }
   saved.value = true;
   setTimeout(() => (saved.value = false), 180);
 }, 1000);
+
+function enqueue_ls_set(key: string, value: string) {
+  ls_queue[key] = value; // Přepíše předchozí hodnotu pokud existuje
+  ls_set_batch(); // Zavolá debounced funkci
+}
 
 export const useNumberSystem = defineStore("numberSystem", () => {
   const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -113,7 +123,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
 
   const setDigit = (index: number, value: string) => {
     digits.value[index] = value;
-    ls_set("digits", digits.value.join(delimiter));
+    enqueue_ls_set("digits", digits.value.join(delimiter));
   };
 
   const addDigit = () => {
@@ -183,36 +193,37 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const to = (lang_obj: Name) => lang_obj[lang.value];
   const toggleLang = () => {
     lang.value = lang.value === "cs" ? "en" : "cs";
-    ls_set("lang", lang.value);
+    enqueue_ls_set("lang", lang.value);
   };
 
   watch(
     () => digits.value,
     () => {
-      ls_set("digits", digits.value.join(delimiter));
+      enqueue_ls_set("digits", digits.value.join(delimiter));
     }
   );
   watch(
     () => digits.value.length,
     () => {
-      ls_set("digits", digits.value.join(delimiter));
+      enqueue_ls_set("digits", digits.value.join(delimiter));
     }
   );
   watch(
     () => show_digits_value.value,
-    () => ls_set("show_digits_value", show_digits_value.value.toString())
+    () =>
+      enqueue_ls_set("show_digits_value", show_digits_value.value.toString())
   );
   watch(
     () => lock_digits.value,
-    () => ls_set("lock_digits", lock_digits.value.toString())
+    () => enqueue_ls_set("lock_digits", lock_digits.value.toString())
   );
   watch(
     () => base_green.value,
-    () => ls_set("base_green", base_green.value.toString())
+    () => enqueue_ls_set("base_green", base_green.value.toString())
   );
   watch(
     () => base_purple.value,
-    () => ls_set("base_purple", base_purple.value.toString())
+    () => enqueue_ls_set("base_purple", base_purple.value.toString())
   );
   return {
     saved,
