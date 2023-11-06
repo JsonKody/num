@@ -1,8 +1,24 @@
 # Poziční číselné soustavy 🤌🧐🍷
 
+#real Cool Heading
+
 Toto je vizualizace číselných pozičních soustav, vytvořená pro YouTube tutoriál na kanálu JsonKody.
 
-### [Online ukázka - numeral-playground.jsonkody.cz](http://numeral-playground.jsonkody.cz)
+Ladil jsem to tak dlouho, ze se to da teoreticky pouzit jako prevodnik, nebo vyukova pomucka.
+
+Aplikace ma prakticky na vsech prvcich aplikovan 'title' s instrukcemi a vysvetlivkami - staci jen nad prvkem chvili podrzet mys.
+
+Je kompletne prelozena do Anglictiny a Cestiny (vpravo dole je prepinac jazyku).
+
+Protoze jde o vyukovou pomucku, snazil jsem se ruzne ovladaci prvky upozadit, aby neodklanely pozornost od tech hlavnich prvku aplikace a to cisel, proto je vetsina prvku polopruhledna.
+
+Ovladani aplikace 
+
+### [numeral-playground.jsonkody.cz](http://numeral-playground.jsonkody.cz)
+
+
+![screenshot](./src/assets/images/screenshot.png)
+
 
 ## Instrukce
 
@@ -56,6 +72,7 @@ Tento malý projekt měl původně sloužit jen jako "pomocný nástroj" pro moj
 
 Aktualizace: preklad je hotov, aplikace je 100%
 
+#Real Cool Heading
 
 English desc.:
 
