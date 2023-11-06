@@ -61,12 +61,12 @@ const ns = useNumberSystem();
           <h1 class="header relative purple-grad">
             {{ ns.name_purple }}
           </h1>
-          <div
+          <!-- <div
             v-if="ns.lang === 'cs'"
             class="text-xs center text-purple-400 opacity-70"
           >
             ( {{ ns.en_name }} )
-          </div>
+          </div> -->
         </div>
       </Transition>
       <!-- number -->

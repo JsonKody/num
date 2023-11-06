@@ -45,7 +45,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
 <template>
   <div>
     <!-- Digits -->
-    <div class="flex flex-col gap-2">
+    <div class="digits-wrap">
       <TransitionGroup
         tag="div"
         class="relative flex flex-row flex-wrap gap-1 grow center"
