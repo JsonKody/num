@@ -7,27 +7,30 @@ import { debounce } from "lodash-es";
 
 const delimiter = ",";
 
-const ls_get = (
+function ls_get<T extends "boolean" | "number" | "string" | "digits">(
   key: string,
-  type: "boolean" | "number" | "string" | "digits" = "string"
-) => {
+  type: T
+): T extends "boolean"
+  ? boolean
+  : T extends "number"
+  ? number
+  : T extends "string"
+  ? string
+  : T extends "digits"
+  ? string[]
+  : never {
+  const item = localStorage.getItem(key);
   if (type === "string") {
-    return localStorage.getItem(key);
+    return item as any;
+  } else if (type === "boolean") {
+    return (item === "true") as any;
+  } else if (type === "number") {
+    return (item ? Number(item) : 0) as any;
+  } else if (type === "digits") {
+    return (item ? item.split(delimiter) : []) as any;
   }
-
-  if (type === "boolean") {
-    return localStorage.getItem(key) === "true";
-  }
-
-  if (type === "number") {
-    return Number(localStorage.getItem(key));
-  }
-
-  if (type === "digits") {
-    const digits = localStorage.getItem(key);
-    return digits ? digits.split(delimiter) : ["0"];
-  }
-};
+  throw new Error(`Unsupported type: ${type}`);
+}
 
 const saved = ref(false);
 const ls_set = debounce((key: string, val: string) => {
@@ -42,7 +45,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const MIN_BASE = 2;
   const MAX_BASE = chars.length;
 
-  const lang = ref<Lang>((ls_get("lang") as Lang) || "cs");
+  const lang = ref<Lang>((ls_get("lang", "string") as Lang) || "cs");
 
   const base_green = ref<Base>((ls_get("base_green", "number") as Base) || 10);
   const base_purple = ref<Base>(
@@ -52,9 +55,13 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const digits = ref<string[]>(
     (ls_get("digits", "digits") as string[]) || [zero]
   );
-  const showDigitValue = ref(true);
+  const show_digits_value = ref<boolean>(
+    (ls_get("show_digits_value", "boolean") as boolean) || true
+  );
   // zamkne pocet ciselnych mist - mohou rust dle potreby ale nebudou se samy snizovat
-  const lock_digits = ref(ls_get("lock_digits", "boolean") || true);
+  const lock_digits = ref<boolean>(
+    (ls_get("lock_digits", "boolean") as boolean) || true
+  );
 
   const name_green = computed(() =>
     lang.value === "cs"
@@ -192,6 +199,10 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     }
   );
   watch(
+    () => show_digits_value.value,
+    () => ls_set("show_digits_value", show_digits_value.value.toString())
+  );
+  watch(
     () => lock_digits.value,
     () => ls_set("lock_digits", lock_digits.value.toString())
   );
@@ -224,7 +235,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     availableCharsForBase,
     digitsToPurpleStrNumber,
     digitsToGreenStrNumber,
-    showDigitValue,
+    show_digits_value,
     setDigitsToZero,
     mas_available_str_digit,
     setDigitsToMax,

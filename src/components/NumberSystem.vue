@@ -209,12 +209,12 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             'Toggle between displaying positional values and place indices.'
           )
         "
-        @click="ns.showDigitValue = !ns.showDigitValue"
+        @click="ns.show_digits_value = !ns.show_digits_value"
         class="control-button"
       >
         <Eye />
         {{
-          ns.showDigitValue
+          ns.show_digits_value
             ? ns.t("Hodnoty řádů", "Positional values")
             : ns.t("Indexy řádů", "Place indices")
         }}
