@@ -41,7 +41,7 @@ export const pop: Directive = {
         will-change: transform; /* Optimalizace pro transformaci */
         pointer-events: none;
         position: absolute;
-		    font-size: 16px;
+		  font-size: 16px;
         z-index: 999;
       `
 			popover.classList.add('hidden')
@@ -57,8 +57,6 @@ export const pop: Directive = {
 				await computePosition(el, el._popover, {
 					// Přidáme middleware
 					placement,
-
-					// fallbackPlacements: ['bottom', 'top', 'left'],
 					middleware: [offset(8), flip(), shift({ padding: 8 })],
 				}).then(({ x, y, placement }) => {
 					if (el._popover) {
@@ -66,7 +64,6 @@ export const pop: Directive = {
 						el._popover.style.transformOrigin = new_placement
 					}
 
-					console.log(placement)
 					Object.assign(el._popover!.style, {
 						top: `${y}px`,
 						left: `${x}px`,
@@ -80,7 +77,7 @@ export const pop: Directive = {
 		const showPopover = () => {
 			updatePopoverPosition()
 			const popover = el._popover!
-			if (binding.value !== '') {
+			if (popover.textContent !== '') {
 				el._popover!.classList.remove('hidden')
 			}
 			// Zařídíte, že prohlížeč "vidí" změnu a začne animaci
@@ -119,6 +116,8 @@ export const pop: Directive = {
 
 		const el_class = el._popover?.classList
 		binding.value === '' ? el_class?.add('hidden') : el_class?.remove('hidden')
+
+		console.log('binding: ' + binding.value)
 	},
 	beforeUnmount(
 		el: HTMLElement & {
