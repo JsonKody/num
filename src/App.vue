@@ -48,12 +48,19 @@ const ns = useNumberSystem();
       <!-- number -->
       <Transition name="push" mode="out-in">
         <div :key="ns.digitsToGreenStrNumber" class="number emerald-grad">
-          <!-- TODO -->
           <span
             class="cursor-help"
+            :title="
+              ns.info
+                ? ''
+                : ns.t('Číslo v ... ', 'Number in ... ') +
+                  ns.name_green.toLocaleLowerCase()
+            "
             v-pop="
-              ns.t('Číslo v ... ', 'Number in ... ') +
-              ns.name_green.toLocaleLowerCase()
+              ns.t_info(
+                `Číslo v ... ${ns.name_green.toLocaleLowerCase()}`,
+                `Number in ... ${ns.name_green.toLocaleLowerCase()}`
+              )
             "
             >{{ ns.digitsToGreenStrNumber }}</span
           >
@@ -81,8 +88,10 @@ const ns = useNumberSystem();
           <span
             class="cursor-help"
             v-pop="
-              ns.t('Číslo v ... ', 'Number in ... ') +
-              ns.name_purple.toLocaleLowerCase()
+              ns.t_info(
+                `Číslo v ... ${ns.name_green.toLocaleLowerCase()}`,
+                `Number in ... ${ns.name_green.toLocaleLowerCase()}`
+              )
             "
             >{{ ns.digitsToPurpleStrNumber }}</span
           >
@@ -97,29 +106,31 @@ const ns = useNumberSystem();
         JsonKody
       </a>
     </div>
-
   </div>
+
   <!-- Info switch -->
-  <div class="absolute bottom-0 left-0">
+  <div
+    class="m-3.5 gap-2 absolute bottom-0 left-0 sm:opacity-40 sm:hover:opacity-80"
+  >
     <div
       v-pop:right="ns.t_info('Vypnout popisky', 'Hide labels')"
       @click="ns.info = false"
       v-if="ns.info"
-      class="app-info-on center w-10 h-10"
+      class="app-info"
     >
       <Info />
     </div>
     <div
-      :v-pop="ns.t('Zapnout popisky', 'Show labels')"
+      v-pop:right="ns.t('Zapnout popisky', 'Show labels')"
       @click="ns.info = true"
       v-else
-      class="app-info-off center w-10 h-10"
+      class="app-info"
     >
       <InfoOff />
     </div>
   </div>
   <div
-    class="trans m-3.5 flex items-center justify-center gap-2 absolute bottom-0 right-0 sm:opacity-40 sm:hover:opacity-80"
+    class="trans m-3.5 center gap-2 absolute bottom-0 right-0 sm:opacity-40 sm:hover:opacity-80"
   >
     <!-- sm:opacity-50 sm:hover:opacity-100 -->
     <div

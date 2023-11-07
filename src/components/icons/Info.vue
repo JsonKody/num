@@ -4,8 +4,8 @@
   <svg
     xmlns="http://www.w3.org/2000/svg"
     class="icon"
-    width="1.2rem"
-    height="1.2rem"
+    width="34px"
+    height="34px"
     viewBox="0 0 24 24"
     stroke-width="2"
     stroke="currentColor"
