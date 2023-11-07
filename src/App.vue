@@ -47,7 +47,7 @@ const ns = useNumberSystem();
       </Transition>
       <!-- number -->
       <Transition name="push" mode="out-in">
-        <div :key="ns.digitsToGreenStrNumber" class="number emerald-grad">
+        <div :key="ns.digitsToGreenStrNumber + '_g'" class="number emerald-grad">
           <span
             class="cursor-help"
             :title="
@@ -83,14 +83,14 @@ const ns = useNumberSystem();
       </Transition>
       <!-- number -->
       <Transition name="push" mode="out-in">
-        <div :key="ns.digitsToPurpleStrNumber" class="number purple-grad">
+        <div :key="ns.digitsToPurpleStrNumber + '_p'" class="number purple-grad">
           <!-- TODO -->
           <span
             class="cursor-help"
             v-pop="
               ns.t_info(
-                `Číslo v ... ${ns.name_green.toLocaleLowerCase()}`,
-                `Number in ... ${ns.name_green.toLocaleLowerCase()}`
+                `Číslo v ... ${ns.name_purple.toLocaleLowerCase()}`,
+                `Number in ... ${ns.name_purple.toLocaleLowerCase()}`
               )
             "
             >{{ ns.digitsToPurpleStrNumber }}</span
