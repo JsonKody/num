@@ -206,7 +206,7 @@
   }
 
   .app-info {
-    @apply cursor-pointer w-7 h-7 lg:w-4 lg:h-4 trans text-purple-400 disabled:text-slate-600;
+    @apply cursor-pointer w-8 h-8 sm:w-6 sm:h-6 center trans opacity-30 hover:opacity-100 text-purple-400 disabled:text-slate-600;
   }
 
   .control-button {

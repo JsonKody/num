@@ -109,11 +109,9 @@ const ns = useNumberSystem();
   </div>
 
   <!-- Info switch -->
-  <div
-    class="m-3.5 gap-2 absolute bottom-0 left-0 sm:opacity-40 sm:hover:opacity-80"
-  >
+  <div class="m-3 sm:m-2 absolute bottom-0 left-0">
     <div
-      v-pop:right="ns.t_info('Vypnout popisky', 'Hide labels')"
+      v-pop:top="ns.t_info('Vypnout popisky', 'Hide labels')"
       @click="ns.info = false"
       v-if="ns.info"
       class="app-info"
@@ -121,7 +119,7 @@ const ns = useNumberSystem();
       <Info />
     </div>
     <div
-      v-pop:right="ns.t('Zapnout popisky', 'Show labels')"
+      v-pop:top="ns.t('Zapnout popisky', 'Show labels')"
       @click="ns.info = true"
       v-else
       class="app-info"
