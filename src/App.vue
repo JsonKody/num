@@ -10,7 +10,7 @@ const ns = useNumberSystem();
 <template>
   <a
     target="_blank"
-    v-pop:left="'Github'"
+    v-pop="'Github'"
     href="https://github.com/JsonKody/ciselne_pozicni_soustavy"
     class="github-icon"
   >

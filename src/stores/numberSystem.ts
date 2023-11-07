@@ -177,9 +177,14 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const t = (cs: string, en: string) => {
     return lang.value === "cs" ? cs : en;
   };
-  const t_info = (cs: string, en: string) => {
+  const t_info = (
+    cs: string,
+    en: string,
+    title_cs: string = "",
+    title_en: string = ""
+  ) => {
     if (!info.value) {
-      return "";
+      return lang.value === "cs" ? title_cs : title_en;
     }
     return lang.value === "cs" ? cs : en;
   };

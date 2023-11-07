@@ -72,7 +72,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             <Lock />
           </button>
           <button
-            v-pop="
+            v-pop:right="
               ns.t_info(
                 'Odemknuto - počet číslic bude vždy minimum nutné k vyjádření čísla',
                 'Unlocked - number of digits will always be the minimum necessary to represent the number'
