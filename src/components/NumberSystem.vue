@@ -60,7 +60,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
       <div class="flex justify-between">
         <div class="center" @click="ns.lock_digits = !ns.lock_digits">
           <button
-            v-pop="
+            v-pop:right="
               ns.t_info(
                 'Zamknuto - počet číslic se nebude automaticky snižovat',
                 'Locked - number of digits won\'t automatically decrease'
