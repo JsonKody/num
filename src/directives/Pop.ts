@@ -68,9 +68,9 @@ export const pop: Directive = {
     const showPopover = () => {
       updatePopoverPosition();
       const popover = el._popover!;
-      // if (binding.value !== "") {
-      // }
-      el._popover!.classList.remove("hidden");
+      if (binding.value !== "") {
+        el._popover!.classList.remove("hidden");
+      }
       // Zařídíte, že prohlížeč "vidí" změnu a začne animaci
       void el._popover!.offsetWidth;
       el._popover!.style.opacity = "1";
