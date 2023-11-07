@@ -205,6 +205,14 @@
     @apply p-1 w-7 h-7 rounded-md trans center opacity-30 hover:opacity-100 text-purple-400 disabled:text-slate-600;
   }
 
+  .app-info-on {
+    @apply p-1 w-7 h-7 rounded-md trans center opacity-30 hover:opacity-100 text-purple-400 disabled:text-slate-600;
+  }
+  
+  .app-info-off {
+    @apply p-1 w-7 h-7 rounded-md trans center opacity-30 hover:opacity-100 text-purple-400 disabled:text-slate-600;
+  }
+
   .control-button {
     @apply sm:h-8 px-3 trans rounded-md  border border-purple-500 border-opacity-50 bg-slate-950 opacity-50 hover:opacity-90 text-slate-300 center bg-opacity-50;
   }

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import NumberSystem from "./components/NumberSystem.vue";
+import Info from "./components/icons/Info.vue";
+import InfoOff from "./components/icons/InfoOff.vue";
 import { useNumberSystem } from "./stores/numberSystem";
 
 const ns = useNumberSystem();
@@ -8,7 +10,7 @@ const ns = useNumberSystem();
 <template>
   <a
     target="_blank"
-    title="Github"
+    v-pop:left="'Github'"
     href="https://github.com/JsonKody/ciselne_pozicni_soustavy"
     class="github-icon"
   >
@@ -31,7 +33,9 @@ const ns = useNumberSystem();
     <div
       @click="ns.switchGreenPurple"
       class="header-block"
-      :title="ns.t('Kliknutim prohodíš hodnoty', 'Click to switch values')"
+      v-pop:top="
+        ns.t_info('Kliknutím prohodíš hodnoty', 'Click to switch values')
+      "
     >
       <!-- title -->
       <Transition name="switch-v" mode="out-in">
@@ -44,9 +48,10 @@ const ns = useNumberSystem();
       <!-- number -->
       <Transition name="push" mode="out-in">
         <div :key="ns.digitsToGreenStrNumber" class="number emerald-grad">
+          <!-- TODO -->
           <span
             class="cursor-help"
-            :title="
+            v-pop="
               ns.t('Číslo v ... ', 'Number in ... ') +
               ns.name_green.toLocaleLowerCase()
             "
@@ -72,9 +77,10 @@ const ns = useNumberSystem();
       <!-- number -->
       <Transition name="push" mode="out-in">
         <div :key="ns.digitsToPurpleStrNumber" class="number purple-grad">
+          <!-- TODO -->
           <span
             class="cursor-help"
-            :title="
+            v-pop="
               ns.t('Číslo v ... ', 'Number in ... ') +
               ns.name_purple.toLocaleLowerCase()
             "
@@ -87,13 +93,29 @@ const ns = useNumberSystem();
     <NumberSystem />
 
     <div class="footer-link cursor-pointer">
-      <a
-        target="_blank"
-        href="https://jsonkody.cz"
-        title="JsonKody 🤌🧐🍷"
-      >
+      <a target="_blank" href="https://jsonkody.cz" v-pop="'JsonKody 🤌🧐🍷'">
         JsonKody
       </a>
+    </div>
+
+  </div>
+  <!-- Info switch -->
+  <div class="absolute bottom-0 left-0">
+    <div
+      v-pop:right="ns.t_info('Vypnout popisky', 'Hide labels')"
+      @click="ns.info = false"
+      v-if="ns.info"
+      class="app-info-on center w-10 h-10"
+    >
+      <Info />
+    </div>
+    <div
+      :v-pop="ns.t('Zapnout popisky', 'Show labels')"
+      @click="ns.info = true"
+      v-else
+      class="app-info-off center w-10 h-10"
+    >
+      <InfoOff />
     </div>
   </div>
   <div
@@ -103,7 +125,7 @@ const ns = useNumberSystem();
     <div
       @click="ns.toggleLang"
       class="flag-button cs"
-      title="Čeština"
+      v-pop:top="'Čeština'"
       :class="{
         'fb-active': ns.lang === 'cs',
         'fb-off': ns.lang === 'en',
@@ -112,7 +134,7 @@ const ns = useNumberSystem();
     <div
       @click="ns.toggleLang"
       class="flag-button en"
-      title="English"
+      v-pop:top="'English'"
       :class="{
         'fb-active': ns.lang === 'en',
         'fb-off': ns.lang === 'cs',
