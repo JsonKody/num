@@ -5,6 +5,13 @@ import InfoOff from "./components/icons/InfoOff.vue";
 import { useNumberSystem } from "./stores/numberSystem";
 
 const ns = useNumberSystem();
+
+function toGenitiveCase(text: string) {
+  let words = text.split(" ");
+  words[0] = words[0].slice(0, -1) + "é"; // Odeber poslední písmeno a přidej 'é'
+  words[1] = words[1].slice(0, -1) + "ě"; // Odeber poslední písmeno a přidej 'ě'
+  return words.join(" "); // Spoj slova zpět do řetězce
+}
 </script>
 
 <template>
@@ -34,7 +41,7 @@ const ns = useNumberSystem();
       @click="ns.switchGreenPurple"
       class="header-block"
       v-pop:top="
-        ns.t_info('Kliknutím prohodíš hodnoty', 'Click to switch values')
+        ns.t_info('Kliknutím prohodíš hodnoty.', 'Click to switch values.')
       "
     >
       <!-- title -->
@@ -47,19 +54,16 @@ const ns = useNumberSystem();
       </Transition>
       <!-- number -->
       <Transition name="push" mode="out-in">
-        <div :key="ns.digitsToGreenStrNumber + '_g'" class="number emerald-grad">
+        <div
+          :key="ns.digitsToGreenStrNumber + '_g'"
+          class="number emerald-grad"
+        >
           <span
-            class="cursor-help"
-            :title="
-              ns.info
-                ? ''
-                : ns.t('Číslo v ... ', 'Number in ... ') +
-                  ns.name_green.toLocaleLowerCase()
-            "
+            :class="ns.info ? 'cursor-help' : ''"
             v-pop="
               ns.t_info(
-                `Číslo v ... ${ns.name_green.toLocaleLowerCase()}`,
-                `Number in ... ${ns.name_green.toLocaleLowerCase()}`
+                `Číslo v ${toGenitiveCase(ns.name_green.toLocaleLowerCase())}`,
+                `Number in ${ns.name_green.toLocaleLowerCase()}`
               )
             "
             >{{ ns.digitsToGreenStrNumber }}</span
@@ -73,24 +77,20 @@ const ns = useNumberSystem();
           <h1 class="header relative purple-grad">
             {{ ns.name_purple }}
           </h1>
-          <!-- <div
-            v-if="ns.lang === 'cs'"
-            class="text-xs center text-purple-400 opacity-70"
-          >
-            ( {{ ns.en_name }} )
-          </div> -->
         </div>
       </Transition>
       <!-- number -->
       <Transition name="push" mode="out-in">
-        <div :key="ns.digitsToPurpleStrNumber + '_p'" class="number purple-grad">
-          <!-- TODO -->
+        <div
+          :key="ns.digitsToPurpleStrNumber + '_p'"
+          class="number purple-grad"
+        >
           <span
-            class="cursor-help"
+            :class="ns.info ? 'cursor-help' : ''"
             v-pop="
               ns.t_info(
-                `Číslo v ... ${ns.name_purple.toLocaleLowerCase()}`,
-                `Number in ... ${ns.name_purple.toLocaleLowerCase()}`
+                `Číslo v ${toGenitiveCase(ns.name_purple.toLocaleLowerCase())}`,
+                `Number in ${ns.name_purple.toLocaleLowerCase()}`
               )
             "
             >{{ ns.digitsToPurpleStrNumber }}</span
@@ -111,7 +111,7 @@ const ns = useNumberSystem();
   <!-- Info switch -->
   <div class="m-3 sm:m-2 absolute bottom-0 left-0">
     <div
-      v-pop:top="ns.t_info('Vypnout popisky', 'Hide labels')"
+      v-pop:top="ns.t_info('Vypnout popisky', 'Hide info labels')"
       @click="ns.info = false"
       v-if="ns.info"
       class="app-info"
@@ -119,7 +119,7 @@ const ns = useNumberSystem();
       <Info />
     </div>
     <div
-      v-pop:top="ns.t('Zapnout popisky', 'Show labels')"
+      v-pop:top="ns.t('Zapnout popisky', 'Show info labels')"
       @click="ns.info = true"
       v-else
       class="app-info"
