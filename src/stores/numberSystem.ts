@@ -7,12 +7,26 @@ import { debounce } from "lodash-es";
 
 const delimiter = ",";
 
-const ls_get_bool = (key: string) => localStorage.getItem(key) === "true";
-const ls_get_str = (key: string) => localStorage.getItem(key);
-const ls_get_num = (key: string) => Number(localStorage.getItem(key));
-const ls_get_dig = (key: string) => {
+const ls_get_bool = (key: string, def: boolean) => {
+  const str_bool = localStorage.getItem(key);
+  if (str_bool === null) return def;
+  return str_bool === "true";
+};
+const ls_get_lang = (key: string, def: Lang) => {
+  const str = localStorage.getItem(key);
+  if (str === null) return def;
+  return str as Lang;
+};
+const ls_get_num = (key: string, def: number) => {
+  const str_num = localStorage.getItem(key);
+  if (str_num === null) return def;
+  return parseInt(str_num);
+};
+
+const ls_get_dig = (key: string, def: string[]) => {
   const digits = localStorage.getItem(key);
-  return digits ? digits.split(delimiter) : ["0"];
+  if (digits === null) return def;
+  return digits.split(delimiter);
 };
 
 const ls_queue: Record<string, string> = {};
@@ -39,17 +53,17 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const MIN_BASE = 2;
   const MAX_BASE = chars.length;
 
-  const lang = ref<Lang>((ls_get_str("lang") as Lang) || "cs");
-  const info = ref<boolean>(ls_get_bool("info") as boolean);
+  const lang = ref<Lang>(ls_get_lang("lang", "cs") as Lang);
+  const info = ref<boolean>(ls_get_bool("info", true));
 
-  const base_green = ref<Base>((ls_get_num("base_green") as Base) || 10);
-  const base_purple = ref<Base>((ls_get_num("base_purple") as Base) || 16);
+  const base_green = ref<Base>(ls_get_num("base_green", 10) as Base);
+  const base_purple = ref<Base>(ls_get_num("base_purple", 16) as Base);
 
-  const digits = ref<string[]>(ls_get_dig("digits") as string[]);
+  const digits = ref<string[]>(ls_get_dig("digits", [zero, zero, zero, zero]));
 
-  const show_digits_val = ref<boolean>(ls_get_bool("show_digits_val"));
+  const show_digits_val = ref<boolean>(ls_get_bool("show_digits_val", true));
   // zamkne pocet ciselnych mist - mohou rust dle potreby ale nebudou se samy snizovat
-  const lock_digits = ref<boolean>(ls_get_bool("lock_digits"));
+  const lock_digits = ref<boolean>(ls_get_bool("lock_digits", true));
 
   const name_green = computed(() =>
     lang.value === "cs"
