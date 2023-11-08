@@ -32,8 +32,8 @@ const toggleMinMax = () => {
     <div class="cursor-help" @click="ns.show_digits_val = !ns.show_digits_val">
       <div
         v-if="ns.show_digits_val"
-        :title="
-          ns.t(
+        v-pop:top="
+          ns.t_info(
             'Hodnota řádu. Kliknutím přepnete na index řádu.',
             'Digit value. Click to switch to the place index.'
           )
@@ -44,8 +44,8 @@ const toggleMinMax = () => {
       </div>
       <div
         v-else
-        :title="
-          ns.t(
+        v-pop:top="
+          ns.t_info(
             'Index řádu. Kliknutím přepnete na hodnotu řádu.',
             'Place index. Click to switch to the digit value.'
           )
@@ -58,12 +58,16 @@ const toggleMinMax = () => {
 
     <!-- Digit -->
     <label
-      :title="`( ${
-        parseInt(selectedNumber, ns.base_purple) * digitValue
-      } )  ${ns.t(
-        'Kliknutím přepínej Min - Max',
-        'Click to toggle Min - Max'
-      )}`"
+      v-pop="
+        ns.t_info(
+          `( ${
+            parseInt(selectedNumber, ns.base_purple) * digitValue
+          } )  Kliknutím přepínej Min - Max`,
+          `( ${
+            parseInt(selectedNumber, ns.base_purple) * digitValue
+          } )  Click to toggle Min - Max`
+        )
+      "
       :for="digitIndex + '-digit'"
       class="digit"
       @click="toggleMinMax"
@@ -78,10 +82,11 @@ const toggleMinMax = () => {
     <!-- Digit selector -->
     <div class="digit-select">
       <select
-        :title="
-          ns.t('Vyber číslici na pozici', 'Select digit on position') +
-          ' - ' +
-          digitIndex
+        v-pop="
+          ns.t_info(
+            `Vyber číslici na pozici - ${digitIndex}`,
+            `Select digit on position - ${digitIndex}`
+          )
         "
         :id="digitIndex + '-digit'"
         @change="updateDigit"

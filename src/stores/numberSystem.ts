@@ -1,5 +1,5 @@
 // numberSystem.ts
-import type { Base, Lang, Name } from "../types/typings";
+import type { Base, Lang } from "../types/typings";
 import { defineStore } from "pinia";
 import { ref, computed, watch } from "vue";
 import { generateCzechName, generateEnglishName } from "../prefixes";
@@ -40,6 +40,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   const MAX_BASE = chars.length;
 
   const lang = ref<Lang>((ls_get_str("lang") as Lang) || "cs");
+  const info = ref<boolean>(ls_get_bool("info") as boolean);
 
   const base_green = ref<Base>((ls_get_num("base_green") as Base) || 10);
   const base_purple = ref<Base>((ls_get_num("base_purple") as Base) || 16);
@@ -173,8 +174,20 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     }
   };
 
-  const t = (cs: string, en: string) => (lang.value === "cs" ? cs : en);
-  const to = (lang_obj: Name) => lang_obj[lang.value];
+  const t = (cs: string, en: string) => {
+    return lang.value === "cs" ? cs : en;
+  };
+  const t_info = (
+    cs: string,
+    en: string,
+    title_cs: string = "",
+    title_en: string = ""
+  ) => {
+    if (!info.value) {
+      return lang.value === "cs" ? title_cs : title_en;
+    }
+    return lang.value === "cs" ? cs : en;
+  };
   const toggleLang = () => {
     lang.value = lang.value === "cs" ? "en" : "cs";
     enqueue_ls_set("lang", lang.value);
@@ -208,11 +221,16 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     () => base_purple.value,
     () => enqueue_ls_set("base_purple", base_purple.value.toString())
   );
+  watch(
+    () => info.value,
+    () => enqueue_ls_set("info", info.value.toString())
+  );
   return {
     saved,
     t,
-    to,
+    t_info,
     lang,
+    info,
     toggleLang,
     base_green,
     base_purple,

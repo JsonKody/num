@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import NumberSystem from "./components/NumberSystem.vue";
+import Info from "./components/icons/Info.vue";
+import InfoOff from "./components/icons/InfoOff.vue";
 import { useNumberSystem } from "./stores/numberSystem";
 
 const ns = useNumberSystem();
@@ -8,7 +10,7 @@ const ns = useNumberSystem();
 <template>
   <a
     target="_blank"
-    title="Github"
+    v-pop="'Github'"
     href="https://github.com/JsonKody/ciselne_pozicni_soustavy"
     class="github-icon"
   >
@@ -31,7 +33,9 @@ const ns = useNumberSystem();
     <div
       @click="ns.switchGreenPurple"
       class="header-block"
-      :title="ns.t('Kliknutim prohodíš hodnoty', 'Click to switch values')"
+      v-pop:top="
+        ns.t_info('Kliknutím prohodíš hodnoty', 'Click to switch values')
+      "
     >
       <!-- title -->
       <Transition name="switch-v" mode="out-in">
@@ -43,12 +47,20 @@ const ns = useNumberSystem();
       </Transition>
       <!-- number -->
       <Transition name="push" mode="out-in">
-        <div :key="ns.digitsToGreenStrNumber" class="number emerald-grad">
+        <div :key="ns.digitsToGreenStrNumber + '_g'" class="number emerald-grad">
           <span
             class="cursor-help"
             :title="
-              ns.t('Číslo v ... ', 'Number in ... ') +
-              ns.name_green.toLocaleLowerCase()
+              ns.info
+                ? ''
+                : ns.t('Číslo v ... ', 'Number in ... ') +
+                  ns.name_green.toLocaleLowerCase()
+            "
+            v-pop="
+              ns.t_info(
+                `Číslo v ... ${ns.name_green.toLocaleLowerCase()}`,
+                `Number in ... ${ns.name_green.toLocaleLowerCase()}`
+              )
             "
             >{{ ns.digitsToGreenStrNumber }}</span
           >
@@ -71,12 +83,15 @@ const ns = useNumberSystem();
       </Transition>
       <!-- number -->
       <Transition name="push" mode="out-in">
-        <div :key="ns.digitsToPurpleStrNumber" class="number purple-grad">
+        <div :key="ns.digitsToPurpleStrNumber + '_p'" class="number purple-grad">
+          <!-- TODO -->
           <span
             class="cursor-help"
-            :title="
-              ns.t('Číslo v ... ', 'Number in ... ') +
-              ns.name_purple.toLocaleLowerCase()
+            v-pop="
+              ns.t_info(
+                `Číslo v ... ${ns.name_purple.toLocaleLowerCase()}`,
+                `Number in ... ${ns.name_purple.toLocaleLowerCase()}`
+              )
             "
             >{{ ns.digitsToPurpleStrNumber }}</span
           >
@@ -87,23 +102,39 @@ const ns = useNumberSystem();
     <NumberSystem />
 
     <div class="footer-link cursor-pointer">
-      <a
-        target="_blank"
-        href="https://jsonkody.cz"
-        title="JsonKody 🤌🧐🍷"
-      >
+      <a target="_blank" href="https://jsonkody.cz" v-pop="'JsonKody 🤌🧐🍷'">
         JsonKody
       </a>
     </div>
   </div>
+
+  <!-- Info switch -->
+  <div class="m-3 sm:m-2 absolute bottom-0 left-0">
+    <div
+      v-pop:top="ns.t_info('Vypnout popisky', 'Hide labels')"
+      @click="ns.info = false"
+      v-if="ns.info"
+      class="app-info"
+    >
+      <Info />
+    </div>
+    <div
+      v-pop:top="ns.t('Zapnout popisky', 'Show labels')"
+      @click="ns.info = true"
+      v-else
+      class="app-info"
+    >
+      <InfoOff />
+    </div>
+  </div>
   <div
-    class="trans m-3.5 flex items-center justify-center gap-2 absolute bottom-0 right-0 sm:opacity-40 sm:hover:opacity-80"
+    class="trans m-3.5 center gap-2 absolute bottom-0 right-0 sm:opacity-40 sm:hover:opacity-80"
   >
     <!-- sm:opacity-50 sm:hover:opacity-100 -->
     <div
       @click="ns.toggleLang"
       class="flag-button cs"
-      title="Čeština"
+      v-pop:top="'Čeština'"
       :class="{
         'fb-active': ns.lang === 'cs',
         'fb-off': ns.lang === 'en',
@@ -112,7 +143,7 @@ const ns = useNumberSystem();
     <div
       @click="ns.toggleLang"
       class="flag-button en"
-      title="English"
+      v-pop:top="'English'"
       :class="{
         'fb-active': ns.lang === 'en',
         'fb-off': ns.lang === 'cs',

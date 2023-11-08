@@ -19,7 +19,7 @@ const setBase = (event: Event) => {
 };
 
 const baseTitle = computed(() =>
-  ns.t(
+  ns.t_info(
     `[ ${ns.base_purple} ]  je základ v této soustavy.
 Je to tedy ${ns.name_purple.toLowerCase()}.`,
     `[ ${ns.base_purple} ]  is the base in this number system.
@@ -60,8 +60,8 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
       <div class="flex justify-between">
         <div class="center" @click="ns.lock_digits = !ns.lock_digits">
           <button
-            :title="
-              ns.t(
+            v-pop:right="
+              ns.t_info(
                 'Zamknuto - počet číslic se nebude automaticky snižovat',
                 'Locked - number of digits won\'t automatically decrease'
               )
@@ -72,8 +72,8 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             <Lock />
           </button>
           <button
-            :title="
-              ns.t(
+            v-pop:right="
+              ns.t_info(
                 'Odemknuto - počet číslic bude vždy minimum nutné k vyjádření čísla',
                 'Unlocked - number of digits will always be the minimum necessary to represent the number'
               )
@@ -87,13 +87,13 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         <div class="flex gap-1">
           <button
             class="digit-button"
-            :title="
+            v-pop="
               digitMinusDisabled
-                ? ns.t(
+                ? ns.t_info(
                     'Ale, no tak, nech si tu alespoň jednu číslici 😉',
                     'Oh, come on, keep at least one digit here 😉'
                   )
-                : ns.t('odebrat číslici', 'remove digit')
+                : ns.t_info('odebrat číslici', 'remove digit')
             "
             @click="ns.removeDigit"
             :disabled="digitMinusDisabled"
@@ -101,7 +101,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             <Minus />
           </button>
           <button
-            :title="ns.t('přidat číslici', 'add digit')"
+            v-pop="ns.t_info('přidat číslici', 'add digit')"
             class="digit-button"
             @click="ns.addDigit"
           >
@@ -118,18 +118,18 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
     <div class="base-wrap">
       <!-- Save diod -->
       <div
-        :title="ns.t('Uloženo', 'Saved')"
-        class="m-2 trans absolute top-0 left-0 w-2 h-2 rounded-full"
+        v-pop="ns.t_info('Uloženo', 'Saved')"
+        class="m-2 trans absolute top-0 left-0 w-2 h-2 bg-purple-800 rounded-full"
         :class="{
-          'bg-purple-800 opacity-40': ns.saved,
-          'bg-purple-800 opacity-20': !ns.saved,
+          'opacity-40': ns.saved,
+          'opacity-20': !ns.saved,
         }"
       ></div>
       <div class="center">
         <!-- Base number -->
         <Transition name="switch-h" mode="out-in">
           <div
-            :title="baseTitle"
+            v-pop="baseTitle"
             :key="ns.base_purple"
             class="trans number-base pink-grad"
           >
@@ -137,12 +137,12 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           </div>
         </Transition>
       </div>
-      <label :title="baseTitle" for="base" class="text-base cursor-help">{{
+      <label v-pop="baseTitle" for="base" class="text-base cursor-help">{{
         ns.t("Základ", "Base")
       }}</label>
       <input
-        :title="
-          ns.t(
+        v-pop="
+          ns.t_info(
             `Zde můžete změnit základ soustavy.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`,
             `Here you can change the base of the number system.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`
           )
@@ -159,13 +159,13 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
 
       <div class="base-buttons">
         <button
-          :title="
+          v-pop:left="
             basePlusDisabled
-              ? ns.t(
+              ? ns.t_info(
                   `[ ${ns.MAX_BASE} ]  je nejvyšší povolený základ`,
                   `[ ${ns.MAX_BASE} ]  is the highest allowed base`
                 )
-              : ns.t('Základ + 1', 'Base + 1')
+              : ns.t_info('Základ + 1', 'Base + 1')
           "
           :disabled="ns.base_purple >= ns.MAX_BASE"
           @click="increaseBase"
@@ -174,13 +174,13 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           <Plus />
         </button>
         <button
-          :title="
+          v-pop:left="
             baseMinusDisabled
-              ? ns.t(
+              ? ns.t_info(
                   `[ ${ns.MIN_BASE} ]  je nejmenší povolený základ`,
                   `[ ${ns.MIN_BASE} ]  is the lowest allowed base`
                 )
-              : ns.t('Základ - 1', 'Base - 1')
+              : ns.t_info('Základ - 1', 'Base - 1')
           "
           :disabled="baseMinusDisabled"
           @click="decreaseBase"
@@ -194,8 +194,11 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
     <!-- Controls -->
     <div class="gap-1 center">
       <button
-        :title="
-          ns.t('Nastaví všechny číslice na nulu.', 'Set all digits to zero.')
+        v-pop="
+          ns.t_info(
+            'Nastaví všechny číslice na nulu.',
+            'Set all digits to zero.'
+          )
         "
         @click="ns.setDigitsToZero"
         class="control-button"
@@ -203,8 +206,8 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         Min
       </button>
       <button
-        :title="
-          ns.t(
+        v-pop="
+          ns.t_info(
             'Přepíná mezi zobrazením hodnot řádů a indexů řádů.',
             'Toggle between displaying positional values and place indices.'
           )
@@ -220,8 +223,8 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         }}
       </button>
       <button
-        :title="
-          ns.t(
+        v-pop="
+          ns.t_info(
             'Nastaví všechny číslice na maximální hodnotu.',
             'Set all digits to their maximum value.'
           )
