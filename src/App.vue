@@ -31,7 +31,7 @@ const ns = useNumberSystem();
   <div class="wrapper">
     <!-- Display block / Switch -->
     <div
-      @click="ns.switchGreenPurple"
+      @click="ns.switch_green_purple"
       class="header-block"
       v-pop:top="
         ns.t_info('Kliknutím prohodíš hodnoty.', 'Click to switch values.')
@@ -48,7 +48,7 @@ const ns = useNumberSystem();
       <!-- number -->
       <Transition name="push" mode="out-in">
         <div
-          :key="ns.digitsToGreenStrNumber + '_g'"
+          :key="ns.digits_to_green_str_num + '_g'"
           class="number emerald-grad"
         >
           <span
@@ -59,7 +59,7 @@ const ns = useNumberSystem();
                 `Number in - ${ns.name_green.toLocaleLowerCase()}`
               )
             "
-            >{{ ns.digitsToGreenStrNumber }}</span
+            >{{ ns.digits_to_green_str_num }}</span
           >
         </div>
       </Transition>
@@ -75,7 +75,7 @@ const ns = useNumberSystem();
       <!-- number -->
       <Transition name="push" mode="out-in">
         <div
-          :key="ns.digitsToPurpleStrNumber + '_p'"
+          :key="ns.digits_to_purple_str_num + '_p'"
           class="number purple-grad"
         >
           <span
@@ -86,7 +86,7 @@ const ns = useNumberSystem();
                 `Number in - ${ns.name_purple.toLocaleLowerCase()}`
               )
             "
-            >{{ ns.digitsToPurpleStrNumber }}</span
+            >{{ ns.digits_to_purple_str_num }}</span
           >
         </div>
       </Transition>

@@ -8,7 +8,7 @@ const { index } = defineProps<{
 
 const ns = useNumberSystem();
 const selectedNumber = computed(() => ns.digits[index]);
-const availableChars = computed(() => ns.availableCharsForBase);
+const availableChars = computed(() => ns.available_chars_for_base);
 const digitIndex = computed(() => ns.digits.length - index - 1);
 const positionValue = computed(() =>
   Math.pow(ns.base_purple, digitIndex.value)
@@ -20,14 +20,14 @@ const digitValue = computed(
 
 const updateDigit = (event: Event) => {
   const value = (event.target as HTMLSelectElement).value;
-  ns.setDigit(index, value);
+  ns.set_digit(index, value);
 };
 
 const toggleMinMax = () => {
   if (selectedNumber.value === ns.zero) {
-    ns.setDigit(index, ns.mas_available_str_digit);
+    ns.set_digit(index, ns.mas_available_str_digit);
   } else {
-    ns.setDigit(index, ns.zero);
+    ns.set_digit(index, ns.zero);
   }
 };
 </script>

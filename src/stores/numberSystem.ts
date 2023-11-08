@@ -63,7 +63,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
   );
   const en_name = computed(() => generateEnglishName(base_purple.value));
 
-  const availableCharsForBase = computed(() => {
+  const available_chars_for_base = computed(() => {
     return chars.substring(0, base_purple.value);
   });
 
@@ -85,30 +85,32 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     }
   };
 
-  const setDigitsToZero = () => {
-    const zero = availableCharsForBase.value[0];
+  const set_digits_to_zero = () => {
+    const zero = available_chars_for_base.value[0];
     digits.value = digits.value.map(() => zero);
   };
 
   const mas_available_str_digit = computed(() => {
-    return availableCharsForBase.value[availableCharsForBase.value.length - 1];
+    return available_chars_for_base.value[
+      available_chars_for_base.value.length - 1
+    ];
   });
 
-  const setDigitsToMax = () => {
+  const set_digits_to_max = () => {
     const max = mas_available_str_digit.value;
     digits.value = digits.value.map(() => max);
   };
 
-  const setDigit = (index: number, value: string) => {
+  const set_digit = (index: number, value: string) => {
     digits.value[index] = value;
     enqueue_ls_set("digits", digits.value.join(delimiter));
   };
 
-  const addDigit = () => {
+  const add_digit = () => {
     digits.value.unshift(chars[0]);
   };
 
-  const removeDigit = () => {
+  const remove_digit = () => {
     digits.value.shift();
   };
 
@@ -143,14 +145,14 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     return str_num ? str_num : zero;
   }
 
-  const digitsToGreenStrNumber = computed(() =>
+  const digits_to_green_str_num = computed(() =>
     str_number_converter(
       digits.value.join(""),
       base_purple.value,
       base_green.value
     )
   );
-  const digitsToPurpleStrNumber = computed(() =>
+  const digits_to_purple_str_num = computed(() =>
     str_number_converter(
       digits.value.join(""),
       base_purple.value,
@@ -158,10 +160,10 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     )
   );
 
-  const switchGreenPurple = () => {
+  const switch_green_purple = () => {
     const digits_length = digits.value.length;
 
-    const new_digits_array = digitsToGreenStrNumber.value.split("");
+    const new_digits_array = digits_to_green_str_num.value.split("");
     digits.value = [];
     const temp = base_green.value;
     base_green.value = base_purple.value;
@@ -241,19 +243,19 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     MAX_BASE,
     digits,
     lock_digits,
-    setDigit,
-    addDigit,
-    removeDigit,
-    availableCharsForBase,
-    digitsToPurpleStrNumber,
-    digitsToGreenStrNumber,
+    set_digit,
+    add_digit,
+    remove_digit,
+    available_chars_for_base,
+    digits_to_purple_str_num,
+    digits_to_green_str_num,
     show_digits_val,
-    setDigitsToZero,
+    set_digits_to_zero,
     mas_available_str_digit,
-    setDigitsToMax,
+    set_digits_to_max,
     name_green,
     name_purple,
     en_name,
-    switchGreenPurple,
+    switch_green_purple,
   };
 });

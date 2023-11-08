@@ -99,7 +99,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
                   )
                 : ns.t_info('Odebrat číslici', 'Remove digit')
             "
-            @click="ns.removeDigit"
+            @click="ns.remove_digit"
             :disabled="digitMinusDisabled"
           >
             <Minus />
@@ -107,7 +107,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           <button
             v-pop="ns.t_info('Přidat číslici', 'Add digit')"
             class="digit-button"
-            @click="ns.addDigit"
+            @click="ns.add_digit"
           >
             <Plus />
           </button>
@@ -218,7 +218,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             'Set all digits to zero.'
           )
         "
-        @click="ns.setDigitsToZero"
+        @click="ns.set_digits_to_zero"
         class="control-button"
       >
         Min
@@ -247,7 +247,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             'Set all digits to their maximum value.'
           )
         "
-        @click="ns.setDigitsToMax"
+        @click="ns.set_digits_to_max"
         class="control-button"
       >
         Max
