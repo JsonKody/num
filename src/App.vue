@@ -5,13 +5,6 @@ import InfoOff from "./components/icons/InfoOff.vue";
 import { useNumberSystem } from "./stores/numberSystem";
 
 const ns = useNumberSystem();
-
-function toGenitiveCase(text: string) {
-  let words = text.split(" ");
-  words[0] = words[0].slice(0, -1) + "é"; // Odeber poslední písmeno a přidej 'é'
-  words[1] = words[1].slice(0, -1) + "ě"; // Odeber poslední písmeno a přidej 'ě'
-  return words.join(" "); // Spoj slova zpět do řetězce
-}
 </script>
 
 <template>
@@ -62,8 +55,8 @@ function toGenitiveCase(text: string) {
             :class="ns.info ? 'cursor-help' : ''"
             v-pop="
               ns.t_info(
-                `Číslo v ${toGenitiveCase(ns.name_green.toLocaleLowerCase())}`,
-                `Number in ${ns.name_green.toLocaleLowerCase()}`
+                `Číslo v - ${ns.name_green.toLocaleLowerCase()}`,
+                `Number in - ${ns.name_green.toLocaleLowerCase()}`
               )
             "
             >{{ ns.digitsToGreenStrNumber }}</span
@@ -89,8 +82,8 @@ function toGenitiveCase(text: string) {
             :class="ns.info ? 'cursor-help' : ''"
             v-pop="
               ns.t_info(
-                `Číslo v ${toGenitiveCase(ns.name_purple.toLocaleLowerCase())}`,
-                `Number in ${ns.name_purple.toLocaleLowerCase()}`
+                `Číslo v - ${ns.name_purple.toLocaleLowerCase()}`,
+                `Number in - ${ns.name_purple.toLocaleLowerCase()}`
               )
             "
             >{{ ns.digitsToPurpleStrNumber }}</span
@@ -132,7 +125,7 @@ function toGenitiveCase(text: string) {
   >
     <!-- sm:opacity-50 sm:hover:opacity-100 -->
     <div
-      @click="ns.toggleLang"
+      @click="ns.toggle_lang"
       class="flag-button cs"
       v-pop:top="'Čeština'"
       :class="{
@@ -141,7 +134,7 @@ function toGenitiveCase(text: string) {
       }"
     ></div>
     <div
-      @click="ns.toggleLang"
+      @click="ns.toggle_lang"
       class="flag-button en"
       v-pop:top="'English'"
       :class="{

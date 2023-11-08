@@ -10,12 +10,12 @@ import Eye from "./icons/Eye.vue";
 import { computed } from "vue";
 const ns = useNumberSystem();
 
-const setBase = (event: Event) => {
+const set_base = (event: Event) => {
   const value = parseInt((event.target as HTMLInputElement).value);
   if (!value || value < 2 || value > ns.MAX_BASE) {
     return;
   }
-  ns.setBase(value as Base);
+  ns.set_base(value as Base);
 };
 
 const baseTitle = computed(() =>
@@ -29,13 +29,13 @@ So it's called ${ns.name_purple.toLowerCase()}.`
 
 const increaseBase = () => {
   if (ns.base_purple < ns.MAX_BASE) {
-    ns.setBase((ns.base_purple + 1) as Base);
+    ns.set_base((ns.base_purple + 1) as Base);
   }
 };
 
 const decreaseBase = () => {
   if (ns.base_purple > ns.MIN_BASE) {
-    ns.setBase((ns.base_purple - 1) as Base);
+    ns.set_base((ns.base_purple - 1) as Base);
   }
 };
 
@@ -172,7 +172,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         type="number"
         name="base"
         id="base"
-        @change="setBase"
+        @change="set_base"
       />
 
       <div class="base-buttons">

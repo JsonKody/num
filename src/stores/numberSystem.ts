@@ -67,7 +67,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     return chars.substring(0, base_purple.value);
   });
 
-  const setBase = (val: Base) => {
+  const set_base = (val: Base) => {
     const digits_length = digits.value.length;
 
     const new_digits_array = digits_converter(
@@ -188,7 +188,7 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     }
     return lang.value === "cs" ? cs : en;
   };
-  const toggleLang = () => {
+  const toggle_lang = () => {
     lang.value = lang.value === "cs" ? "en" : "cs";
     enqueue_ls_set("lang", lang.value);
   };
@@ -231,10 +231,10 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     t_info,
     lang,
     info,
-    toggleLang,
+    toggle_lang,
     base_green,
     base_purple,
-    setBase,
+    set_base,
     chars,
     zero,
     MIN_BASE,
