@@ -22,14 +22,6 @@ const updateDigit = (event: Event) => {
   const value = (event.target as HTMLSelectElement).value;
   ns.set_digit(index, value);
 };
-
-const toggleMinMax = () => {
-  if (selectedNumber.value === ns.zero) {
-    ns.set_digit(index, ns.mas_available_str_digit);
-  } else {
-    ns.set_digit(index, ns.zero);
-  }
-};
 </script>
 
 <template>
@@ -37,7 +29,7 @@ const toggleMinMax = () => {
     <!-- Digit value/index -->
     <div
       :class="ns.info ? 'cursor-help' : 'cursor-pointer'"
-      @click="ns.show_digits_val = !ns.show_digits_val"
+      @click="ns.toggle_digits_val"
     >
       <div
         v-if="ns.show_digits_val"
@@ -83,7 +75,7 @@ const toggleMinMax = () => {
       "
       :for="digitIndex + '-digit'"
       class="digit"
-      @click="toggleMinMax"
+      @click="ns.toggle_digit_min_max(digitIndex)"
       :class="{
         'opacity-50': selectedNumber == '0',
         'text-purple-400': selectedNumber != '0',

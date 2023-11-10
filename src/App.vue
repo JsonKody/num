@@ -5,6 +5,103 @@ import InfoOff from "./components/icons/InfoOff.vue";
 import { useNumberSystem } from "./stores/numberSystem";
 
 const ns = useNumberSystem();
+
+const digits_keys: Record<string, number> = {
+  Digit0: 0,
+  Digit9: 1,
+  Digit8: 2,
+  Digit7: 3,
+  Digit6: 4,
+  Digit5: 5,
+  Digit4: 6,
+  Digit3: 7,
+  Digit2: 8,
+  Digit1: 9,
+};
+
+document.addEventListener("keypress", (e) => {
+  if (
+    [
+      "KeyI",
+      "KeyJ",
+      "KeyK",
+      "KeyL",
+      "KeyD",
+      "KeyN",
+      "KeyM",
+      "Space",
+      "Comma",
+      "Period",
+      "Minus",
+      "Equal",
+      "Backspace",
+    ].includes(e.code)
+  ) {
+    e.preventDefault();
+  }
+
+  if (e.code === "KeyI") {
+    ns.info = !ns.info;
+  }
+
+  if (e.code === "KeyL" || e.code === "KeyJ") {
+    ns.toggle_lang();
+  }
+
+  if (e.code === "Space") {
+    ns.switch_green_purple();
+  }
+
+  if (e.code === "Comma") {
+    ns.decrease_base();
+  }
+
+  if (e.code === "Period") {
+    ns.increase_base();
+  }
+
+  if (e.code === "Minus") {
+    ns.remove_digit();
+  }
+
+  if (e.code === "Equal") {
+    ns.add_digit();
+  }
+
+  if (e.code === "KeyD") {
+    ns.toggle_digits_val();
+  }
+
+  if (e.code === "KeyK") {
+    ns.lock_digits = !ns.lock_digits;
+  }
+
+  if (e.code === "KeyN") {
+    ns.set_digits_to_zero();
+  }
+
+  if (e.code === "KeyM") {
+    ns.set_digits_to_max();
+  }
+
+  if (e.code === "Escape") {
+    e.preventDefault();
+    alert("Reset");
+    ns.reset();
+  }
+
+  // Zkontrolujte, zda fokus není na vstupním poli
+  const activeElement = document.activeElement;
+  if (activeElement && activeElement.tagName === "INPUT") {
+    // Pokud je fokus na inputu, ignorujte klávesové zkratky
+    return;
+  }
+
+  if (digits_keys.hasOwnProperty(e.code)) {
+    const digitIndex = digits_keys[e.code];
+    ns.toggle_digit_min_max(digitIndex);
+  }
+});
 </script>
 
 <template>

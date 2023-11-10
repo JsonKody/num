@@ -27,18 +27,6 @@ So it's called ${ns.name_purple.toLowerCase()}.`
   )
 );
 
-const increaseBase = () => {
-  if (ns.base_purple < ns.MAX_BASE) {
-    ns.set_base((ns.base_purple + 1) as Base);
-  }
-};
-
-const decreaseBase = () => {
-  if (ns.base_purple > ns.MIN_BASE) {
-    ns.set_base((ns.base_purple - 1) as Base);
-  }
-};
-
 const digitMinusDisabled = computed(() => ns.digits.length < 2);
 const baseMinusDisabled = computed(() => ns.base_purple <= ns.MIN_BASE);
 const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
@@ -186,7 +174,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
               : ns.t_info('Základ + 1', 'Base + 1')
           "
           :disabled="ns.base_purple >= ns.MAX_BASE"
-          @click="increaseBase"
+          @click="ns.increase_base"
           class="base-button"
         >
           <Plus />
@@ -201,7 +189,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
               : ns.t_info('Základ - 1', 'Base - 1')
           "
           :disabled="baseMinusDisabled"
-          @click="decreaseBase"
+          @click="ns.decrease_base"
           class="base-button"
         >
           <Minus />
@@ -230,7 +218,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             'Toggle between displaying positional values and place indices.'
           )
         "
-        @click="ns.show_digits_val = !ns.show_digits_val"
+        @click="ns.toggle_digits_val"
         class="control-button"
       >
         <Eye />

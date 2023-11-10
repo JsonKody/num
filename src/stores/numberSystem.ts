@@ -99,25 +99,49 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     }
   };
 
+  const increase_base = () => {
+    if (base_purple.value < MAX_BASE) {
+      set_base((base_purple.value + 1) as Base);
+    }
+  };
+
+  const decrease_base = () => {
+    if (base_purple.value > MIN_BASE) {
+      set_base((base_purple.value - 1) as Base);
+    }
+  };
+
   const set_digits_to_zero = () => {
     const zero = available_chars_for_base.value[0];
     digits.value = digits.value.map(() => zero);
   };
 
-  const mas_available_str_digit = computed(() => {
+  const max_available_str_digit = computed(() => {
     return available_chars_for_base.value[
       available_chars_for_base.value.length - 1
     ];
   });
 
   const set_digits_to_max = () => {
-    const max = mas_available_str_digit.value;
+    const max = max_available_str_digit.value;
     digits.value = digits.value.map(() => max);
   };
 
   const set_digit = (index: number, value: string) => {
     digits.value[index] = value;
     enqueue_ls_set("digits", digits.value.join(delimiter));
+  };
+
+  const toggle_digit_min_max = (index: number) => {
+    const digit_index = digits.value.length - index - 1
+    if (!digits.value[digit_index]) {
+      return;
+    }
+    if (digits.value[digit_index] === zero) {
+      set_digit(digit_index, max_available_str_digit.value);
+    } else {
+      set_digit(digit_index, zero);
+    }
   };
 
   const add_digit = () => {
@@ -209,6 +233,15 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     enqueue_ls_set("lang", lang.value);
   };
 
+  const toggle_digits_val = () => {
+    show_digits_val.value = !show_digits_val.value;
+  };
+
+  const reset = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
   watch(
     () => digits.value,
     () => {
@@ -248,13 +281,15 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     lang,
     info,
     toggle_lang,
+    MIN_BASE,
+    MAX_BASE,
     base_green,
     base_purple,
     set_base,
+    increase_base,
+    decrease_base,
     chars,
     zero,
-    MIN_BASE,
-    MAX_BASE,
     digits,
     lock_digits,
     set_digit,
@@ -264,12 +299,15 @@ export const useNumberSystem = defineStore("numberSystem", () => {
     digits_to_purple_str_num,
     digits_to_green_str_num,
     show_digits_val,
+    toggle_digits_val,
     set_digits_to_zero,
-    mas_available_str_digit,
+    max_available_str_digit,
     set_digits_to_max,
+    toggle_digit_min_max,
     name_green,
     name_purple,
     en_name,
     switch_green_purple,
+    reset,
   };
 });
