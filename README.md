@@ -15,15 +15,17 @@
 
 ## Popis
 
-`Numeral_playground` je výuková aplikace/vizualizace číselných pozičních soustav, vytvořené jako edukační nástroj pro YouTube tutoriál na kanálu JsonKody.
+`Numeral_playground` je výuková aplikace/vizualizace číselných pozičních soustav, vytvořené jako edukační nástroj pro YouTube tutoriál na kanálu [JsonKody](https://www.youtube.com/jsonkody).
 
 Počáteční záměr byl jen vytvořit mikro-appku pro video o dvojkové soustavě a pozičních soustavách obecně. Projekt se ale malinko rozrostl a přerostl v interaktivní aplikaci, která může sloužit jako převodník nebo výuková pomůcka.
 
-V aplikaci jsou všechny prvky opatřeny `title` atributem s instrukcemi a vysvětlivkami, stačí držet kurzor nad prvkem a objeví se vám potřebná nápověda.
+V aplikaci jsou všechny prvky opatřeny `tooltipy` s instrukcemi a vysvětlivkami - v nalevo dole je můžete ikonkou `[i]` vypnout nebo zapnout.
 
 Aplikace je dostupná ve dvou jazykových mutacích – čeština a angličtina, přepínač jazyků naleznete v pravém dolním rohu.
 
 Snažil jsem se ovládací prvky upozadit, aby neodváděly pozornost od hlavního účelu aplikace – pochopení číselných soustav, proto je většina ovládacích prvků poloprůhledná.
+
+Aplikace si automaticky ukádá stav po každé akci + jedné vteřině nečinnosti (debounce). Umístil jsem i nenápadnou ikonku, která indikuje uložení. Nechtěl jsem aby příliš blikala a otravovala takze je efekt jen slabý.
 
 ## Instalace
 
