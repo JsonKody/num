@@ -18,9 +18,15 @@ const origins: Record<string, Side> = {
 	left: 'right',
 }
 
+/**
+ * args: top, right, bottom, left - sets position
+ * modifiers: keep - prevents closing on click
+ *
+ */
 export const pop: Directive = {
 	mounted(el: PopoverHTMLElement, binding: DirectiveBinding) {
 		const new_origin = origins[binding.arg as Side]
+		const { keep } = binding.modifiers
 
 		// Funkce pro vytvoření tooltipu
 		const createPopover = () => {
@@ -101,7 +107,9 @@ export const pop: Directive = {
 
 		// Zavření tooltipu při kliknutí
 		const clickHandler = () => {
-			hidePopover()
+			if (!keep) {
+				hidePopover()
+			}
 		}
 
 		// Přidání posluchačů událostí
