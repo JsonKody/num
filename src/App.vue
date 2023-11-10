@@ -31,10 +31,10 @@ const ns = useNumberSystem();
   <div class="wrapper">
     <!-- Display block / Switch -->
     <div
-      @click="ns.switchGreenPurple"
+      @click="ns.switch_green_purple"
       class="header-block"
       v-pop:top="
-        ns.t_info('Kliknutím prohodíš hodnoty', 'Click to switch values')
+        ns.t_info('Kliknutím prohodíš hodnoty.', 'Click to switch values.')
       "
     >
       <!-- title -->
@@ -47,22 +47,19 @@ const ns = useNumberSystem();
       </Transition>
       <!-- number -->
       <Transition name="push" mode="out-in">
-        <div :key="ns.digitsToGreenStrNumber" class="number emerald-grad">
+        <div
+          :key="ns.digits_to_green_str_num + '_g'"
+          class="number emerald-grad"
+        >
           <span
-            class="cursor-help"
-            :title="
-              ns.info
-                ? ''
-                : ns.t('Číslo v ... ', 'Number in ... ') +
-                  ns.name_green.toLocaleLowerCase()
-            "
+            :class="ns.info ? 'cursor-help' : ''"
             v-pop="
               ns.t_info(
-                `Číslo v ... ${ns.name_green.toLocaleLowerCase()}`,
-                `Number in ... ${ns.name_green.toLocaleLowerCase()}`
+                `Číslo v - ${ns.name_green.toLocaleLowerCase()}`,
+                `Number in - ${ns.name_green.toLocaleLowerCase()}`
               )
             "
-            >{{ ns.digitsToGreenStrNumber }}</span
+            >{{ ns.digits_to_green_str_num }}</span
           >
         </div>
       </Transition>
@@ -73,27 +70,23 @@ const ns = useNumberSystem();
           <h1 class="header relative purple-grad">
             {{ ns.name_purple }}
           </h1>
-          <!-- <div
-            v-if="ns.lang === 'cs'"
-            class="text-xs center text-purple-400 opacity-70"
-          >
-            ( {{ ns.en_name }} )
-          </div> -->
         </div>
       </Transition>
       <!-- number -->
       <Transition name="push" mode="out-in">
-        <div :key="ns.digitsToPurpleStrNumber" class="number purple-grad">
-          <!-- TODO -->
+        <div
+          :key="ns.digits_to_purple_str_num + '_p'"
+          class="number purple-grad"
+        >
           <span
-            class="cursor-help"
+            :class="ns.info ? 'cursor-help' : ''"
             v-pop="
               ns.t_info(
-                `Číslo v ... ${ns.name_green.toLocaleLowerCase()}`,
-                `Number in ... ${ns.name_green.toLocaleLowerCase()}`
+                `Číslo v - ${ns.name_purple.toLocaleLowerCase()}`,
+                `Number in - ${ns.name_purple.toLocaleLowerCase()}`
               )
             "
-            >{{ ns.digitsToPurpleStrNumber }}</span
+            >{{ ns.digits_to_purple_str_num }}</span
           >
         </div>
       </Transition>
@@ -111,7 +104,7 @@ const ns = useNumberSystem();
   <!-- Info switch -->
   <div class="m-3 sm:m-2 absolute bottom-0 left-0">
     <div
-      v-pop:top="ns.t_info('Vypnout popisky', 'Hide labels')"
+      v-pop:top="ns.t_info('Vypnout popisky', 'Hide info labels')"
       @click="ns.info = false"
       v-if="ns.info"
       class="app-info"
@@ -119,7 +112,7 @@ const ns = useNumberSystem();
       <Info />
     </div>
     <div
-      v-pop:top="ns.t('Zapnout popisky', 'Show labels')"
+      v-pop:top="ns.t('Zapnout popisky', 'Show info labels')"
       @click="ns.info = true"
       v-else
       class="app-info"
@@ -132,7 +125,7 @@ const ns = useNumberSystem();
   >
     <!-- sm:opacity-50 sm:hover:opacity-100 -->
     <div
-      @click="ns.toggleLang"
+      @click="ns.toggle_lang"
       class="flag-button cs"
       v-pop:top="'Čeština'"
       :class="{
@@ -141,7 +134,7 @@ const ns = useNumberSystem();
       }"
     ></div>
     <div
-      @click="ns.toggleLang"
+      @click="ns.toggle_lang"
       class="flag-button en"
       v-pop:top="'English'"
       :class="{

@@ -152,6 +152,11 @@
 
   /*** App ***/
 
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    @apply cursor-default;
+  }
+
   .icon {
     @apply cursor-pointer;
   }
@@ -220,7 +225,7 @@
   }
 
   .number-base {
-    @apply mb-1 center text-4xl cursor-help;
+    @apply mb-1 center text-4xl;
   }
 
   .base-button {

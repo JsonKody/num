@@ -10,12 +10,12 @@ import Eye from "./icons/Eye.vue";
 import { computed } from "vue";
 const ns = useNumberSystem();
 
-const setBase = (event: Event) => {
+const set_base = (event: Event) => {
   const value = parseInt((event.target as HTMLInputElement).value);
   if (!value || value < 2 || value > ns.MAX_BASE) {
     return;
   }
-  ns.setBase(value as Base);
+  ns.set_base(value as Base);
 };
 
 const baseTitle = computed(() =>
@@ -29,13 +29,13 @@ So it's called ${ns.name_purple.toLowerCase()}.`
 
 const increaseBase = () => {
   if (ns.base_purple < ns.MAX_BASE) {
-    ns.setBase((ns.base_purple + 1) as Base);
+    ns.set_base((ns.base_purple + 1) as Base);
   }
 };
 
 const decreaseBase = () => {
   if (ns.base_purple > ns.MIN_BASE) {
-    ns.setBase((ns.base_purple - 1) as Base);
+    ns.set_base((ns.base_purple - 1) as Base);
   }
 };
 
@@ -60,10 +60,12 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
       <div class="flex justify-between">
         <div class="center" @click="ns.lock_digits = !ns.lock_digits">
           <button
-            v-pop="
+            v-pop:right="
               ns.t_info(
-                'Zamknuto - počet číslic se nebude automaticky snižovat',
-                'Locked - number of digits won\'t automatically decrease'
+                'Zamknuto - počet číslic se nebude automaticky snižovat.',
+                'Locked - number of digits won\'t automatically decrease.',
+                'Zamknuto',
+                'Locked'
               )
             "
             class="digit-lock"
@@ -74,8 +76,10 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           <button
             v-pop:right="
               ns.t_info(
-                'Odemknuto - počet číslic bude vždy minimum nutné k vyjádření čísla',
-                'Unlocked - number of digits will always be the minimum necessary to represent the number'
+                'Odemknuto - počet číslic bude vždy minimum nutné k vyjádření čísla.',
+                'Unlocked - number of digits will always be the minimum necessary to represent the number.',
+                'Odemknuto',
+                'Unlocked'
               )
             "
             class="digit-lock"
@@ -93,17 +97,17 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
                     'Ale, no tak, nech si tu alespoň jednu číslici 😉',
                     'Oh, come on, keep at least one digit here 😉'
                   )
-                : ns.t_info('odebrat číslici', 'remove digit')
+                : ns.t_info('Odebrat číslici', 'Remove digit')
             "
-            @click="ns.removeDigit"
+            @click="ns.remove_digit"
             :disabled="digitMinusDisabled"
           >
             <Minus />
           </button>
           <button
-            v-pop="ns.t_info('přidat číslici', 'add digit')"
+            v-pop="ns.t_info('Přidat číslici', 'Add digit')"
             class="digit-button"
-            @click="ns.addDigit"
+            @click="ns.add_digit"
           >
             <Plus />
           </button>
@@ -118,11 +122,20 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
     <div class="base-wrap">
       <!-- Save diod -->
       <div
-        v-pop="ns.t_info('Uloženo', 'Saved')"
+        v-pop="
+          ns.t_info(
+            'Toto je indikátor uložení.',
+            'This is the save indicator.',
+            'Uloženo',
+            'Saved'
+          )
+        "
         class="m-2 trans absolute top-0 left-0 w-2 h-2 bg-purple-800 rounded-full"
         :class="{
           'opacity-40': ns.saved,
           'opacity-20': !ns.saved,
+          'cursor-help': ns.info,
+          'cursor-default': !ns.info,
         }"
       ></div>
       <div class="center">
@@ -132,19 +145,24 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             v-pop="baseTitle"
             :key="ns.base_purple"
             class="trans number-base pink-grad"
+            :class="{ 'cursor-help': ns.info }"
           >
             {{ ns.base_purple }}
           </div>
         </Transition>
       </div>
-      <label v-pop="baseTitle" for="base" class="text-base cursor-help">{{
-        ns.t("Základ", "Base")
-      }}</label>
+      <label
+        v-pop="baseTitle"
+        for="base"
+        :class="{ 'cursor-help': ns.info }"
+        class="text-base"
+        >{{ ns.t("Základ", "Base") }}</label
+      >
       <input
         v-pop="
           ns.t_info(
-            `Zde můžete změnit základ soustavy.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`,
-            `Here you can change the base of the number system.\nmin:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`
+            `Zde můžete změnit základ soustavy - min:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`,
+            `Here you can change the base of the number system - min:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`
           )
         "
         class="opacity-10 hover:opacity-80 focus:opacity-80"
@@ -154,7 +172,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         type="number"
         name="base"
         id="base"
-        @change="setBase"
+        @change="set_base"
       />
 
       <div class="base-buttons">
@@ -162,8 +180,8 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           v-pop:left="
             basePlusDisabled
               ? ns.t_info(
-                  `[ ${ns.MAX_BASE} ]  je nejvyšší povolený základ`,
-                  `[ ${ns.MAX_BASE} ]  is the highest allowed base`
+                  `[ ${ns.MAX_BASE} ]  je nejvyšší povolený základ.`,
+                  `[ ${ns.MAX_BASE} ]  is the highest allowed base.`
                 )
               : ns.t_info('Základ + 1', 'Base + 1')
           "
@@ -177,8 +195,8 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           v-pop:left="
             baseMinusDisabled
               ? ns.t_info(
-                  `[ ${ns.MIN_BASE} ]  je nejmenší povolený základ`,
-                  `[ ${ns.MIN_BASE} ]  is the lowest allowed base`
+                  `[ ${ns.MIN_BASE} ]  je nejmenší povolený základ.`,
+                  `[ ${ns.MIN_BASE} ]  is the lowest allowed base.`
                 )
               : ns.t_info('Základ - 1', 'Base - 1')
           "
@@ -200,7 +218,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             'Set all digits to zero.'
           )
         "
-        @click="ns.setDigitsToZero"
+        @click="ns.set_digits_to_zero"
         class="control-button"
       >
         Min
@@ -229,7 +247,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             'Set all digits to their maximum value.'
           )
         "
-        @click="ns.setDigitsToMax"
+        @click="ns.set_digits_to_max"
         class="control-button"
       >
         Max
