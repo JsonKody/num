@@ -69,7 +69,7 @@ const toggleMinMax = () => {
 
     <!-- Digit -->
     <label
-      v-pop="
+      v-pop.keep="
         ns.t_info(
           `( ${
             parseInt(selectedNumber, ns.base_purple) * positionValue
