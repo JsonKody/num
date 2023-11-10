@@ -25,7 +25,7 @@ Aplikace je dostupná ve dvou jazykových mutacích – čeština a angličtina,
 
 Snažil jsem se ovládací prvky upozadit, aby neodváděly pozornost od hlavního účelu aplikace – pochopení číselných soustav, proto je většina ovládacích prvků poloprůhledná.
 
-Aplikace si automaticky ukádá stav po každé akci + jedné vteřině nečinnosti (debounce). Umístil jsem i nenápadnou ikonku, která indikuje uložení. Nechtěl jsem aby příliš blikala a otravovala takze je efekt jen slabý.
+Aplikace si automaticky ukádá stav po každé akci + jedné vteřině nečinnosti (debounce). Umístil jsem i nenápadnou ikonku, která indikuje uložení. Nechtěl jsem, aby příliš blikala a otravovala takže je efekt jen slabý.
 
 ## Instalace
 
