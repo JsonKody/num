@@ -57,7 +57,7 @@ export const pop: Directive = {
 
     // Funkce pro aktualizaci pozice
     const updatePopoverPosition = async () => {
-      const placement = (binding.arg || "top") as Placement;
+      const placement = (binding.arg || "bottom") as Placement;
 
       if (el._popover) {
         await computePosition(el, el._popover, {
