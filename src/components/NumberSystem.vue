@@ -58,6 +58,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             "
             class="digit-lock"
             v-if="ns.lock_digits"
+            aria-label="Digit lock"
           >
             <Lock />
           </button>
@@ -71,6 +72,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
               )
             "
             class="digit-lock"
+            aria-label="Digit lock"
             v-else
           >
             <LockOpen />
@@ -79,6 +81,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         <div class="flex gap-1">
           <button
             class="digit-button"
+            aria-label="Remove digit"
             v-pop="
               digitMinusDisabled
                 ? ns.t_info(
@@ -95,6 +98,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           <button
             v-pop="ns.t_info('Přidat číslici', 'Add digit')"
             class="digit-button"
+            aria-label="Add digit"
             @click="ns.add_digit"
           >
             <Plus />
@@ -176,6 +180,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           :disabled="ns.base_purple >= ns.MAX_BASE"
           @click="ns.increase_base"
           class="base-button"
+          aria-label="Increase base"
         >
           <Plus />
         </button>
@@ -191,6 +196,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
           :disabled="baseMinusDisabled"
           @click="ns.decrease_base"
           class="base-button"
+          aria-label="Decrease base"
         >
           <Minus />
         </button>

@@ -110,6 +110,7 @@ document.addEventListener("keypress", (e) => {
     v-pop="'Github'"
     href="https://github.com/JsonKody/ciselne_pozicni_soustavy"
     class="github-icon"
+    aria-label="link to this project on Github"
   >
     <svg
       height="38"
