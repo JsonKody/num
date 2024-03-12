@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useNumberSystem } from "../stores/numberSystem";
+import { use_number_system } from "../stores/numberSystem";
 import { Base } from "../types/typings";
 import Lock from "./icons/Lock.vue";
 import LockOpen from "./icons/LockOpen.vue";
@@ -8,28 +8,29 @@ import Plus from "./icons/Plus.vue";
 import Minus from "./icons/Minus.vue";
 import Eye from "./icons/Eye.vue";
 import { computed } from "vue";
-const ns = useNumberSystem();
+
+const numsys = use_number_system();
 
 const set_base = (event: Event) => {
   const value = parseInt((event.target as HTMLInputElement).value);
-  if (!value || value < 2 || value > ns.MAX_BASE) {
+  if (!value || value < 2 || value > numsys.MAX_BASE) {
     return;
   }
-  ns.set_base(value as Base);
+  numsys.set_base(value as Base);
 };
 
-const baseTitle = computed(() =>
-  ns.t_info(
-    `[ ${ns.base_purple} ]  je základ v této soustavy.
-Je to tedy ${ns.name_purple.toLowerCase()}.`,
-    `[ ${ns.base_purple} ]  is the base in this number system.
-So it's called ${ns.name_purple.toLowerCase()}.`
+const base_title = computed(() =>
+numsys.t_info(
+    `[ ${numsys.base_purple} ]  je základ v této soustavy.
+Je to tedy ${numsys.name_purple.toLowerCase()}.`,
+    `[ ${numsys.base_purple} ]  is the base in this number system.
+So it's called ${numsys.name_purple.toLowerCase()}.`
   )
 );
 
-const digitMinusDisabled = computed(() => ns.digits.length < 2);
-const baseMinusDisabled = computed(() => ns.base_purple <= ns.MIN_BASE);
-const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
+const digit_minus_disabled = computed(() => numsys.digits.length < 2);
+const base_minus_disabled = computed(() => numsys.base_purple <= numsys.MIN_BASE);
+const base_plus_disabled = computed(() => numsys.base_purple >= numsys.MAX_BASE);
 </script>
 
 <template>
@@ -41,15 +42,15 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         class="relative flex flex-row flex-wrap gap-1 grow center"
         name="list"
       >
-        <div v-for="(_digit, i) in ns.digits" :key="i">
+        <div v-for="(_digit, i) in numsys.digits" :key="i">
           <Digit :index="i" />
         </div>
       </TransitionGroup>
       <div class="flex justify-between">
-        <div class="center" @click="ns.lock_digits = !ns.lock_digits">
+        <div class="center" @click="numsys.lock_digits = !numsys.lock_digits">
           <button
             v-pop:right="
-              ns.t_info(
+              numsys.t_info(
                 'Zamknuto - počet číslic se nebude automaticky snižovat.',
                 'Locked - number of digits won\'t automatically decrease.',
                 'Zamknuto',
@@ -57,14 +58,14 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
               )
             "
             class="digit-lock"
-            v-if="ns.lock_digits"
+            v-if="numsys.lock_digits"
             aria-label="Digit lock"
           >
             <Lock />
           </button>
           <button
             v-pop:right="
-              ns.t_info(
+              numsys.t_info(
                 'Odemknuto - počet číslic bude vždy minimum nutné k vyjádření čísla.',
                 'Unlocked - number of digits will always be the minimum necessary to represent the number.',
                 'Odemknuto',
@@ -83,23 +84,23 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
             class="digit-button"
             aria-label="Remove digit"
             v-pop="
-              digitMinusDisabled
-                ? ns.t_info(
+              digit_minus_disabled
+                ? numsys.t_info(
                     'Ale, no tak, nech si tu alespoň jednu číslici 😉',
                     'Oh, come on, keep at least one digit here 😉'
                   )
-                : ns.t_info('Odebrat číslici', 'Remove digit')
+                : numsys.t_info('Odebrat číslici', 'Remove digit')
             "
-            @click="ns.remove_digit"
-            :disabled="digitMinusDisabled"
+            @click="numsys.remove_digit"
+            :disabled="digit_minus_disabled"
           >
             <Minus />
           </button>
           <button
-            v-pop="ns.t_info('Přidat číslici', 'Add digit')"
+            v-pop="numsys.t_info('Přidat číslici', 'Add digit')"
             class="digit-button"
             aria-label="Add digit"
-            @click="ns.add_digit"
+            @click="numsys.add_digit"
           >
             <Plus />
           </button>
@@ -115,7 +116,7 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
       <!-- Save diod -->
       <div
         v-pop="
-          ns.t_info(
+          numsys.t_info(
             'Toto je indikátor uložení.',
             'This is the save indicator.',
             'Uloženo',
@@ -124,43 +125,43 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         "
         class="m-2 trans absolute top-0 left-0 w-2 h-2 bg-purple-800 rounded-full"
         :class="{
-          'opacity-40': ns.saved,
-          'opacity-20': !ns.saved,
-          'cursor-help': ns.info,
-          'cursor-default': !ns.info,
+          'opacity-40': numsys.saved,
+          'opacity-20': !numsys.saved,
+          'cursor-help': numsys.info,
+          'cursor-default': !numsys.info,
         }"
       ></div>
       <div class="center">
         <!-- Base number -->
         <Transition name="switch-h" mode="out-in">
           <div
-            v-pop="baseTitle"
-            :key="ns.base_purple"
+            v-pop="base_title"
+            :key="numsys.base_purple"
             class="trans number-base pink-grad"
-            :class="{ 'cursor-help': ns.info }"
+            :class="{ 'cursor-help': numsys.info }"
           >
-            {{ ns.base_purple }}
+            {{ numsys.base_purple }}
           </div>
         </Transition>
       </div>
       <label
-        v-pop="baseTitle"
+        v-pop="base_title"
         for="base"
-        :class="{ 'cursor-help': ns.info }"
+        :class="{ 'cursor-help': numsys.info }"
         class="text-base"
-        >{{ ns.t("Základ", "Base") }}</label
+        >{{ numsys.t("Základ", "Base") }}</label
       >
       <input
         v-pop="
-          ns.t_info(
-            `Zde můžete změnit základ soustavy - min:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`,
-            `Here you can change the base of the number system - min:   ${ns.MIN_BASE}\nmax:   ${ns.MAX_BASE}`
+          numsys.t_info(
+            `Zde můžete změnit základ soustavy - min:   ${numsys.MIN_BASE}\nmax:   ${numsys.MAX_BASE}`,
+            `Here you can change the base of the number system - min:   ${numsys.MIN_BASE}\nmax:   ${numsys.MAX_BASE}`
           )
         "
         class="opacity-10 hover:opacity-80 focus:opacity-80"
-        :value="ns.base_purple"
-        :min="ns.MIN_BASE"
-        :max="ns.MAX_BASE"
+        :value="numsys.base_purple"
+        :min="numsys.MIN_BASE"
+        :max="numsys.MAX_BASE"
         type="number"
         name="base"
         id="base"
@@ -170,15 +171,15 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
       <div class="base-buttons">
         <button
           v-pop:left="
-            basePlusDisabled
-              ? ns.t_info(
-                  `[ ${ns.MAX_BASE} ]  je nejvyšší povolený základ.`,
-                  `[ ${ns.MAX_BASE} ]  is the highest allowed base.`
+            base_plus_disabled
+              ? numsys.t_info(
+                  `[ ${numsys.MAX_BASE} ]  je nejvyšší povolený základ.`,
+                  `[ ${numsys.MAX_BASE} ]  is the highest allowed base.`
                 )
-              : ns.t_info('Základ + 1', 'Base + 1')
+              : numsys.t_info('Základ + 1', 'Base + 1')
           "
-          :disabled="ns.base_purple >= ns.MAX_BASE"
-          @click="ns.increase_base"
+          :disabled="numsys.base_purple >= numsys.MAX_BASE"
+          @click="numsys.increase_base"
           class="base-button"
           aria-label="Increase base"
         >
@@ -186,15 +187,15 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
         </button>
         <button
           v-pop:left="
-            baseMinusDisabled
-              ? ns.t_info(
-                  `[ ${ns.MIN_BASE} ]  je nejmenší povolený základ.`,
-                  `[ ${ns.MIN_BASE} ]  is the lowest allowed base.`
+            base_minus_disabled
+              ? numsys.t_info(
+                  `[ ${numsys.MIN_BASE} ]  je nejmenší povolený základ.`,
+                  `[ ${numsys.MIN_BASE} ]  is the lowest allowed base.`
                 )
-              : ns.t_info('Základ - 1', 'Base - 1')
+              : numsys.t_info('Základ - 1', 'Base - 1')
           "
-          :disabled="baseMinusDisabled"
-          @click="ns.decrease_base"
+          :disabled="base_minus_disabled"
+          @click="numsys.decrease_base"
           class="base-button"
           aria-label="Decrease base"
         >
@@ -207,41 +208,41 @@ const basePlusDisabled = computed(() => ns.base_purple >= ns.MAX_BASE);
     <div class="gap-1 center">
       <button
         v-pop="
-          ns.t_info(
+          numsys.t_info(
             'Nastaví všechny číslice na nulu.',
             'Set all digits to zero.'
           )
         "
-        @click="ns.set_digits_to_zero"
+        @click="numsys.set_digits_to_zero"
         class="control-button"
       >
         Min
       </button>
       <button
         v-pop="
-          ns.t_info(
+          numsys.t_info(
             'Přepíná mezi zobrazením hodnot řádů a indexů řádů.',
             'Toggle between displaying positional values and place indices.'
           )
         "
-        @click="ns.toggle_digits_val"
+        @click="numsys.toggle_digits_val"
         class="control-button"
       >
         <Eye />
         {{
-          ns.show_digits_val
-            ? ns.t("Hodnoty řádů", "Positional values")
-            : ns.t("Indexy řádů", "Place indices")
+          numsys.show_digits_val
+            ? numsys.t("Hodnoty řádů", "Positional values")
+            : numsys.t("Indexy řádů", "Place indices")
         }}
       </button>
       <button
         v-pop="
-          ns.t_info(
+          numsys.t_info(
             'Nastaví všechny číslice na maximální hodnotu.',
             'Set all digits to their maximum value.'
           )
         "
-        @click="ns.set_digits_to_max"
+        @click="numsys.set_digits_to_max"
         class="control-button"
       >
         Max

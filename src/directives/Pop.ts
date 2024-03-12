@@ -56,7 +56,7 @@ export const pop: Directive = {
 		}
 
 		// Funkce pro aktualizaci pozice
-		const updatePopoverPosition = async () => {
+		const update_popover_position = async () => {
 			const placement = (binding.arg || 'bottom') as Placement
 
 			if (el._popover) {
@@ -81,7 +81,7 @@ export const pop: Directive = {
 
 		// Zobrazení tooltipu
 		const showPopover = () => {
-			updatePopoverPosition()
+			update_popover_position()
 			const popover = el._popover!
 			if (popover.textContent !== '') {
 				el._popover!.style.display = 'inline-block'
@@ -90,7 +90,7 @@ export const pop: Directive = {
 			void el._popover!.offsetWidth
 			el._popover!.style.opacity = '1'
 			el._popover!.style.transform = 'scale(1)'
-			el._autoUpdateCleanup = autoUpdate(el, popover as HTMLElement, updatePopoverPosition)
+			el._autoUpdateCleanup = autoUpdate(el, popover as HTMLElement, update_popover_position)
 		}
 
 		// Skrytí tooltipu

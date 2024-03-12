@@ -10,21 +10,20 @@
     "psh": "git add -A && git commit -m \"saved & pushed by pnpm\" && git push"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.5.3",
-    "@types/lodash-es": "^4.17.10",
+    "@floating-ui/dom": "^1.6.3",
+    "@types/lodash-es": "^4.17.12",
     "lodash-es": "^4.17.21",
     "pinia": "^2.1.7",
-    "vue": "^3.3.4",
-    "vue-router": "^4.2.5"
+    "vue": "^3.4.21"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.2.3",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.31",
-    "sass": "^1.69.5",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "sass": "^1.71.1",
     "tailwindcss": "^3.3.5",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5",
-    "vue-tsc": "^1.8.5"
+    "typescript": "^5.4.2",
+    "vite": "^5.1.6",
+    "vue-tsc": "^2.0.6"
   }
 }

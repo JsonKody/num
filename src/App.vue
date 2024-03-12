@@ -2,9 +2,9 @@
 import NumberSystem from "./components/NumberSystem.vue";
 import Info from "./components/icons/Info.vue";
 import InfoOff from "./components/icons/InfoOff.vue";
-import { useNumberSystem } from "./stores/numberSystem";
+import { use_number_system } from "./stores/numberSystem";
 
-const ns = useNumberSystem();
+const ns = use_number_system();
 
 const digits_keys: Record<string, number> = {
   Digit0: 0,
@@ -98,8 +98,8 @@ document.addEventListener("keypress", (e) => {
   }
 
   if (digits_keys.hasOwnProperty(e.code)) {
-    const digitIndex = digits_keys[e.code];
-    ns.toggle_digit_min_max(digitIndex);
+    const digit_index = digits_keys[e.code];
+    ns.toggle_digit_min_max(digit_index);
   }
 });
 </script>

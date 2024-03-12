@@ -47,7 +47,7 @@ function enqueue_ls_set(key: string, value: string) {
   ls_set_batch(); // Zavolá debounced funkci
 }
 
-export const useNumberSystem = defineStore("numberSystem", () => {
+export const use_number_system = defineStore("numberSystem", () => {
   const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const zero = chars[0];
   const MIN_BASE = 2;
