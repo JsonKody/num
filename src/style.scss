@@ -1,15 +1,17 @@
 @font-face {
   font-family: "Asap";
-  src: url("./assets/fonts/asap/asap.ttf") format("truetype");
-  font-weight: 100 900; // od 100 (nejtenčí) do 900 (nejtlustější)
-  font-style: italic oblique 0deg 10deg; // od 0 do 10 stupňů sklonu
+  src: url("./assets/fonts/asap/Asap-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic oblique 0deg 10deg;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Roboto Mono";
-  src: url("./assets/fonts/roboto_mono/roboto_mono.ttf") format("truetype");
-  font-weight: 100 900; // od 100 (nejtenčí) do 900 (nejtlustější)
-  font-style: oblique 0deg 10deg; // od 0 do 10 stupňů sklonu
+  src: url("./assets/fonts/roboto_mono/RobotoMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: oblique 0deg 10deg;
+  font-display: swap;
 }
 
 @tailwind base;
