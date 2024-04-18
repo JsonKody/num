@@ -1,6 +1,6 @@
 # Poziční číselné soustavy 🤌🧐🍷
 
-### [numeral-playground.jsonkody.cz](http://numeral-playground.jsonkody.cz)
+### [num.jsonkody.cz](http://num.jsonkody.cz)
 
 ![screenshot](./src/assets/images/screenshot.png)
 
@@ -15,7 +15,7 @@
 
 ## Popis
 
-`Numeral_playground` je výuková aplikace/vizualizace číselných pozičních soustav, vytvořené jako edukační nástroj pro YouTube tutoriál na kanálu [JsonKody](https://www.youtube.com/jsonkody).
+`Num` je výuková aplikace/vizualizace číselných pozičních soustav, vytvořené jako edukační nástroj pro YouTube tutoriál na kanálu [JsonKody](https://www.youtube.com/jsonkody).
 
 Počáteční záměr byl jen vytvořit mikro-appku pro video o dvojkové soustavě a pozičních soustavách obecně. Projekt se ale malinko rozrostl a přerostl v interaktivní aplikaci, která může sloužit jako převodník nebo výuková pomůcka.
 
@@ -34,7 +34,7 @@ Aplikace si automaticky ukádá stav po každé akci + jedné vteřině nečinno
 **_Pozn.: pořebujete mít nainstalovaný [Git](https://git-scm.com/downloads)_**
 
 ```bash
-git clone git@github.com:JsonKody/numeral_playground.git
+git clone git@github.com:JsonKody/num.git
 ```
 
 ### Instalace závislostí
@@ -84,4 +84,4 @@ Máte-li nějaké nápady na vylepšení nebo chcete opravit bug, neváhejte vyt
 
 ## Licence
 
-Tento software `Numeral_playground` je poskytován pod MIT licencí, která je dostupná v souboru [LICENSE](LICENSE).
+Tento software `num` je poskytován pod MIT licencí, která je dostupná v souboru [LICENSE](LICENSE).
