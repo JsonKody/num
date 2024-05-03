@@ -20,7 +20,7 @@ const set_base = (event: Event) => {
 };
 
 const base_title = computed(() =>
-numsys.t_info(
+  numsys.t_info(
     `[ ${numsys.base_purple} ]  je základ v této soustavy.
 Je to tedy ${numsys.name_purple.toLowerCase()}.`,
     `[ ${numsys.base_purple} ]  is the base in this number system.
@@ -29,14 +29,34 @@ So it's called ${numsys.name_purple.toLowerCase()}.`
 );
 
 const digit_minus_disabled = computed(() => numsys.digits.length < 2);
-const base_minus_disabled = computed(() => numsys.base_purple <= numsys.MIN_BASE);
-const base_plus_disabled = computed(() => numsys.base_purple >= numsys.MAX_BASE);
+const base_minus_disabled = computed(
+  () => numsys.base_purple <= numsys.MIN_BASE
+);
+const base_plus_disabled = computed(
+  () => numsys.base_purple >= numsys.MAX_BASE
+);
 </script>
 
 <template>
   <div>
+    
     <!-- Digits -->
-    <div class="digits-wrap">
+    <div class="digits-wrap"><div class="absolute right-0 flex flex-col gap-1">
+          <button
+            class="plus-button"
+            aria-label="Remove digit"
+            @click="numsys.increase_number"
+          >
+            <Plus />
+          </button>
+          <button
+            class="minus-button"
+            aria-label="Add digit"
+            @click="numsys.decrease_number"
+          >
+            <Minus />
+          </button>
+        </div>
       <TransitionGroup
         tag="div"
         class="relative flex flex-row flex-wrap gap-1 grow center"
@@ -105,6 +125,7 @@ const base_plus_disabled = computed(() => numsys.base_purple >= numsys.MAX_BASE)
             <Plus />
           </button>
         </div>
+        
         <div>
           <Lock class="digit-button invisible" />
         </div>

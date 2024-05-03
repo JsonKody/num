@@ -81,22 +81,34 @@ export const use_number_system = defineStore("numberSystem", () => {
     return chars.substring(0, base_purple.value);
   });
 
+  const generate_digits_based_on_lock = (
+    new_digits_array: string[],
+    original_length: number
+  ) => {
+    if (lock_digits.value && new_digits_array.length < original_length) {
+      const zeros = new Array(original_length - new_digits_array.length).fill(
+        zero
+      );
+      return [...zeros, ...new_digits_array];
+    }
+
+    return new_digits_array;
+  };
+
   const set_base = (val: Base) => {
-    const digits_length = digits.value.length;
+    const original_length = digits.value.length;
 
     const new_digits_array = digits_converter(
       digits.value,
       base_purple.value,
       val
     );
-    digits.value = [];
+    // digits.value = [];
     base_purple.value = val;
-    digits.value = new_digits_array;
-
-    if (lock_digits.value && digits.value.length < digits_length) {
-      const zeros = new Array(digits_length - digits.value.length).fill(zero);
-      digits.value = [...zeros, ...digits.value];
-    }
+    digits.value = generate_digits_based_on_lock(
+      new_digits_array,
+      original_length
+    );
   };
 
   const increase_base = () => {
@@ -108,6 +120,38 @@ export const use_number_system = defineStore("numberSystem", () => {
   const decrease_base = () => {
     if (base_purple.value > MIN_BASE) {
       set_base((base_purple.value - 1) as Base);
+    }
+  };
+
+  const change_number = (num: bigint) => {
+    const original_length = digits.value.length;
+    const ten_based_str = str_number_converter(
+      digits.value.join(""),
+      base_purple.value,
+      10
+    );
+
+    const new_val = BigInt(ten_based_str) + num;
+    const new_digits_array = new_val
+      .toString(base_purple.value)
+      .toUpperCase()
+      .split("");
+    digits.value = generate_digits_based_on_lock(
+      new_digits_array,
+      original_length
+    );
+  };
+
+  const increase_number = () => {
+    change_number(1n);
+  };
+  const decrease_number = () => {
+    const num = BigInt(
+      str_number_converter(digits.value.join(""), base_purple.value, 10)
+    );
+
+    if (num > 0n) {
+      change_number(-1n);
     }
   };
 
@@ -133,7 +177,7 @@ export const use_number_system = defineStore("numberSystem", () => {
   };
 
   const toggle_digit_min_max = (index: number) => {
-    const digit_index = digits.value.length - index - 1
+    const digit_index = digits.value.length - index - 1;
     if (!digits.value[digit_index]) {
       return;
     }
@@ -152,10 +196,10 @@ export const use_number_system = defineStore("numberSystem", () => {
     digits.value.shift();
   };
 
-  function stringToBigInt(str: string, base: Base): BigInt {
-    let result = BigInt(0);
+  function string_to_big_int(str: string, base: Base): bigint {
+    let result = 0n;
     const bigBase = BigInt(base);
-    let multiplier = BigInt(1);
+    let multiplier = 1n;
 
     for (let i = str.length - 1; i >= 0; i--) {
       const digit = str[i];
@@ -177,7 +221,7 @@ export const use_number_system = defineStore("numberSystem", () => {
     base_from: Base,
     base_to: Base
   ) {
-    str_num = stringToBigInt(str_num, base_from)
+    str_num = string_to_big_int(str_num, base_from)
       .toString(base_to)
       .toUpperCase();
     return str_num ? str_num : zero;
@@ -199,19 +243,17 @@ export const use_number_system = defineStore("numberSystem", () => {
   );
 
   const switch_green_purple = () => {
-    const digits_length = digits.value.length;
+    const original_length = digits.value.length;
 
     const new_digits_array = digits_to_green_str_num.value.split("");
     digits.value = [];
     const temp = base_green.value;
     base_green.value = base_purple.value;
     base_purple.value = temp;
-    digits.value = new_digits_array;
-
-    if (lock_digits.value && digits.value.length < digits_length) {
-      const zeros = new Array(digits_length - digits.value.length).fill(zero);
-      digits.value = [...zeros, ...digits.value];
-    }
+    digits.value = generate_digits_based_on_lock(
+      new_digits_array,
+      original_length
+    );
   };
 
   const t = (cs: string, en: string) => {
@@ -288,6 +330,9 @@ export const use_number_system = defineStore("numberSystem", () => {
     set_base,
     increase_base,
     decrease_base,
+    change_number,
+    increase_number,
+    decrease_number,
     chars,
     zero,
     digits,
