@@ -2,8 +2,6 @@
 import NumberSystem from "./components/NumberSystem.vue";
 import Info from "./components/icons/Info.vue";
 import InfoOff from "./components/icons/InfoOff.vue";
-import Plus from "./components/icons/Plus.vue";
-import Minus from "./components/icons/Minus.vue";
 import { use_number_system } from "./stores/numberSystem";
 
 const ns = use_number_system();
