@@ -41,7 +41,9 @@ const base_plus_disabled = computed(
   <div>
     
     <!-- Digits -->
-    <div class="digits-wrap"><div class="absolute right-0 flex flex-col gap-1">
+    <div class="digits-wrap">
+      <!-- TODO vyresit jak vylepsit buttony -->
+      <!-- <div class="rd absolute right-0 flex flex-col gap-1">
           <button
             class="plus-button"
             aria-label="Remove digit"
@@ -56,7 +58,7 @@ const base_plus_disabled = computed(
           >
             <Minus />
           </button>
-        </div>
+        </div> -->
       <TransitionGroup
         tag="div"
         class="relative flex flex-row flex-wrap gap-1 grow center"
