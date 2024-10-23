@@ -1,11 +1,12 @@
 import { defineConfig } from "vite";
+import vueDevTools from 'vite-plugin-vue-devtools'
 import { compression } from "vite-plugin-compression2";
 import { splitVendorChunkPlugin } from "vite";
 import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), splitVendorChunkPlugin(), compression()],
+  plugins: [vue(), splitVendorChunkPlugin(), compression(), vueDevTools()],
   server: {
     port: 4040,
   },
