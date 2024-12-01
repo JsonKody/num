@@ -16,17 +16,17 @@ importers:
         version: 4.17.21
       pinia:
         specifier: ^2.2.8
-        version: 2.2.8(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))
+        version: 2.2.8(typescript@5.6.2)(vue@3.5.13(typescript@5.6.2))
       vue:
         specifier: ^3.5.13
-        version: 3.5.13(typescript@5.7.2)
+        version: 3.5.13(typescript@5.6.2)
     devDependencies:
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
       '@vitejs/plugin-vue':
         specifier: ^5.2.1
-        version: 5.2.1(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.2))
+        version: 5.2.1(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.2))
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
@@ -40,8 +40,8 @@ importers:
         specifier: ^3.4.15
         version: 3.4.15
       typescript:
-        specifier: ^5.7.2
-        version: 5.7.2
+        specifier: 5.6.2
+        version: 5.6.2
       vite:
         specifier: ^6.0.1
         version: 6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1)
@@ -50,10 +50,10 @@ importers:
         version: 1.3.3(rollup@4.28.0)(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))
       vite-plugin-vue-devtools:
         specifier: ^7.6.7
-        version: 7.6.7(rollup@4.28.0)(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.2))
+        version: 7.6.7(rollup@4.28.0)(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.2))
       vue-tsc:
         specifier: ^2.1.10
-        version: 2.1.10(typescript@5.7.2)
+        version: 2.1.10(typescript@5.6.2)
 
 packages:
 
@@ -1363,8 +1363,8 @@ packages:
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  typescript@5.7.2:
-    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
+  typescript@5.6.2:
+    resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -1970,10 +1970,10 @@ snapshots:
 
   '@types/lodash@4.17.13': {}
 
-  '@vitejs/plugin-vue@5.2.1(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.2))':
+  '@vitejs/plugin-vue@5.2.1(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.2))':
     dependencies:
       vite: 6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1)
-      vue: 3.5.13(typescript@5.7.2)
+      vue: 3.5.13(typescript@5.6.2)
 
   '@volar/language-core@2.4.10':
     dependencies:
@@ -2054,7 +2054,7 @@ snapshots:
 
   '@vue/devtools-api@6.6.4': {}
 
-  '@vue/devtools-core@7.6.7(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.2))':
+  '@vue/devtools-core@7.6.7(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.2))':
     dependencies:
       '@vue/devtools-kit': 7.6.7
       '@vue/devtools-shared': 7.6.7
@@ -2062,7 +2062,7 @@ snapshots:
       nanoid: 5.0.9
       pathe: 1.1.2
       vite-hot-client: 0.2.4(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))
-      vue: 3.5.13(typescript@5.7.2)
+      vue: 3.5.13(typescript@5.6.2)
     transitivePeerDependencies:
       - vite
 
@@ -2080,7 +2080,7 @@ snapshots:
     dependencies:
       rfdc: 1.4.1
 
-  '@vue/language-core@2.1.10(typescript@5.7.2)':
+  '@vue/language-core@2.1.10(typescript@5.6.2)':
     dependencies:
       '@volar/language-core': 2.4.10
       '@vue/compiler-dom': 3.5.13
@@ -2091,7 +2091,7 @@ snapshots:
       muggle-string: 0.4.1
       path-browserify: 1.0.1
     optionalDependencies:
-      typescript: 5.7.2
+      typescript: 5.6.2
 
   '@vue/reactivity@3.5.13':
     dependencies:
@@ -2109,11 +2109,11 @@ snapshots:
       '@vue/shared': 3.5.13
       csstype: 3.1.3
 
-  '@vue/server-renderer@3.5.13(vue@3.5.13(typescript@5.7.2))':
+  '@vue/server-renderer@3.5.13(vue@3.5.13(typescript@5.6.2))':
     dependencies:
       '@vue/compiler-ssr': 3.5.13
       '@vue/shared': 3.5.13
-      vue: 3.5.13(typescript@5.7.2)
+      vue: 3.5.13(typescript@5.6.2)
 
   '@vue/shared@3.5.13': {}
 
@@ -2540,13 +2540,13 @@ snapshots:
 
   pify@2.3.0: {}
 
-  pinia@2.2.8(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2)):
+  pinia@2.2.8(typescript@5.6.2)(vue@3.5.13(typescript@5.6.2)):
     dependencies:
       '@vue/devtools-api': 6.6.4
-      vue: 3.5.13(typescript@5.7.2)
-      vue-demi: 0.14.10(vue@3.5.13(typescript@5.7.2))
+      vue: 3.5.13(typescript@5.6.2)
+      vue-demi: 0.14.10(vue@3.5.13(typescript@5.6.2))
     optionalDependencies:
-      typescript: 5.7.2
+      typescript: 5.6.2
 
   pirates@4.0.6: {}
 
@@ -2758,7 +2758,7 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  typescript@5.7.2: {}
+  typescript@5.6.2: {}
 
   unicorn-magic@0.3.0: {}
 
@@ -2800,9 +2800,9 @@ snapshots:
       - rollup
       - supports-color
 
-  vite-plugin-vue-devtools@7.6.7(rollup@4.28.0)(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.2)):
+  vite-plugin-vue-devtools@7.6.7(rollup@4.28.0)(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.2)):
     dependencies:
-      '@vue/devtools-core': 7.6.7(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.2))
+      '@vue/devtools-core': 7.6.7(vite@6.0.1(jiti@1.21.6)(sass@1.81.0)(yaml@2.6.1))(vue@3.5.13(typescript@5.6.2))
       '@vue/devtools-kit': 7.6.7
       '@vue/devtools-shared': 7.6.7
       execa: 9.5.1
@@ -2844,26 +2844,26 @@ snapshots:
 
   vscode-uri@3.0.8: {}
 
-  vue-demi@0.14.10(vue@3.5.13(typescript@5.7.2)):
+  vue-demi@0.14.10(vue@3.5.13(typescript@5.6.2)):
     dependencies:
-      vue: 3.5.13(typescript@5.7.2)
+      vue: 3.5.13(typescript@5.6.2)
 
-  vue-tsc@2.1.10(typescript@5.7.2):
+  vue-tsc@2.1.10(typescript@5.6.2):
     dependencies:
       '@volar/typescript': 2.4.10
-      '@vue/language-core': 2.1.10(typescript@5.7.2)
+      '@vue/language-core': 2.1.10(typescript@5.6.2)
       semver: 7.6.3
-      typescript: 5.7.2
+      typescript: 5.6.2
 
-  vue@3.5.13(typescript@5.7.2):
+  vue@3.5.13(typescript@5.6.2):
     dependencies:
       '@vue/compiler-dom': 3.5.13
       '@vue/compiler-sfc': 3.5.13
       '@vue/runtime-dom': 3.5.13
-      '@vue/server-renderer': 3.5.13(vue@3.5.13(typescript@5.7.2))
+      '@vue/server-renderer': 3.5.13(vue@3.5.13(typescript@5.6.2))
       '@vue/shared': 3.5.13
     optionalDependencies:
-      typescript: 5.7.2
+      typescript: 5.6.2
 
   which@2.0.2:
     dependencies:
