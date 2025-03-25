@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import "./style.scss";
+import "./style.css";
 import { pop } from "./directives/Pop";
 import App from "./App.vue";
 
