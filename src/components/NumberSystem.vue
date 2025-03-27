@@ -83,7 +83,7 @@ const base_plus_disabled = computed(() => numsys.base_purple >= numsys.MAX_BASE)
           <button
             class="digit-button"
             aria-label="Remove digit"
-            v-pop="
+            v-pop:bottom="
               digit_minus_disabled
                 ? numsys.t_info(
                     'Ale, no tak, nech si tu alespoň jednu číslici 😉',
@@ -97,7 +97,7 @@ const base_plus_disabled = computed(() => numsys.base_purple >= numsys.MAX_BASE)
             <Minus />
           </button>
           <button
-            v-pop="numsys.t_info('Přidat číslici', 'Add digit')"
+            v-pop:bottom="numsys.t_info('Přidat číslici', 'Add digit')"
             class="digit-button"
             aria-label="Add digit"
             @click="numsys.add_digit"
