@@ -151,7 +151,7 @@ document.addEventListener("keypress", (e) => {
         >
           <span
             :class="ns.info ? 'cursor-help' : ''"
-            v-pop="
+            v-pop:bottom="
               ns.t_info(
                 `Číslo v - ${ns.name_green.toLocaleLowerCase()}`,
                 `Number in - ${ns.name_green.toLocaleLowerCase()}`
@@ -178,7 +178,7 @@ document.addEventListener("keypress", (e) => {
         >
           <span
             :class="ns.info ? 'cursor-help' : ''"
-            v-pop="
+            v-pop:bottom="
               ns.t_info(
                 `Číslo v - ${ns.name_purple.toLocaleLowerCase()}`,
                 `Number in - ${ns.name_purple.toLocaleLowerCase()}`
@@ -193,7 +193,12 @@ document.addEventListener("keypress", (e) => {
     <NumberSystem />
 
     <div class="flex justify-center items-center">
-      <a class="footer-link cursor-pointer" target="_blank" href="https://jsonkody.cz" v-pop="'JsonKody 🤌🧐🍷'">
+      <a
+        class="footer-link cursor-pointer"
+        target="_blank"
+        href="https://jsonkody.cz"
+        v-pop="'JsonKody 🤌🧐🍷'"
+      >
         JsonKody
       </a>
     </div>

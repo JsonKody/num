@@ -61,7 +61,7 @@ const update_digit = (event: Event) => {
 
     <!-- Digit -->
     <label
-      v-pop.keep="
+      v-pop:bottom="
         ns.t_info(
           `( ${
             parseInt(selected_number, ns.base_purple) * position_value
@@ -89,7 +89,7 @@ const update_digit = (event: Event) => {
     <!-- Digit selector -->
     <div class="digit-select">
       <select
-        v-pop="
+        v-pop:bottom="
           ns.t_info(
             `Vyber číslici na pozici - ${digit_index}`,
             `Select digit on position - ${digit_index}`

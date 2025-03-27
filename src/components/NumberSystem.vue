@@ -20,7 +20,7 @@ const set_base = (event: Event) => {
 };
 
 const base_title = computed(() =>
-numsys.t_info(
+  numsys.t_info(
     `[ ${numsys.base_purple} ]  je základ v této soustavy.
 Je to tedy ${numsys.name_purple.toLowerCase()}.`,
     `[ ${numsys.base_purple} ]  is the base in this number system.
@@ -29,8 +29,12 @@ So it's called ${numsys.name_purple.toLowerCase()}.`
 );
 
 const digit_minus_disabled = computed(() => numsys.digits.length < 2);
-const base_minus_disabled = computed(() => numsys.base_purple <= numsys.MIN_BASE);
-const base_plus_disabled = computed(() => numsys.base_purple >= numsys.MAX_BASE);
+const base_minus_disabled = computed(
+  () => numsys.base_purple <= numsys.MIN_BASE
+);
+const base_plus_disabled = computed(
+  () => numsys.base_purple >= numsys.MAX_BASE
+);
 </script>
 
 <template>
@@ -145,14 +149,14 @@ const base_plus_disabled = computed(() => numsys.base_purple >= numsys.MAX_BASE)
         </Transition>
       </div>
       <label
-        v-pop="base_title"
+        v-pop:bottom="base_title"
         for="base"
         :class="{ 'cursor-help': numsys.info }"
         class="text-base"
         >{{ numsys.t("Základ", "Base") }}</label
       >
       <input
-        v-pop="
+        v-pop:bottom="
           numsys.t_info(
             `Zde můžete změnit základ soustavy - min:   ${numsys.MIN_BASE}\nmax:   ${numsys.MAX_BASE}`,
             `Here you can change the base of the number system - min:   ${numsys.MIN_BASE}\nmax:   ${numsys.MAX_BASE}`
