@@ -158,7 +158,7 @@ const base_plus_disabled = computed(() => numsys.base_purple >= numsys.MAX_BASE)
             `Here you can change the base of the number system - min:   ${numsys.MIN_BASE}\nmax:   ${numsys.MAX_BASE}`
           )
         "
-        class="opacity-10 hover:opacity-80 focus:opacity-80"
+        class="bg-white opacity-10 hover:opacity-80 focus:opacity-80"
         :value="numsys.base_purple"
         :min="numsys.MIN_BASE"
         :max="numsys.MAX_BASE"

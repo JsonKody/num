@@ -206,7 +206,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 @utility digit-select {
-  @apply mono-r trans opacity-10 hover:opacity-80 text-xs center;
+  @apply mono-r trans bg-white rounded opacity-10 hover:opacity-80 text-xs center;
 }
 
 @utility digit-button {
@@ -246,7 +246,7 @@ input[type="number"]::-webkit-outer-spin-button {
 /*** Footer ***/
 
 @utility footer-link {
-  @apply my-1.5 select-none text-xs center opacity-10;
+  @apply my-1.5 select-none text-xs center trans opacity-10 hover:opacity-25;
 }
 
 @utility github-icon {

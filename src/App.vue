@@ -192,8 +192,8 @@ document.addEventListener("keypress", (e) => {
 
     <NumberSystem />
 
-    <div class="footer-link cursor-pointer">
-      <a target="_blank" href="https://jsonkody.cz" v-pop="'JsonKody 🤌🧐🍷'">
+    <div class="flex justify-center items-center">
+      <a class="footer-link cursor-pointer" target="_blank" href="https://jsonkody.cz" v-pop="'JsonKody 🤌🧐🍷'">
         JsonKody
       </a>
     </div>
