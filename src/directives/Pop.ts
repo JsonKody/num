@@ -149,6 +149,10 @@ export const pop: Directive = {
   updated(el: PopoverHTMLElement, binding: DirectiveBinding) {
     if (el._popover) {
       set_text(binding, el._popover as HTMLDivElement);
+
+      if (!el._popover.textContent) {
+        el._popover!.style.display = "none";
+      }
     }
   },
   beforeUnmount(el: PopoverHTMLElement) {
