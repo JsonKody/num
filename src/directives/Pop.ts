@@ -1,26 +1,32 @@
-import type { Directive, DirectiveBinding } from 'vue'
-import type { Placement, Side } from '@floating-ui/dom'
-import { computePosition, autoUpdate, flip, shift, offset } from '@floating-ui/dom'
+import type { Directive, DirectiveBinding } from "vue";
+import type { Placement, Side } from "@floating-ui/dom";
+import {
+  computePosition,
+  autoUpdate,
+  flip,
+  shift,
+  offset,
+} from "@floating-ui/dom";
 
 // Rozšíření interface pro HTMLElement
 interface PopoverHTMLElement extends HTMLElement {
-  _popover?: HTMLElement
-  _autoUpdateCleanup?: () => void
-  _removeEventListeners?: () => void
+  _popover?: HTMLElement;
+  _autoUpdateCleanup?: () => void;
+  _removeEventListeners?: () => void;
 }
 
-const scale = 0.7
-const time = 0.2
+const scale = 0.7;
+const time = 0.2;
 const origins: Record<string, Side> = {
-  top: 'bottom',
-  right: 'left',
-  bottom: 'top',
-  left: 'right',
-}
+  top: "bottom",
+  right: "left",
+  bottom: "top",
+  left: "right",
+};
 
 function set_text(binding: DirectiveBinding, popover: HTMLDivElement) {
-  const str: string = binding.value ? binding.value.trim() : ''
-  popover.textContent = str
+  const str: string = binding.value ? binding.value.trim() : "";
+  popover.textContent = str;
 }
 
 /**
@@ -29,13 +35,13 @@ function set_text(binding: DirectiveBinding, popover: HTMLDivElement) {
  */
 export const pop: Directive = {
   mounted(el: PopoverHTMLElement, binding: DirectiveBinding) {
-    const new_origin = origins[binding.arg as Side]
-    const { click } = binding.modifiers
+    const new_origin = origins[binding.arg as Side];
+    const { click } = binding.modifiers;
 
     // Funkce pro vytvoření tooltipu
     const createPopover = () => {
-      const popover = document.createElement('div')
-      set_text(binding, popover)
+      const popover = document.createElement("div");
+      set_text(binding, popover);
       // const str = binding.value ? binding.value.trim() : ''
       // popover.textContent = str
 
@@ -58,15 +64,15 @@ export const pop: Directive = {
 		  font-size: 16px;
         z-index: 999;
 		  max-width: 42rem;
-      `
-      popover.style.display = 'none'
-      document.body.prepend(popover)
-      el._popover = popover
-    }
+      `;
+      popover.style.display = "none";
+      document.body.prepend(popover);
+      el._popover = popover;
+    };
 
     // Funkce pro aktualizaci pozice
     const updatePopoverPosition = async () => {
-      const placement = (binding.arg || 'top') as Placement
+      const placement = (binding.arg || "top") as Placement;
 
       if (el._popover) {
         await computePosition(el, el._popover, {
@@ -76,73 +82,77 @@ export const pop: Directive = {
         }).then(({ x, y, placement }) => {
           if (el._popover) {
             // new placement
-            el._popover.style.transformOrigin = origins[placement]
+            el._popover.style.transformOrigin = origins[placement];
           }
 
           Object.assign(el._popover!.style, {
             top: `${y}px`,
             left: `${x}px`,
-          })
-        })
+          });
+        });
       }
-    }
-    createPopover()
+    };
+    createPopover();
 
     // Zobrazení tooltipu
     const showPopover = () => {
-      updatePopoverPosition()
-      const popover = el._popover!
+      updatePopoverPosition();
+      const popover = el._popover!;
       if (popover.textContent) {
-        el._popover!.style.display = 'inline-block'
+        el._popover!.style.display = "inline-block";
       }
       // Zařídíte, že prohlížeč "vidí" změnu a začne animaci
-      void el._popover!.offsetWidth
-      el._popover!.style.opacity = '1'
-      el._popover!.style.transform = 'scale(1)'
-      el._autoUpdateCleanup = autoUpdate(el, popover as HTMLElement, updatePopoverPosition)
-    }
+      void el._popover!.offsetWidth;
+      el._popover!.style.opacity = "1";
+      el._popover!.style.transform = "scale(1)";
+      el._autoUpdateCleanup = autoUpdate(
+        el,
+        popover as HTMLElement,
+        updatePopoverPosition
+      );
+    };
 
     // Skrytí tooltipu
     const hidePopover = () => {
       if (el._popover) {
-        el._popover.style.opacity = '0'
-        el._popover.style.transform = `scale(${scale})`
+        el._popover.style.opacity = "0";
+        el._popover.style.transform = `scale(${scale})`;
         if (el._autoUpdateCleanup) {
-          el._autoUpdateCleanup()
-          el._autoUpdateCleanup = undefined
+          el._autoUpdateCleanup();
+          el._autoUpdateCleanup = undefined;
         }
       }
-    }
+    };
 
     // Zavření tooltipu při kliknutí
     const clickHandler = () => {
-      updatePopoverPosition()
+      updatePopoverPosition();
       // hidePopover()
-    }
+    };
 
     // Přidání posluchačů událostí
     if (!click) {
-      el.addEventListener('click', clickHandler)
+      el.addEventListener("click", clickHandler);
     }
-    el.addEventListener('mouseenter', showPopover)
-    el.addEventListener('mouseleave', hidePopover)
+    el.addEventListener("mouseenter", showPopover);
+    el.addEventListener("mouseleave", hidePopover);
 
     // Uložení funkce pro odstranění posluchačů událostí
     el._removeEventListeners = () => {
       if (!click) {
-        el.removeEventListener('mouseenter', showPopover)
+        el.removeEventListener("mouseenter", showPopover);
       }
-      el.removeEventListener('mouseleave', hidePopover)
-      el.removeEventListener('click', clickHandler)
-    }
+      el.removeEventListener("mouseleave", hidePopover);
+      el.removeEventListener("click", clickHandler);
+    };
   },
   updated(el: PopoverHTMLElement, binding: DirectiveBinding) {
     if (el._popover) {
-      set_text(binding, el._popover as HTMLDivElement)
+      set_text(binding, el._popover as HTMLDivElement);
     }
   },
   beforeUnmount(el: PopoverHTMLElement) {
-    el._removeEventListeners?.()
-    el._popover?.remove()
+    el._removeEventListeners?.();
+    el._popover?.remove();
   },
-}
+};
