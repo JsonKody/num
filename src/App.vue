@@ -102,6 +102,16 @@ document.addEventListener("keypress", (e) => {
     ns.toggle_digit_min_max(digit_index);
   }
 });
+
+// testing TOOLPOP
+// import { ref } from 'vue'
+// const img = `<img src="https://bekinka.cz/images/logo_smile.webp">`
+// const count = ref(0)
+// const poptml = () => `<button onclick="alert('Clicked!')">Click</button>`
+// const $t = (cs: string, en: string): string => {
+//   if(ns.lang === 'cs') return cs;
+//   return en
+// }
 </script>
 
 <template>
@@ -127,6 +137,21 @@ document.addEventListener("keypress", (e) => {
     </svg>
   </a>
   <div class="wrapper">
+
+    <!-- testing TOOLPOP -->
+     <!-- <button v-pop="`count is ${count}`" @click="count += 1"> counter ({{ count }})</button>
+     <p
+        v-pop:right.html.interactive="poptml"
+      >
+        HTML with button
+      </p>
+
+        {{ $t('ahoj', 'hello') }}
+
+
+        <p v-pop="() => $t('ahoj', 'hello')">{{ $t('test jazyku', 'testing langs') }}</p> -->
+      <!-- testing TOOLPOP -->
+
     <!-- Display block / Switch -->
     <div
       @click="ns.switch_green_purple"

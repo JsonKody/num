@@ -224,9 +224,9 @@ export const use_number_system = defineStore("numberSystem", () => {
     title_en: string = ""
   ) => {
     if (!info.value) {
-      return lang.value === "cs" ? title_cs : title_en;
+      return () => lang.value === "cs" ? title_cs : title_en;
     }
-    return lang.value === "cs" ? cs : en;
+    return () => lang.value === "cs" ? cs : en;
   };
   const toggle_lang = () => {
     lang.value = lang.value === "cs" ? "en" : "cs";
@@ -274,7 +274,11 @@ export const use_number_system = defineStore("numberSystem", () => {
     () => info.value,
     () => enqueue_ls_set("info", info.value.toString())
   );
+
+
+  const count = ref(0)
   return {
+    count, 
     saved,
     t,
     t_info,
