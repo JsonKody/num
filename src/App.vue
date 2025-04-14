@@ -104,22 +104,22 @@ document.addEventListener("keypress", (e) => {
 });
 
 // testing TOOLPOP
-// import { ref } from "vue";
+import { ref } from "vue";
 
-// const count = ref(0);
-// const img_1 = `<img src="https://bekinka.cz/images/logo_smile.webp">`;
-// const img_2 = `<img src="https://bekinka.cz/images/art/thumb/32_boo.avif" style="border-radius: 99999px; border: 4px solid PaleGreen;">`;
+const count = ref(0);
+const img_1 = `<img src="https://bekinka.cz/images/logo_smile.webp">`;
+const img_2 = `<img src="https://bekinka.cz/images/art/thumb/32_boo.avif" style="border-radius: 99999px; border: 4px solid PaleGreen;">`;
 
-// // lightweight i18n - in real project you should use Pinia store
-// const lang = ref<"en" | "cs">("en");
+// lightweight i18n - in real project you should use Pinia store
+const lang = ref<"en" | "cs">("en");
 
-// const $t = (en: string, cs: string) => {
-//   return lang.value === "en" ? en : cs;
-// };
+const $t = (en: string, cs: string) => {
+  return lang.value === "en" ? en : cs;
+};
 
-// const toggleLang = () => {
-//   lang.value = lang.value === "cs" ? "en" : "cs";
-// };
+const toggleLang = () => {
+  lang.value = lang.value === "cs" ? "en" : "cs";
+};
 </script>
 
 <template>
@@ -147,7 +147,7 @@ document.addEventListener("keypress", (e) => {
   <div class="wrapper">
     <!-- testing TOOLPOP -->
     
-    <!-- <button v-pop="`count is ${count}`" @click="count += 1">
+    <button v-pop="`count is ${count}`" @click="count += 1">
       counter ({{ count }})
     </button>
 
@@ -176,7 +176,7 @@ document.addEventListener("keypress", (e) => {
     >
       {{ $t("Toggle lang", "Změň jazyk") }}: {{ lang }} -&gt;
       {{ lang === "cs" ? "en" : "cs" }}
-    </button> -->
+    </button>
     <!-- testing TOOLPOP -->
 
     <!-- Display block / Switch -->
