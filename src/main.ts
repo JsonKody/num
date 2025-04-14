@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import "./style.css";
-import { pop } from "./directives/pop";
+import { pop } from "toolpop";
 import App from "./App.vue";
 
 const pinia = createPinia();

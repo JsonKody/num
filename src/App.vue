@@ -104,14 +104,22 @@ document.addEventListener("keypress", (e) => {
 });
 
 // testing TOOLPOP
-// import { ref } from 'vue'
-// const img = `<img src="https://bekinka.cz/images/logo_smile.webp">`
-// const count = ref(0)
-// const poptml = () => `<button onclick="alert('Clicked!')">Click</button>`
-// const $t = (cs: string, en: string): string => {
-//   if(ns.lang === 'cs') return cs;
-//   return en
-// }
+// import { ref } from "vue";
+
+// const count = ref(0);
+// const img_1 = `<img src="https://bekinka.cz/images/logo_smile.webp">`;
+// const img_2 = `<img src="https://bekinka.cz/images/art/thumb/32_boo.avif" style="border-radius: 99999px; border: 4px solid PaleGreen;">`;
+
+// // lightweight i18n - in real project you should use Pinia store
+// const lang = ref<"en" | "cs">("en");
+
+// const $t = (en: string, cs: string) => {
+//   return lang.value === "en" ? en : cs;
+// };
+
+// const toggleLang = () => {
+//   lang.value = lang.value === "cs" ? "en" : "cs";
+// };
 </script>
 
 <template>
@@ -137,20 +145,39 @@ document.addEventListener("keypress", (e) => {
     </svg>
   </a>
   <div class="wrapper">
-
     <!-- testing TOOLPOP -->
-     <!-- <button v-pop="`count is ${count}`" @click="count += 1"> counter ({{ count }})</button>
-     <p
-        v-pop:right.html.interactive="poptml"
-      >
-        HTML with button
-      </p>
+    
+    <!-- <button v-pop="`count is ${count}`" @click="count += 1">
+      counter ({{ count }})
+    </button>
 
-        {{ $t('ahoj', 'hello') }}
+   
+    <p v-pop="'Simple tooltip'">Hover me</p>
 
+    <p v-pop.html="img_1">html -> bekinka</p>
 
-        <p v-pop="() => $t('ahoj', 'hello')">{{ $t('test jazyku', 'testing langs') }}</p> -->
-      <!-- testing TOOLPOP -->
+    <p v-pop:bottom.html="img_2">html -> boo</p>
+
+    {{ $t("ahoj", "hello") }}
+
+    <p v-pop:right="`lang: ${lang}`">lang: {{ lang }}</p>
+
+    <h2
+      v-pop="
+        $t('Does it update on language change?', 'Mění se to při změně jazyka?')
+      "
+    >
+      {{ $t("Testing languages", "Testuji jazyky") }}
+    </h2>
+
+    <button
+      @click="toggleLang"
+      v-pop:bottom="$t('Click to toggle language', 'Kliknutím změň jazyk')"
+    >
+      {{ $t("Toggle lang", "Změň jazyk") }}: {{ lang }} -&gt;
+      {{ lang === "cs" ? "en" : "cs" }}
+    </button> -->
+    <!-- testing TOOLPOP -->
 
     <!-- Display block / Switch -->
     <div
