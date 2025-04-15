@@ -13,7 +13,7 @@
     "@floating-ui/dom": "^1.6.12",
     "lodash-es": "^4.17.21",
     "pinia": "^2.2.8",
-    "toolpop": "^0.2.0",
+    "toolpop": "^0.2.7",
     "vue": "^3.5.13"
   },
   "devDependencies": {
