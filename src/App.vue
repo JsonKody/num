@@ -126,7 +126,7 @@ document.addEventListener("keypress", (e) => {
   <a
     target="_blank"
     v-pop="'Github'"
-    href="https://github.com/JsonKody/ciselne_pozicni_soustavy"
+    href="https://github.com/jsonkody/num"
     class="github-icon"
     aria-label="link to this project on Github"
   >
