@@ -10,23 +10,23 @@
     "psh": "git add -A && git commit -m \"saved & pushed by pnpm\" && git push"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.6.12",
+    "@floating-ui/dom": "^1.7.0",
     "lodash-es": "^4.17.21",
-    "pinia": "^2.2.8",
-    "toolpop": "^0.2.9",
+    "pinia": "^3.0.2",
+    "toolpop": "^0.3.1",
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.0.15",
+    "@tailwindcss/vite": "^4.1.5",
     "@types/lodash-es": "^4.17.12",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "autoprefixer": "^10.4.20",
-    "tailwindcss": "^4.0.15",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "autoprefixer": "^10.4.21",
+    "tailwindcss": "^4.1.5",
     "terser": "^5.39.0",
-    "typescript": "~5.6.2",
-    "vite": "^6.0.1",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
     "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-vue-devtools": "^7.6.7",
-    "vue-tsc": "^2.2.0"
+    "vite-plugin-vue-devtools": "^7.7.6",
+    "vue-tsc": "^2.2.10"
   }
 }
